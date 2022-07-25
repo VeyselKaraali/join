@@ -12,7 +12,24 @@
   <body onload="init()">
     <!-- === START NAVIGATION === -->
     <nav id="desktop-nav"></nav>
-    <nav id="mobile-nav" class="d-none"></nav>
+    <nav id="mobile-nav">
+      <div class="nav-header">
+        <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+        <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
+        <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+          <div class="menu-line"></div>
+        </div>
+      </div>
+      <div id="nav-body" class="nav-body">
+        <a href="index.html">Board</a>
+        <a href="backlog.html">Backlog</a>
+        <a href="task.html">Add Task</a>
+        <a href="help.html">Help</a>
+        <a href="imprint.html">Imprint</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="login.html">Logout</a>
+      </div>
+    </nav>
     <!-- === END NAVIGATION === -->
   </body>
   

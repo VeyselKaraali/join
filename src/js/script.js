@@ -1,3 +1,5 @@
+let isMenuOpen = false;
+
 /**
  * This function is used to 
  * 
@@ -10,12 +12,12 @@ function init(){
 /* DESKTOP NAVIGATION */
 function createNavigation(){
   let desktopNav = `
-  <a class="logo-wrapper" href="board.html">
+  <a class="logo-wrapper" href="index.html">
     <img class="logo" src="src/icons/join_logo.png" alt="">
   </a>
   
   <div class="menu-wrapper">
-    <a onclick="setActiveMenu(this)" class="menu-item" href="board.html">Board</a>
+    <a onclick="setActiveMenu(this)" class="menu-item" href="index.html">Board</a>
     <a class="menu-item" href="backlog.html">Backlog</a>
     <a class="menu-item" href="task.html">Add Task</a>
     <a class="menu-item" href="help.html">Help</a>
@@ -52,25 +54,39 @@ function setActiveMenu(clickedMenuItem){
     //});
   }
   clickedMenuItem.classList.add('active');
-  console.log('Test');
 }
 
 
-
-/*
-function setMenuItemActive(){
-  let menuContainer = document.getElementById("desktop-nav");
-  let menus = menuContainer.getElementsByClassName("menu-item");
-  for (let i = 0; i < menus.length; i++) {
-    menus[i].addEventListener("click", function() {
-    let current = document.getElementsByClassName("active");
-    if (current.length > 0) { 
-      current[0].className = current[0].className.replace(" active", "");
-    }
-    this.className += " active";
-    });
+function toggleMenu() {
+  //const menuBtn = document.querySelector('.menu-btn');
+  const menuBtn = document.getElementById('menu-btn');
+  if(menuBtn){
+      isMenuOpen = !isMenuOpen;
+      if(isMenuOpen){
+        menuBtn.classList.add('open');
+        document.getElementById('nav-body').style.height='100%';
+      } else {
+        menuBtn.classList.remove('open');
+        document.getElementById('nav-body').style.height='0';
+      }
   }
 }
-*/
+
+function checkMediaQuery() {
+  // If the inner width of the window is lower then 700px
+  if (window.innerWidth <= 700) {
+    document.getElementById('mobile-nav').classList.remove('d-none');
+    document.getElementById('desktop-nav').classList.add('d-none');
+  }
+  if (window.innerWidth > 700) {
+    document.getElementById('mobile-nav').classList.add('d-none');
+    document.getElementById('desktop-nav').classList.remove('d-none');
+  }
+}
+window.addEventListener('load', checkMediaQuery);
+window.addEventListener('resize', checkMediaQuery);
+
+
+
 
 
