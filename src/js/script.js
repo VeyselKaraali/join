@@ -5,7 +5,7 @@ let isMenuOpen = false;
  * 
  */
 function init(){
-  setURL('http://developerakademie.com/smallest_backend_ever');
+  setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   createNavigation();
 }
 
