@@ -58,15 +58,18 @@ function createMobileNavigation(){
         <div class="menu-line"></div>
       </div>
     </div>
-    <div id="nav-body" class="nav-body">
-      <a href="index.html">Board</a>
-      <a href="backlog.html">Backlog</a>
-      <a href="task.html">Add Task</a>
-      <a href="help.html">Help</a>
-      <a href="imprint.html">Imprint</a>
-      <a href="privacy.html">Privacy</a>
-      <a href="login.html">Logout</a>
+    <div id="nav-body-wrapper" class="nav-body-wrapper">
+      <div id="nav-body" class="nav-body">
+        <a href="index.html">Board</a>
+        <a href="backlog.html">Backlog</a>
+        <a href="task.html">Add Task</a>
+        <a href="help.html">Help</a>
+        <a href="imprint.html">Imprint</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="login.html">Logout</a>
+      </div>
     </div>
+
   `;
   document.getElementById('mobile-nav').innerHTML = mobileNav;
 }
@@ -89,13 +92,17 @@ function toggleMenu() {
       isMenuOpen = !isMenuOpen;
       if(isMenuOpen){
         menuBtn.classList.add('open');
+        document.getElementById("nav-body").classList.add("nav-body-incremented");
+        //document.getElementById("nav-body-wrapper").classList.remove('d-none');
         //document.getElementById('nav-body').style.height='100%';
       } else {
         menuBtn.classList.remove('open');
+        document.getElementById("nav-body").classList.remove("nav-body-incremented");
+        //document.getElementById("nav-body-wrapper").classList.add('d-none');
         //document.getElementById('nav-body').style.height='0';
       }
   }
-  document.getElementById("nav-body").classList.toggle("nav-body-incremented");
+  //document.getElementById("nav-body").classList.toggle("nav-body-incremented");
 }
 
 function checkMediaQuery() {

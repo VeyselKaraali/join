@@ -56,6 +56,10 @@ h1, h2, h3, h4, h5, h6 {
 .d-none {
   display: none !important;
 }
+
+.height-unset {
+  height: unset !important;
+}
 /* === END GENERAL SETTINGS === */
 
 /* === START DESKTOP NAV === */
@@ -218,6 +222,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: rotate(45deg);
 }
 
+#mobile-nav .nav-body-wrapper {
+  height: 280px;
+}
+
 #mobile-nav .nav-body {
   display: flex;
   flex-direction: column;
@@ -225,7 +233,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   overflow: hidden;
   height: 0 !important;
-  transition: height 2s ease;
+  transition: height 0.5s ease;
 }
 
 #mobile-nav .nav-body-incremented {
