@@ -8,6 +8,7 @@ async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
   createNavigation();
+  setActiveMenu();
 }
 
 function createNavigation() {
@@ -18,22 +19,22 @@ function createNavigation() {
 /* DESKTOP NAVIGATION */
 function createDesktopNavigation(){
   let desktopNav = `
-  <a class="logo-wrapper" href="index.html">
+  <a href="index.html" class="logo-wrapper myLink" data-pathname="/index.html">
     <img class="logo" src="src/icons/join_logo.png" alt="">
   </a>
   
   <div class="menu-wrapper">
-    <a onclick="setActiveMenu(this)" class="menu-item" href="index.html">Board</a>
-    <a class="menu-item" href="backlog.html">Backlog</a>
-    <a class="menu-item" href="task.html">Add Task</a>
-    <a class="menu-item" href="help.html">Help</a>
+    <a href="index.html" class="menu-item myLink" data-pathname="/index.html">Board</a>
+    <a href="backlog.html" class="menu-item myLink" data-pathname="/backlog.html">Backlog</a>
+    <a href="task.html" class="menu-item myLink" data-pathname="/task.html">Add Task</a>
+    <a href="help.html" class="menu-item myLink" data-pathname="/help.html">Help</a>
   </div>
   
   <div class="horizontal-line"></div>
   
   <div class="menu-wrapper">
-    <a class="menu-item" href="imprint.html">Imprint</a>
-    <a class="menu-item" href="privacy.html">Privacy</a>
+    <a href="imprint.html" class="menu-item myLink" data-pathname="/imprint.html">Imprint</a>
+    <a href="privacy.html" class="menu-item myLink" data-pathname="/privacy.html">Privacy</a>
   </div>
   
   <div class="horizontal-line"></div>
@@ -70,21 +71,16 @@ function createMobileNavigation(){
   document.getElementById('mobile-nav').innerHTML = mobileNav;
 }
 
-function setActiveMenu(clickedMenuItem){
-  let menuContainer = document.getElementById("desktop-nav");
-  let menus = menuContainer.getElementsByClassName("menu-item");
-  for (let i = 0; i < menus.length; i++) {
-    //menus[i].addEventListener("click", function() {
-    let current = document.getElementsByClassName("active");
-    if (current.length > 0) { 
-      current[0].className = current[0].className.replace(" active", "");
+function setActiveMenu(){
+  let links = document.getElementsByClassName("myLink");
+  let URL = window.location.pathname;
+  URL = URL.substring(URL.lastIndexOf('/'));
+  for (let i = 0; i < links.length; i++) {
+    if (links[i].dataset.pathname == URL) {
+      links[i].classList.add("active");
     }
-    //this.className += " active";
-    //});
   }
-  clickedMenuItem.classList.add('active');
 }
-
 
 function toggleMenu() {
   //const menuBtn = document.querySelector('.menu-btn');
@@ -93,12 +89,13 @@ function toggleMenu() {
       isMenuOpen = !isMenuOpen;
       if(isMenuOpen){
         menuBtn.classList.add('open');
-        document.getElementById('nav-body').style.height='100%';
+        //document.getElementById('nav-body').style.height='100%';
       } else {
         menuBtn.classList.remove('open');
-        document.getElementById('nav-body').style.height='0';
+        //document.getElementById('nav-body').style.height='0';
       }
   }
+  document.getElementById("nav-body").classList.toggle("nav-body-incremented");
 }
 
 function checkMediaQuery() {
@@ -116,6 +113,8 @@ function checkMediaQuery() {
 }
 window.addEventListener('load', checkMediaQuery);
 window.addEventListener('resize', checkMediaQuery);
+
+
 
 
 
