@@ -9,8 +9,13 @@ function init(){
   createNavigation();
 }
 
+function createNavigation() {
+  createDesktopNavigation();
+  createMobileNavigation();
+}
+
 /* DESKTOP NAVIGATION */
-function createNavigation(){
+function createDesktopNavigation(){
   let desktopNav = `
   <a class="logo-wrapper" href="index.html">
     <img class="logo" src="src/icons/join_logo.png" alt="">
@@ -39,6 +44,29 @@ function createNavigation(){
   <img class="profile-img" src="src/img/profile-1.jfif" alt="">
   `;
   document.getElementById('desktop-nav').innerHTML = desktopNav;
+}
+
+/* MOBILE NAVIGATION */
+function createMobileNavigation(){
+  let mobileNav = `
+  <div class="nav-header">
+  <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+  <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
+  <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+    <div class="menu-line"></div>
+  </div>
+</div>
+<div id="nav-body" class="nav-body">
+  <a href="index.html">Board</a>
+  <a href="backlog.html">Backlog</a>
+  <a href="task.html">Add Task</a>
+  <a href="help.html">Help</a>
+  <a href="imprint.html">Imprint</a>
+  <a href="privacy.html">Privacy</a>
+  <a href="login.html">Logout</a>
+</div>
+  `;
+  document.getElementById('mobile-nav').innerHTML = mobileNav;
 }
 
 function setActiveMenu(clickedMenuItem){
@@ -78,7 +106,7 @@ function checkMediaQuery() {
     document.getElementById('mobile-nav').classList.remove('d-none');
     document.getElementById('desktop-nav').classList.add('d-none');
   }
-  if (window.innerWidth > 700) {
+  else {
     document.getElementById('mobile-nav').classList.add('d-none');
     document.getElementById('desktop-nav').classList.remove('d-none');
   }

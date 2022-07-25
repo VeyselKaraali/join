@@ -28,7 +28,6 @@ async function downloadFromServer() {
 }
 
 function setURL(url) {
-    url='https://gruppe-288.developerakademie.net/join/';
     BASE_SERVER_URL = url;
 }
 
