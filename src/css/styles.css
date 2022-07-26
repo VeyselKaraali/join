@@ -39,7 +39,9 @@ box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
   font-size: 16px;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -51,13 +53,19 @@ body {
 }
 
 p,
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
 .d-none {
   display: none !important;
 }
+
 /* === END GENERAL SETTINGS === */
 
 /* === START DESKTOP NAV === */
@@ -127,7 +135,7 @@ h1, h2, h3, h4, h5, h6 {
   border-left: 5px solid #fff;
 }
 
-.profile-img{
+.profile-img {
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -137,10 +145,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 30px;
   border-radius: 100%;
 }
+
 /* === END DESKTOP NAV === */
 
 /* === START MOBILE NAV === */
-#mobile-nav, #mobile-nav a {
+#mobile-nav,
+#mobile-nav a {
   color: #fff;
 }
 
@@ -151,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100vw;
 }
 
-#mobile-nav .profile-img{
+#mobile-nav .profile-img {
   width: 40px;
   height: 40px;
   margin: 0;
@@ -167,10 +177,10 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-around;
   align-items: center;
   height: 60px;
-  border-bottom: 1px solid rgba(255,255,255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
 }
 
-#mobile-nav .menu-btn{
+#mobile-nav .menu-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,8 +252,9 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   height: 40px;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 /* === END MOBILE NAV === */
 
 /* === START BACKLOG === */
@@ -255,7 +266,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
 }
 
-.headline{
+.headline {
   font-family: 'PT Sans bold', 'sans-serif';
   font-size: 32px;
 }
@@ -353,4 +364,43 @@ h1, h2, h3, h4, h5, h6 {
 .task-wrapper .item-4 img {
   cursor: pointer;
 }
+
 /* === END BACKLOG === */
+
+/* === START BOARD === */
+#board-wrapper {
+  margin: 30px 20px 0px 20px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
+  left: 120px;
+  width: calc(100% - 160px);
+  z-index: -1;
+}
+
+#todo,
+#inprogress,
+#testing,
+#done {
+  min-width: 20%;
+}
+
+#todo-header,
+#inprogress-header,
+#testing-header,
+#done-header {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#todo-content,
+#inprogress-content,
+#testing-content,
+#done-content {
+  min-height: 70vh;
+  padding: 20px;
+  background-color: #f4f3fb;
+}
+
+/* === END BOARD === */
