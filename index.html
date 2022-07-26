@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
-    <link rel="stylesheet" href="src/css/styles.css"/>
-    <script src="src/js/mini_backend.js"></script>
-    <script src="src/js/script.js"></script>
-    <title>Board</title>
-  </head>
-  <body onload="init()">
-    <!-- === START NAVIGATION === -->
-    <nav id="desktop-nav" class="d-none"></nav>
-    <nav id="mobile-nav" class="d-none"></nav>
-    <!-- === END NAVIGATION === -->
-  </body>
-  
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
+  <link rel="stylesheet" href="src/css/styles.css" />
+  <script src="src/js/mini_backend.js"></script>
+  <script src="src/js/script.js"></script>
+  <title>Board</title>
+</head>
+
+<body onload="init()">
+  <!-- === START NAVIGATION === -->
+  <nav id="desktop-nav" class="d-none"></nav>
+  <nav id="mobile-nav" class="d-none"></nav>
+  <!-- === END NAVIGATION === -->
+
+  <!-- === START BOARD === -->
+  <div id="board-wrapper">
+    <div id="todo">
+      <div id="todo-header">
+        <h2>To Do</h2>
+      </div>
+      <div id="todo-content">
+        Test
+      </div>
+    </div>
+    <div id="inprogress">
+      <div id="inprogress-header">
+        <h2>In Progress</h2>
+      </div>
+      <div id="inprogress-content">
+        Test
+      </div>
+    </div>
+
+    <div id="testing">
+      <div id="testing-header">
+        <h2>Testing</h2>
+      </div>
+      <div id="testing-content">
+        Test
+      </div>
+    </div>
+    <div id="done">
+      <div id="done-header">
+        <h2>Done</h2>
+      </div>
+      <div id="done-content">
+        Test
+      </div>
+    </div>
+  </div>
+
+  <!-- === END BOARD === -->
+</body>
+
 </html>
