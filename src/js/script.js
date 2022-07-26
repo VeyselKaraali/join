@@ -100,33 +100,20 @@ function toggleMenu() {
   }
 }
 
-/*
-function toggleMenu() {
-  const menuBtn = document.getElementById('menu-btn');
-  if(menuBtn){
-      isMenuOpen = !isMenuOpen;
-      if(isMenuOpen){
-        menuBtn.classList.add('open');
-        document.getElementById("nav-body").classList.add("nav-body-incremented");
-      } else {
-        menuBtn.classList.remove('open');
-        document.getElementById("nav-body").classList.remove("nav-body-incremented");
-      }
-  }
-}
-*/
-
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
+  let body = document.getElementById('body');
   // If the inner width of the window is lower then 700px
-  if (window.innerWidth <= 700 && mobileNav && desktopNav) {
+  if (window.innerWidth <= 900 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
+    body.style.flexDirection = 'column';
   }
-  if(window.innerWidth > 700 && mobileNav && desktopNav) {
+  if(window.innerWidth > 900 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
     desktopNav.classList.remove('d-none');
+    //body.style.flexDirection = 'row';
   }
 }
 window.addEventListener('load', checkMediaQuery);

@@ -1,6 +1,7 @@
 /* === START COLORS === */
 /*
 blue: #1e3190
+light blue: #7190FC
 gray: #f4f3fb
 border gray: #e4e4e4
 white: #ffffff
@@ -46,6 +47,7 @@ body {
   font-family: 'PT Sans', 'sans-serif';
   font-weight: normal;
   margin: 0;
+  display: flex;
 }
 
 p,
@@ -63,10 +65,11 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100px;
+  width: 120px;
   height: 100vh;
   background-color: #1e3190;
   color: #fff;
+  position: fixed;
 }
 
 #desktop-nav a:hover {
@@ -242,3 +245,112 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid rgba(255,255,255, 0.2);
 }
 /* === END MOBILE NAV === */
+
+/* === START BACKLOG === */
+.backlog-wrapper {
+  margin: 30px 20px 0px 20px;
+  position: absolute;
+  left: 120px;
+  width: calc(100% - 160px);
+  z-index: -1;
+}
+
+.headline{
+  font-family: 'PT Sans bold', 'sans-serif';
+  font-size: 32px;
+}
+
+.sub-headline {
+  font-size: 12px;
+  color: #1e3190;
+}
+
+.headline-wrapper {
+  font-family: 'PT Sans bold', 'sans-serif';
+  color: #1e3190;
+  width: 100%;
+  margin: 30px 0px 10px 0px;
+}
+
+.headline-wrapper-inside {
+  display: flex;
+  width: calc(100% - 5px);
+  margin-left: auto;
+  column-gap: 20px;
+  padding: 0 10px;
+}
+
+.item-1 {
+  width: 30%;
+}
+
+.item-2 {
+  width: 20%;
+}
+
+.item-3 {
+  width: 35%;
+}
+
+.item-4 {
+  width: 15%;
+}
+
+.task-wrapper {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 10px;
+  background-color: #ffb071;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.task-wrapper-inside {
+  width: calc(100% - 5px);
+  height: 100%;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: auto;
+  background-color: #f4f3fb;
+  display: flex;
+  padding: 10px;
+  column-gap: 20px;
+}
+
+.task-wrapper .profile-img {
+  margin: unset;
+  border: unset;
+}
+
+.task-wrapper .item-1 {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.task-wrapper-inside .mail {
+  color: #7190FC;
+}
+
+.task-wrapper .item-2 {
+  display: flex;
+  align-items: center;
+}
+
+.task-wrapper .item-3 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.task-wrapper .item-4 {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.task-wrapper .item-4 img {
+  cursor: pointer;
+}
+/* === END BACKLOG === */
