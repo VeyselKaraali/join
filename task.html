@@ -1,18 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
-    <link rel="stylesheet" href="src/css/styles.css"/>
-    <script src="src/js/mini_backend.js"></script>
-    <script src="src/js/script.js"></script>
-    <title>Task</title>
-  </head>
-  <body onload="init()">
-    <!-- === START NAVIGATION === -->
-    <nav id="desktop-nav" class="d-none"></nav>
-    <nav id="mobile-nav" class="d-none"></nav>
-    <!-- === END NAVIGATION === -->    
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
+  <link rel="stylesheet" href="src/css/styles.css" />
+  <script src="src/js/mini_backend.js"></script>
+  <script src="src/js/script.js"></script>
+  <title>Task</title>
+</head>
+
+<body onload="init()">
+  <!-- === START NAVIGATION === -->
+  <nav id="desktop-nav" class="d-none"></nav>
+  <nav id="mobile-nav" class="d-none"></nav>
+  <!-- === END NAVIGATION === -->
+‚
+  <div class="add-task-wrapper">
+
+
+    <h1 class="headline">Add Task</h1>
+
+    <span class="sub-headline">Learning Management System Project</span>
+
+
+    <main class="inputContainer">
+      <br>
+      <div>
+
+
+        <form class="input-row">
+
+          <div>
+
+            <div>
+              <label for="TITLE" class="form-label">TITLE</label>
+              <input class="form-control" type="text" placeholder="Managment meeting preparation"
+                aria-label="default input example">
+            </div>
+
+
+            <div>
+              <label for="CATERGORY" class="form-label">CATERGORY</label>
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Management</option>
+                <option value="1">Software Development</option>
+                <option value="2">UX/UI Desing</option>
+                <option value="3">Human Resources</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div>
+
+            <div>
+              <label for="DUE DATE" class="form-label">DUE DATE</label>
+              <input class="form-control" type="date" placeholder="DD.MM.YYYY" aria-label="default input example">
+            </div>
+
+            <div>
+              <label for="URGENCY" class="form-label">URGENCY</label>
+              <select class="form-select" aria-label="Default select example">
+                <option selected>High</option>
+                <option value="1">Intermediate</option>
+                <option value="2">Low</option>
+              </select>
+            </div>
+
+          </div>
+
+      </div>
+
+
+
+      <div class="flex input-row">
+
+        <div>
+          <label for="DESCRIPTION" class="form-label">DESCRIPTION</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div>
+
+          <h2>ASSIGNED TO</h2> <br> <br>
+          <button type="button" class="btn btn-primary">Cancel</button>
+
+          <button type="button" class="btn btn-primary">Create Task</button>
+        </div>
+
+      </div>
+
+      </form>
+
+
+
+  </div>
+
+
+  </main>
+
+
+
+
+
+</body>
+
 </html>
