@@ -58,7 +58,7 @@ function createMobileNavigation(){
         <div class="menu-line"></div>
       </div>
     </div>
-    <div id="nav-body-wrapper" class="nav-body-wrapper">
+    <!-- <div id="nav-body-wrapper" class="nav-body-wrapper"> -->
       <div id="nav-body" class="nav-body">
         <a href="index.html">Board</a>
         <a href="backlog.html">Backlog</a>
@@ -68,7 +68,7 @@ function createMobileNavigation(){
         <a href="privacy.html">Privacy</a>
         <a href="login.html">Logout</a>
       </div>
-    </div>
+      <!-- </div> -->
 
   `;
   document.getElementById('mobile-nav').innerHTML = mobileNav;
@@ -86,24 +86,35 @@ function setActiveMenu(){
 }
 
 function toggleMenu() {
-  //const menuBtn = document.querySelector('.menu-btn');
+  const menuBtn = document.getElementById('menu-btn');
+  navBody = document.getElementById("nav-body");
+  if(menuBtn){
+      isMenuOpen = !isMenuOpen;
+      if(isMenuOpen){
+        menuBtn.classList.add('open');
+        navBody.style.height = '280px';
+      } else {
+        menuBtn.classList.remove('open');
+        navBody.style.height = '0';
+      }
+  }
+}
+
+/*
+function toggleMenu() {
   const menuBtn = document.getElementById('menu-btn');
   if(menuBtn){
       isMenuOpen = !isMenuOpen;
       if(isMenuOpen){
         menuBtn.classList.add('open');
         document.getElementById("nav-body").classList.add("nav-body-incremented");
-        //document.getElementById("nav-body-wrapper").classList.remove('d-none');
-        //document.getElementById('nav-body').style.height='100%';
       } else {
         menuBtn.classList.remove('open');
         document.getElementById("nav-body").classList.remove("nav-body-incremented");
-        //document.getElementById("nav-body-wrapper").classList.add('d-none');
-        //document.getElementById('nav-body').style.height='0';
       }
   }
-  //document.getElementById("nav-body").classList.toggle("nav-body-incremented");
 }
+*/
 
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
