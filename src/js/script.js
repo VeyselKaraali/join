@@ -9,6 +9,8 @@ async function init(){
   await downloadFromServer();
   createNavigation();
   setActiveMenu();
+
+  showTasks();
 }
 
 function createNavigation() {
@@ -76,7 +78,6 @@ function createMobileNavigation(){
 
  
   // This function is for testing the board
-  showTasks();
 }
 
 function setActiveMenu(){
