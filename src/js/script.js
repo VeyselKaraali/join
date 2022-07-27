@@ -135,7 +135,7 @@ let tasks = [
     "created": "27.07.2022",
     "duedate": "05.09.2022",
     "urgency": "high",
-    "status": "todo"
+    "status": "done"
   },
   {
     "title": "Büromaterial bestellen",
@@ -144,7 +144,7 @@ let tasks = [
     "created": "27.07.2022",
     "duedate": "01.09.2022",
     "urgency": "low",
-    "status": "inprogress"
+    "status": "done"
   },
   {
     "title": "Software fertigstellen",
