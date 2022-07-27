@@ -23,7 +23,7 @@
       <div class="todo-header">
         <h2>To Do</h2>
       </div>
-      <div id="todo" class="todo-content">
+      <div id="todo" class="todo-content" ondragover="allowDrop(event)" ondrop="moveTo('todo')">
        
       </div>
     </div>
@@ -31,7 +31,7 @@
       <div class="inprogress-header">
         <h2>In Progress</h2>
       </div>
-      <div id="inprogress" class="inprogress-content">
+      <div id="inprogress" class="inprogress-content" ondragover="allowDrop(event)" ondrop="moveTo('inprogress')">
         
       </div>
     </div>
@@ -40,7 +40,7 @@
       <div class="testing-header">
         <h2>Testing</h2>
       </div>
-      <div id="testing" class="testing-content">
+      <div id="testing" class="testing-content" ondragover="allowDrop(event)" ondrop="moveTo('testing')">
     
       </div>
     </div>
@@ -48,7 +48,7 @@
       <div class="done-header">
         <h2>Done</h2>
       </div>
-      <div id="done" class="done-content">
+      <div id="done" class="done-content" ondragover="allowDrop(event)" ondrop="moveTo('done')">
         
       </div>
     </div>

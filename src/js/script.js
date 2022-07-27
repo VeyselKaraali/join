@@ -1,4 +1,5 @@
 let isMenuOpen = false;
+let currentDraggedElement;
 
 /**
  * This function is used to 
@@ -9,6 +10,7 @@ async function init(){
   await downloadFromServer();
   createNavigation();
   setActiveMenu();
+  
 
   showTasks();
 }
@@ -129,31 +131,34 @@ window.addEventListener('resize', checkMediaQuery);
 //Start Board Test-Functions
 let tasks = [
   {
+    "id": 0,
     "title": "Neuen Mitarbeiter einarbeiten",
     "catergory": "Test Catergory",
     "description": "Bitte alle Basics vermitteln",
     "created": "27.07.2022",
     "duedate": "05.09.2022",
     "urgency": "high",
-    "status": "done"
+    "status": "todo"
   },
-  {
+  { 
+    "id": 1,
     "title": "Büromaterial bestellen",
     "catergory": "Test Catergory",
     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
     "created": "27.07.2022",
     "duedate": "01.09.2022",
     "urgency": "low",
-    "status": "done"
+    "status": "todo"
   },
   {
+    "id": 2,
     "title": "Software fertigstellen",
     "catergory": "Test Catergory",
     "description": "Komplett programmieren und auf Funktion testen",
     "created": "27.07.2022",
     "duedate": "10.09.2022",
     "urgency": "intermediate",
-    "status": "done"
+    "status": "todo"
   }
 ];
 
@@ -165,18 +170,35 @@ function showTasks() {
 }
 
 function renderTasks(selectedStatus) {
+  let content = document.getElementById(`${selectedStatus}`);
+  content.innerHTML = '';
   let getTasks = tasks.filter(function (currentTask) {
     return currentTask.status == `${selectedStatus}`;
   });
-
+  
   for (let i = 0; i < getTasks.length; i++) {
-    let test = document.getElementById(`${selectedStatus}`);
-    test.innerHTML += /*html*/ `
-      <div class="board-task">
+    content.innerHTML += /*html*/ `
+      <div class="board-task" id="task-${i}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
         <span>${getTasks[i].title}</span>
         <span>${getTasks[i].duedate}</span>
       </div>`
   };  
+}
+
+function setCurrentDraggedElement(id) {
+  currentDraggedElement = id;
+}
+
+
+function moveTo(status) {
+  let currentDroppedElement = status;
+  tasks[currentDraggedElement].status = currentDroppedElement;
+  showTasks();
+}
+
+
+function allowDrop(ev) {
+  ev.preventDefault();
 }
 //End Board Test-Functions
 
