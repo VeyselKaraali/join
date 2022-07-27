@@ -368,41 +368,52 @@ h6 {
 /* === END BACKLOG === */
 
 /* === START BOARD === */
-#board-wrapper {
+.board-wrapper {
   margin: 30px 20px 0px 20px;
   position: absolute;
   display: flex;
   justify-content: space-between;
-  padding: 32px;
   left: 120px;
+  gap: 32px;
   width: calc(100% - 160px);
   z-index: -1;
 }
 
-#todo,
-#inprogress,
-#testing,
-#done {
-  min-width: 20%;
+.todo,
+.inprogress,
+.testing,
+.done {
+  width: 25%;
 }
 
-#todo-header,
-#inprogress-header,
-#testing-header,
-#done-header {
+.todo-header,
+.inprogress-header,
+.testing-header,
+.done-header {
   text-align: center;
   text-transform: uppercase;
 }
 
-#todo-content,
-#inprogress-content,
-#testing-content,
-#done-content {
+.todo-content,
+.inprogress-content,
+.testing-content,
+.done-content {
   min-height: 70vh;
-  padding: 20px;
+  border-radius: 10px;
   background-color: #f4f3fb;
+  padding: 8px;
 }
 
+.board-task {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #1e3190;
+}
 /* === END BOARD === */
 
 
@@ -418,7 +429,6 @@ h6 {
 
 
 .inputContainer {
-
   background-color: rgb(233, 233, 241);
   margin: 15px;
   padding: 15px;
