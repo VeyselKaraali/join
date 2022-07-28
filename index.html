@@ -18,38 +18,38 @@
   <!-- === END NAVIGATION === -->
 
   <!-- === START BOARD === -->
-  <div id="board-wrapper">
-    <div id="todo">
-      <div id="todo-header">
+  <div class="board-wrapper">
+    <div class="todo">
+      <div class="todo-header">
         <h2>To Do</h2>
       </div>
-      <div id="todo-content">
-        Test
+      <div id="todo" class="todo-content" ondragover="allowDrop(event)" ondrop="moveTo('todo')">
+       
       </div>
     </div>
-    <div id="inprogress">
-      <div id="inprogress-header">
+    <div class="inprogress">
+      <div class="inprogress-header">
         <h2>In Progress</h2>
       </div>
-      <div id="inprogress-content">
-        Test
+      <div id="inprogress" class="inprogress-content" ondragover="allowDrop(event)" ondrop="moveTo('inprogress')">
+        
       </div>
     </div>
 
-    <div id="testing">
-      <div id="testing-header">
+    <div class="testing">
+      <div class="testing-header">
         <h2>Testing</h2>
       </div>
-      <div id="testing-content">
-        Test
+      <div id="testing" class="testing-content" ondragover="allowDrop(event)" ondrop="moveTo('testing')">
+    
       </div>
     </div>
-    <div id="done">
-      <div id="done-header">
+    <div class="done">
+      <div class="done-header">
         <h2>Done</h2>
       </div>
-      <div id="done-content">
-        Test
+      <div id="done" class="done-content" ondragover="allowDrop(event)" ondrop="moveTo('done')">
+        
       </div>
     </div>
   </div>
