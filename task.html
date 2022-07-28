@@ -30,24 +30,24 @@
       <div>
 
 
-        <form class="input-row">
+        <form onsubmit="addToTask()" class="input-row">
 
           <div>
 
             <div>
               <label for="TITLE" class="form-label">TITLE</label>
-              <input class="form-control" type="text" placeholder="Managment meeting preparation"
+              <input required id="title" class="form-control" type="text" placeholder="Managment meeting preparation"
                 aria-label="default input example">
             </div>
 
 
             <div>
               <label for="CATERGORY" class="form-label">CATERGORY</label>
-              <select class="form-select" aria-label="Default select example">
+              <select  id="catergory" class="form-select" aria-label="Default select example">
                 <option selected>Management</option>
-                <option value="1">Software Development</option>
-                <option value="2">UX/UI Desing</option>
-                <option value="3">Human Resources</option>
+                <option value="Software Development">Software Development</option>
+                <option value="UX/UI Desing">UX/UI Desing</option>
+                <option value="Human Resources">Human Resources</option>
               </select>
             </div>
 
@@ -57,15 +57,15 @@
 
             <div>
               <label for="DUE DATE" class="form-label">DUE DATE</label>
-              <input class="form-control" type="date" placeholder="DD.MM.YYYY" aria-label="default input example">
+              <input required id="date" class="form-control" type="date" placeholder="DD.MM.YYYY" aria-label="default input example">
             </div>
 
             <div>
               <label for="URGENCY" class="form-label">URGENCY</label>
-              <select class="form-select" aria-label="Default select example">
+              <select id="urgency"  class="form-select" aria-label="Default select example">
                 <option selected>High</option>
-                <option value="1">Intermediate</option>
-                <option value="2">Low</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Low">Low</option>
               </select>
             </div>
 
@@ -79,7 +79,7 @@
 
         <div>
           <label for="DESCRIPTION" class="form-label">DESCRIPTION</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea required id="description"  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
 
         <div>
