@@ -175,7 +175,6 @@ function renderTasks(selectedStatus) {
   let getTasks = tasks.filter(function (currentTask) {
     return currentTask.status == `${selectedStatus}`;
   });
-  
   for (let i = 0; i < getTasks.length; i++) {
     content.innerHTML += /*html*/ `
       <div class="board-task" id="task-${i}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
