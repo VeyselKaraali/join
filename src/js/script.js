@@ -1,3 +1,4 @@
+const URL = 'https://gruppe-288.developerakademie.net/join/smallest_backend_ever';
 let isMenuOpen = false;
 
 /**
@@ -5,7 +6,7 @@ let isMenuOpen = false;
  * 
  */
 async function init(){
-  setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
+  setURL(URL);
   await downloadFromServer();
   createNavigation();
   setActiveMenu();
@@ -108,7 +109,7 @@ function checkMediaQuery() {
   if (window.innerWidth <= 900 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
-    body.style.flexDirection = 'column';
+    //body.style.flexDirection = 'column';
   }
   if(window.innerWidth > 900 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
@@ -118,7 +119,6 @@ function checkMediaQuery() {
 }
 window.addEventListener('load', checkMediaQuery);
 window.addEventListener('resize', checkMediaQuery);
-
 
 
 

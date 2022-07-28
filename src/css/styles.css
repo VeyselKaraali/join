@@ -49,7 +49,6 @@ body {
   font-family: 'PT Sans', 'sans-serif';
   font-weight: normal;
   margin: 0;
-  display: flex;
 }
 
 p,
@@ -66,6 +65,14 @@ h6 {
   display: none !important;
 }
 
+.content-wrapper {
+  position: absolute;
+  top: 30px;
+  left: 120px;
+  width: calc(100% - 140px);
+  padding: 40px 20px 0;
+  margin: 0 auto;
+}
 /* === END GENERAL SETTINGS === */
 
 /* === START DESKTOP NAV === */
@@ -257,111 +264,137 @@ h6 {
 
 /* === END MOBILE NAV === */
 
-/* === START BACKLOG === */
-.backlog-wrapper {
-  margin: 30px 20px 0px 20px;
+/* === START TOOLTIP === */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  font-size: 12px;
+  visibility: hidden;
+  width: 110px;
+  background-color: #1e3190;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px 0;
   position: absolute;
-  left: 120px;
-  width: calc(100% - 160px);
-  z-index: -1;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1e3190 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+/* === END TOOLTIP === */
+
+/* === START BACKLOG === */
+.headline-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 .headline {
-  font-family: 'PT Sans bold', 'sans-serif';
-  font-size: 32px;
+  font-family: 'PT Sans Bold', 'sans serif';
+  font-size: 24px;
 }
 
 .sub-headline {
-  font-size: 12px;
-  color: #1e3190;
-}
-
-.headline-wrapper {
-  font-family: 'PT Sans bold', 'sans-serif';
-  color: #1e3190;
-  width: 100%;
-  margin: 30px 0px 10px 0px;
-}
-
-.headline-wrapper-inside {
-  display: flex;
-  width: calc(100% - 5px);
-  margin-left: auto;
-  column-gap: 20px;
-  padding: 0 10px;
-}
-
-.item-1 {
-  width: 30%;
-}
-
-.item-2 {
-  width: 20%;
-}
-
-.item-3 {
-  width: 35%;
-}
-
-.item-4 {
-  width: 15%;
-}
-
-.task-wrapper {
-  width: 100%;
-  min-height: 60px;
-  border-radius: 10px;
-  background-color: #ffb071;
-  margin-bottom: 10px;
   font-size: 14px;
+  color: #1e3190;
 }
 
-.task-wrapper-inside {
+.category-color {
+  background-color: #ffb071;
+  border-radius: 10px;
+}
+
+.backlog-wrapper {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 10px 100px;
+  align-items: flex-start;
+  grid-template-areas: 
+    "assigned category description icons"
+    "assignedValue categoryValue descriptionValue ."
+    "title date urgency ."
+    "titleValue dateValue urgencyValue .";
   width: calc(100% - 5px);
-  height: 100%;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-radius: 10px;
   margin-left: auto;
   background-color: #f4f3fb;
+}
+
+.grid-icons {
+  grid-area: icons;
+  justify-self: end;
+}
+
+.assigned {
+  grid-area: assigned;
+}
+
+.category {
+  grid-area: category;
+}
+
+.description {
+  grid-area: description;
+}
+
+.assignedValue {
+  grid-area: assignedValue;
   display: flex;
-  padding: 10px;
-  column-gap: 20px;
 }
 
-.task-wrapper .profile-img {
-  margin: unset;
-  border: unset;
+.categoryValue {
+  grid-area: categoryValue;
 }
 
-.task-wrapper .item-1 {
-  display: flex;
-  align-items: center;
-  column-gap: 20px;
+.descriptionValue {
+  grid-area: descriptionValue;
 }
 
-.task-wrapper-inside .mail {
-  color: #7190FC;
+.title {
+  grid-area: title;
 }
 
-.task-wrapper .item-2 {
-  display: flex;
-  align-items: center;
+.date {
+  grid-area: date;
 }
 
-.task-wrapper .item-3 {
-  display: flex;
-  align-items: center;
+.urgency {
+  grid-area: urgency;
 }
 
-.task-wrapper .item-4 {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  column-gap: 20px;
+.titleValue {
+  grid-area: titleValue;
 }
 
-.task-wrapper .item-4 img {
-  cursor: pointer;
+.dateValue {
+  grid-area: dateValue;
+}
+
+.urgencyValue {
+  grid-area: urgencyValue;
 }
 
 /* === END BACKLOG === */
