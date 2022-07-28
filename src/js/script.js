@@ -1,3 +1,4 @@
+let currentTask = [];
 let isMenuOpen = false;
 let currentDraggedElement;
 
@@ -161,6 +162,38 @@ let tasks = [
     "status": "todo"
   }
 ];
+
+
+function addToTask() {
+
+  let title = document.getElementById('title')  
+  let date = document.getElementById('date')
+  let catergory = document.getElementById('catergory')
+  let urgency  = document.getElementById('urgency')
+  let description = document.getElementById('description')
+
+  let allTasks= {
+    "id": 0,
+    "title": title.value,
+    "catergory": catergory.value,
+    "description": description.value,
+    "created": "27.07.2022",
+    "duedate": date.value,
+    "urgency": urgency.value,
+    "status": "todo"
+  };
+
+  currentTask.push(allTasks)
+  console.log(currentTask)
+
+  title.value = '';
+  date.value = '';
+  catergory.value = '';
+  urgency.value = '';
+  description.value = '';
+
+}
+
 
 function showTasks() {
   renderTasks('todo');
