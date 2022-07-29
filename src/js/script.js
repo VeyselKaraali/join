@@ -233,7 +233,6 @@ function renderTasks(selectedStatus) {
   let getTasks = tasks.filter(function (currentTask) {
     return currentTask.status == `${selectedStatus}`;
   });
-  
   for (let i = 0; i < getTasks.length; i++) {
     content.innerHTML += /*html*/ `
       <div class="board-task" id="task-${i}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
@@ -251,12 +250,22 @@ function setCurrentDraggedElement(id) {
 function moveTo(status) {
   let currentDroppedElement = status;
   tasks[currentDraggedElement].status = currentDroppedElement;
+  hoverHighlight(status, false);
   showTasks();
 }
 
 
 function allowDrop(ev) {
   ev.preventDefault();
+}
+
+function hoverHighlight(status, toSet) {
+  if (toSet) {
+    document.getElementById(`${status}`).classList.add('highlight');
+  } else {
+    document.getElementById(`${status}`).classList.remove('highlight');
+  }
+  
 }
 //End Board Test-Functions
 
