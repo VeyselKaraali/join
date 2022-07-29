@@ -1,5 +1,6 @@
 let currentTask = [];
 let isMenuOpen = false;
+let isTaskOpen = false;
 let currentDraggedElement;
 
 /**
@@ -11,7 +12,6 @@ async function init(){
   await downloadFromServer();
   createNavigation();
   setActiveMenu();
-  
 
   showTasks();
 }
@@ -112,12 +112,12 @@ function toggleMenu() {
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
-  let body = document.getElementById('body');
+  //let body = document.getElementById('body');
   // If the inner width of the window is lower then 700px
   if (window.innerWidth <= 900 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
-    body.style.flexDirection = 'column';
+    //body.style.flexDirection = 'column';
   }
   if(window.innerWidth > 900 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
@@ -127,6 +127,27 @@ function checkMediaQuery() {
 }
 window.addEventListener('load', checkMediaQuery);
 window.addEventListener('resize', checkMediaQuery);
+
+/*function reduceBacklogDescription(){
+  let fullDescripton = document.getElementById('descriptionValue');
+  let shortDescripton = fullDescripton.innerHTML.substring(0,150);
+  if(fullDescripton.innerHTML.length > 100) {
+    fullDescripton.innerHTML = shortDescripton + '...';
+  }
+}*/
+
+function toggleTask() {
+  let row3 = document.getElementById('row-3');
+  if(isTaskOpen){
+    row3.style.height = '0';
+    isTaskOpen = !isTaskOpen;
+  }
+  else{
+    row3.style.height = "100%";
+    isTaskOpen = !isTaskOpen;
+  }
+  
+}
 
 
 //Start Board Test-Functions

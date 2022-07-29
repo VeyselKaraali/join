@@ -68,10 +68,11 @@ h6 {
 .content-wrapper {
   position: absolute;
   top: 30px;
-  left: 120px;
-  width: calc(100% - 140px);
+  left: 150px;
+  width: calc(100% - 180px);
   padding: 40px 20px 0;
   margin: 0 auto;
+  z-index: -1;
 }
 /* === END GENERAL SETTINGS === */
 
@@ -303,12 +304,17 @@ h6 {
   visibility: visible;
   opacity: 1;
 }
+
+.tooltip img {
+  cursor: pointer;
+}
 /* === END TOOLTIP === */
 
 /* === START BACKLOG === */
 .headline-wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .headline {
@@ -324,79 +330,74 @@ h6 {
 .category-color {
   background-color: #ffb071;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .backlog-wrapper {
-  display: grid;
-  grid-template-columns: auto auto 1fr auto;
-  grid-template-rows: auto auto;
-  gap: 10px 100px;
-  align-items: flex-start;
-  grid-template-areas: 
-    "assigned category description icons"
-    "assignedValue categoryValue descriptionValue ."
-    "title date urgency ."
-    "titleValue dateValue urgencyValue .";
   width: calc(100% - 5px);
   border-radius: 10px;
   margin-left: auto;
   background-color: #f4f3fb;
+  height: 100%;
 }
 
-.grid-icons {
-  grid-area: icons;
-  justify-self: end;
-}
-
-.assigned {
-  grid-area: assigned;
-}
-
-.category {
-  grid-area: category;
-}
-
-.description {
-  grid-area: description;
-}
-
-.assignedValue {
-  grid-area: assignedValue;
+.row-wrapper {
+  width: calc(100% - 20px);
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
 }
 
-.categoryValue {
-  grid-area: categoryValue;
+.row-1 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
-.descriptionValue {
-  grid-area: descriptionValue;
+.row-1 img {
+  padding-right: 10px;
 }
 
-.title {
-  grid-area: title;
+.row-2, .row-3 {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
 }
 
-.date {
-  grid-area: date;
+.row-3 {
+  height: 0;
+  transition: 0.25s ease;
 }
 
-.urgency {
-  grid-area: urgency;
+.row-2 > div, .row-3 > div {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 0;
 }
 
-.titleValue {
-  grid-area: titleValue;
+.col-1, .col-2, .col-3  {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.dateValue {
-  grid-area: dateValue;
+.image-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 10px;
 }
 
-.urgencyValue {
-  grid-area: urgencyValue;
+.backlog-wrapper .profile-img {
+  margin: unset;
+  border: unset;
 }
 
+.backlog-wrapper .headline {
+  font-size: 16px;
+  color: #1e3190;
+}
 /* === END BACKLOG === */
 
 /* === START BOARD === */

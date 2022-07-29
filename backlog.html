@@ -23,43 +23,95 @@
       </div>
 
       <div class="category-color">
-        <div class="backlog-wrapper">
-          <div class="grid-icons">
-            <div class="tooltip">
-              <img  src="src/icons/move.svg" alt="">
-              <span class="tooltiptext">Move Task to Board</span>
+        <div id="backlog-wrapper" class="backlog-wrapper">
+          <div class="row-wrapper">
+            <div class="row-1">
+              <div class="tooltip">
+                <img  src="src/icons/move.svg" alt="">
+                <span class="tooltiptext">Move Task to Board</span>
+              </div>
+              <div id="tooltip-detail-view" class="tooltip">
+                <img  onclick="toggleTask()" id="show-more-icon" src="src/icons/show-more.svg" alt="">
+                <span class="tooltiptext">Show More</span>
+              </div>
+              <div class="tooltip">
+                <img src="src/icons/edit.svg" alt="">
+                <span class="tooltiptext">Edit Task</span>
+              </div>
+              <div class="tooltip">
+                <img src="src/icons/delete.svg" alt="">
+                <span class="tooltiptext">Delete Task</span>
+              </div>
             </div>
-            <div class="tooltip">
-              <img  src="src/icons/show-more.svg" alt="">
-              <span class="tooltiptext">Show More</span>
+            <div class="row-2">
+              <div class="col-1">
+                <div id="assigned-to">
+                  <div class="headline">ASSIGNED TO</div>
+                  <div class="image-wrapper">
+                    <div class="tooltip">
+                      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+                      <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
+                    </div>
+                    <div class="tooltip">
+                      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+                      <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
+                    </div>
+                    <div class="tooltip">
+                      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+                      <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
+                    </div>
+                    <div class="tooltip">
+                      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+                      <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
+                    </div>
+                    <div class="tooltip">
+                      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+                      <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-2">
+                <div id="title">
+                  <div class="headline">TITLE</div>
+                  <div>Text</div>
+                </div>
+
+
+
+
+              </div>
+              <div class="col-3">
+                <div id="category">
+                  <div class="headline">CATEGORY</div>
+                  <div>Marketing</div>
+                </div>
+
+                
+              </div>
             </div>
-            <div class="tooltip">
-              <img  src="src/icons/edit.svg" alt="">
-              <span class="tooltiptext">Edit Task</span>
+            <div id="row-3" class="row-3">
+              <div class="col-1">
+                <div>
+                  <div class="headline">DUE DATE</div>
+                  <div>01.01.2023</div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div>
+                  <div class="headline">URGENCY</div>
+                  <div>High</div>
+                </div>
+              </div>
+              <div class="col-3">
+                <div id="description">
+                  <div class="headline">DESCRIPTION</div>
+                  <div id='' class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus est, explicabo nam maxime itaque laboriosam fugit repudiandae rerum perspiciatis libero necessitatibus aperiam voluptatibus. Quos velit natus dolore aliquam at porro.</div>
+                </div>
+              </div>
             </div>
-            <div class="tooltip">
-              <img  src="src/icons/delete.svg" alt="">
-              <span class="tooltiptext">Delete Task</span>
-            </div>  
           </div>
-          <div class="assigned">ASSIGNED TO</div>
-          <div class="category">CATEGORY</div>
-          <div class="description">DESCRIPTION</div>
-          <div class="assignedValue">
-            <img src="src/img/profile-1.jfif" class="profile-img" alt="">
-            <div>
-              <div>Darrin S. Jones</div>
-              <div class="mail">darrin@gmail.com</div>
-            </div>
-          </div>
-          <div class="categoryValue">Marketing</div>
-          <div class="descriptionValue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus est, explicabo nam maxime itaque laboriosam fugit repudiandae rerum perspiciatis libero necessitatibus aperiam voluptatibus. Quos velit natus dolore aliquam at porro.</div>
-          <div class="title">TITLE</div>
-          <div class="date">DUE DATE</div>
-          <div class="urgency">URGENCY</div>
-          <div class="titleValue">titleValue</div>
-          <div class="dateValue">dateValue</div>
-          <div class="urgencyValue">urgencyValue</div>
         </div>
       </div>
       <!-- === END BACKLOG === -->
