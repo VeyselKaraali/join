@@ -6,7 +6,7 @@
     <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
     <link rel="stylesheet" href="src/css/styles.css"/>
     <script src="src/js/mini_backend.js"></script>
-    <script src="src/js/script.js"></script>
+    <script src="src/js/script.js" defer></script>
     <title>Backlog</title>
   </head>
   <body onload="init()">
@@ -24,8 +24,9 @@
 
       <div class="category-color">
         <div id="backlog-wrapper" class="backlog-wrapper">
-          <div class="row-wrapper">
-            <div class="row-1">
+          <div id="row-wrapper" class="row-wrapper">
+            
+            <div id="row-1" class="row-1">
               <div class="tooltip">
                 <img  src="src/icons/move.svg" alt="">
                 <span class="tooltiptext">Move Task to Board</span>
@@ -43,15 +44,13 @@
                 <span class="tooltiptext">Delete Task</span>
               </div>
             </div>
-            <div class="row-2">
+
+            <div id="row-2" class="row-2">
               <div class="col-1">
                 <div id="assigned-to">
                   <div class="headline">ASSIGNED TO</div>
                   <div class="image-wrapper">
-                    <div class="tooltip">
-                      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
-                      <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
-                    </div>
+
                     <div class="tooltip">
                       <img src="src/img/profile-1.jfif" class="profile-img" alt="">
                       <span class="tooltiptext"><span>Darrin S. Jones</span><br><span>darrin@gmail.com</span> </span>
@@ -77,20 +76,16 @@
                   <div class="headline">TITLE</div>
                   <div>Text</div>
                 </div>
-
-
-
-
               </div>
+
               <div class="col-3">
                 <div id="category">
                   <div class="headline">CATEGORY</div>
                   <div>Marketing</div>
                 </div>
-
-                
               </div>
             </div>
+
             <div id="row-3" class="row-3">
               <div class="col-1">
                 <div>

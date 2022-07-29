@@ -137,13 +137,17 @@ window.addEventListener('resize', checkMediaQuery);
 }*/
 
 function toggleTask() {
+  let rowWrapper = document.getElementById('row-wrapper').offsetHeight;
+  let row1 = document.getElementById('row-1').offsetHeight;
+  let row2 = document.getElementById('row-2').offsetHeight;
   let row3 = document.getElementById('row-3');
+  let row3Height = rowWrapper - row1 - row2;
   if(isTaskOpen){
     row3.style.height = '0';
     isTaskOpen = !isTaskOpen;
   }
   else{
-    row3.style.height = "100%";
+    row3.style.height = `${row3Height}px`;
     isTaskOpen = !isTaskOpen;
   }
   
