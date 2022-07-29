@@ -246,12 +246,22 @@ function setCurrentDraggedElement(id) {
 function moveTo(status) {
   let currentDroppedElement = status;
   tasks[currentDraggedElement].status = currentDroppedElement;
+  hoverHighlight(status, false);
   showTasks();
 }
 
 
 function allowDrop(ev) {
   ev.preventDefault();
+}
+
+function hoverHighlight(status, toSet) {
+  if (toSet) {
+    document.getElementById(`${status}`).classList.add('highlight');
+  } else {
+    document.getElementById(`${status}`).classList.remove('highlight');
+  }
+  
 }
 //End Board Test-Functions
 
