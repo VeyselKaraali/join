@@ -167,6 +167,7 @@ h6 {
   flex-direction: column;
   background-color: #1e3190;
   width: 100vw;
+  position: fixed;
 }
 
 #mobile-nav .profile-img {
@@ -281,8 +282,8 @@ h6 {
 .content {
   grid-area: nav;
   grid-column-start: 2;
-  padding: 50px 20px 0 20px;
-  max-width: 1024px;
+  padding: 80px 20px 0 20px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 /* === END LAYOUT === */
@@ -363,6 +364,12 @@ h6 {
   flex-direction: column;
   background-color: #f4f3fb;
   padding: 5px;
+  transition: all 0.25s;
+}
+
+.backlog-item:hover {
+  cursor: pointer;
+  filter: brightness(95%);
 }
 
 .row-1 {
