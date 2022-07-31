@@ -1,6 +1,6 @@
 let tasks = [
   {
-    "id": 0,
+    "id": 1,
     "title": "Neuen Mitarbeiter einarbeiten",
     "catergory": "Test Catergory",
     "description": "Bitte alle Basics vermitteln",
@@ -10,7 +10,7 @@ let tasks = [
     "status": "todo"
   },
   { 
-    "id": 1,
+    "id": 2,
     "title": "Büromaterial bestellen",
     "catergory": "Test Catergory",
     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
@@ -20,7 +20,7 @@ let tasks = [
     "status": "todo"
   },
   {
-    "id": 2,
+    "id": 3,
     "title": "Software fertigstellen",
     "catergory": "Test Catergory",
     "description": "Komplett programmieren und auf Funktion testen",
@@ -28,6 +28,37 @@ let tasks = [
     "duedate": "10.09.2022",
     "urgency": "intermediate",
     "status": "todo"
+  }
+];
+
+let categories = [
+  {
+    "management":{
+      "id": 1,
+      "name": "Management",
+      "color": "#7190FC"
+    }
+  },
+  {
+    "software":{
+      "id": 2,
+      "name": "Software Development",
+      "color": "#ffb071"
+    }
+  },
+  {
+    "design":{
+      "id": 3,
+      "name": "UX/UI Design",
+      "color": "#e271ff"
+    }
+  },
+  {
+    "humanResources":{
+      "id": 4,
+      "name": "Human Resources",
+      "color": "#55ae66"
+    }
   }
 ];
 
