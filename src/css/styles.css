@@ -453,6 +453,71 @@ h6 {
 }
 /* === END BACKLOG === */
 
+/* === START LOGIN === */
+#login {
+  background-color: #1e3190;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: 15px;
+  background-color: #fff;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#login .headline-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 15px;
+  margin-bottom: unset;
+}
+
+#login .horizontal-line {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form-wrapper img {
+  width: 50px;
+  height: auto;
+}
+
+.login {
+  font-family: 'PT Sans bold', 'sans-serif';;
+  font-size: 32px;
+
+}
+
+form {
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+
+#login input {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  height: 30px;
+  font-size: 16px;
+  border-bottom: 2px solid rgba(200, 200, 200, 0.8);;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+/* === END LOGIN === */
+
 /* === START BOARD === */
 .board-wrapper {
   margin: 30px 20px 0px 20px;
