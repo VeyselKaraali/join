@@ -1,6 +1,5 @@
 let currentTask = [];
 let isMenuOpen = false;
-let isTaskOpen = false;
 let currentDraggedElement;
 
 /**
@@ -112,46 +111,23 @@ function toggleMenu() {
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
-  //let body = document.getElementById('body');
-  // If the inner width of the window is lower then 700px
+  let content = document.getElementById('content');
+
   if (window.innerWidth <= 900 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
-    //body.style.flexDirection = 'column';
+    content.style.gridArea = "content";
+    content.style.gridColumnStart = "1";
   }
   if(window.innerWidth > 900 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
     desktopNav.classList.remove('d-none');
-    //body.style.flexDirection = 'row';
+    content.style.gridArea = "nav";
+    content.style.gridColumnStart = "2";
   }
 }
 window.addEventListener('load', checkMediaQuery);
 window.addEventListener('resize', checkMediaQuery);
-
-/*function reduceBacklogDescription(){
-  let fullDescripton = document.getElementById('descriptionValue');
-  let shortDescripton = fullDescripton.innerHTML.substring(0,150);
-  if(fullDescripton.innerHTML.length > 100) {
-    fullDescripton.innerHTML = shortDescripton + '...';
-  }
-}*/
-
-function toggleTask() {
-  let rowWrapper = document.getElementById('row-wrapper').offsetHeight;
-  let row1 = document.getElementById('row-1').offsetHeight;
-  let row2 = document.getElementById('row-2').offsetHeight;
-  let row3 = document.getElementById('row-3');
-  let row3Height = rowWrapper - row1 - row2;
-  if(isTaskOpen){
-    row3.style.height = '0';
-    isTaskOpen = !isTaskOpen;
-  }
-  else{
-    row3.style.height = `${row3Height}px`;
-    isTaskOpen = !isTaskOpen;
-  }
-  
-}
 
 
 //Start Board Test-Functions
