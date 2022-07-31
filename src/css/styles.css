@@ -435,6 +435,7 @@ h6 {
   border-radius: 10px;
   background-color: #f4f3fb;
   padding: 8px;
+  border: 1px solid  transparent;
   transition: all 125ms ease-in-out;
 }
 
@@ -447,7 +448,7 @@ h6 {
   padding: 8px;
   margin-bottom: 8px;
   border: 1px solid #1e3190;
-  cursor: pointer;
+  cursor: move;
   outline: unset;
 }
 
