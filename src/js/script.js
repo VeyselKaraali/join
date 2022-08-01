@@ -1,16 +1,16 @@
 let tasks = [
   {
-    "id": 1,
+    "id": 0,
     "title": "Neuen Mitarbeiter einarbeiten",
     "catergory": "Test Catergory",
     "description": "Bitte alle Basics vermitteln",
     "created": "27.07.2022",
     "duedate": "05.09.2022",
     "urgency": "high",
-    "status": "todo"
+    "status": "done"
   },
   { 
-    "id": 2,
+    "id": 0,
     "title": "Büromaterial bestellen",
     "catergory": "Test Catergory",
     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
@@ -20,7 +20,7 @@ let tasks = [
     "status": "todo"
   },
   {
-    "id": 3,
+    "id": 0,
     "title": "Software fertigstellen",
     "catergory": "Test Catergory",
     "description": "Komplett programmieren und auf Funktion testen",
@@ -28,6 +28,16 @@ let tasks = [
     "duedate": "10.09.2022",
     "urgency": "intermediate",
     "status": "todo"
+  },
+  {
+    "id": 0,
+    "title": "Kaffee kochen",
+    "catergory": "Test Catergory",
+    "description": "Bitte schnell, wir haben durst :-)",
+    "created": "01.08.2022",
+    "duedate": "01.08.2022",
+    "urgency": "high",
+    "status": "inprogress"
   }
 ];
 
@@ -116,9 +126,9 @@ let currentDraggedElement;
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
+  createIds();
   createNavigation();
   setActiveMenu();
-
   showTasks();
 }
 
@@ -238,7 +248,11 @@ window.addEventListener('resize', checkMediaQuery);
 
 
 //Start Board Test-Functions
-
+function createIds() {
+  for (let i = 0; i < tasks.length; i++) {
+    tasks[i]['id'] = i + 1;
+  }
+}
 
 
 function addToTask() {
@@ -301,7 +315,8 @@ function setCurrentDraggedElement(id) {
 
 function moveTo(status) {
   let currentDroppedElement = status;
-  tasks[currentDraggedElement].status = currentDroppedElement;
+  tasks[currentDraggedElement -1].status = currentDroppedElement;
+  
   hoverHighlight(status, false);
   showTasks();
 }
