@@ -1,6 +1,6 @@
 let tasks = [
   {
-    "id": 1,
+    "id": 0,
     "title": "Neuen Mitarbeiter einarbeiten",
     "catergory": "Test Catergory",
     "description": "Bitte alle Basics vermitteln",
@@ -10,7 +10,7 @@ let tasks = [
     "status": "done"
   },
   { 
-    "id": 2,
+    "id": 0,
     "title": "Büromaterial bestellen",
     "catergory": "Test Catergory",
     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
@@ -20,7 +20,7 @@ let tasks = [
     "status": "todo"
   },
   {
-    "id": 3,
+    "id": 0,
     "title": "Software fertigstellen",
     "catergory": "Test Catergory",
     "description": "Komplett programmieren und auf Funktion testen",
@@ -30,7 +30,7 @@ let tasks = [
     "status": "todo"
   },
   {
-    "id": 4,
+    "id": 0,
     "title": "Kaffee kochen",
     "catergory": "Test Catergory",
     "description": "Bitte schnell, wir haben durst :-)",
@@ -126,6 +126,7 @@ let currentDraggedElement;
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
+  createIds();
   createNavigation();
   setActiveMenu();
   showTasks();
@@ -247,7 +248,11 @@ window.addEventListener('resize', checkMediaQuery);
 
 
 //Start Board Test-Functions
-
+function createIds() {
+  for (let i = 0; i < tasks.length; i++) {
+    tasks[i]['id'] = i + 1;
+  }
+}
 
 
 function addToTask() {
@@ -311,6 +316,7 @@ function setCurrentDraggedElement(id) {
 function moveTo(status) {
   let currentDroppedElement = status;
   tasks[currentDraggedElement -1].status = currentDroppedElement;
+  
   hoverHighlight(status, false);
   showTasks();
 }
