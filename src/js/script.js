@@ -1,3 +1,110 @@
+let tasks = [
+  {
+    "id": 1,
+    "title": "Neuen Mitarbeiter einarbeiten",
+    "catergory": "Test Catergory",
+    "description": "Bitte alle Basics vermitteln",
+    "created": "27.07.2022",
+    "duedate": "05.09.2022",
+    "urgency": "high",
+    "status": "todo"
+  },
+  { 
+    "id": 2,
+    "title": "Büromaterial bestellen",
+    "catergory": "Test Catergory",
+    "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
+    "created": "27.07.2022",
+    "duedate": "01.09.2022",
+    "urgency": "low",
+    "status": "todo"
+  },
+  {
+    "id": 3,
+    "title": "Software fertigstellen",
+    "catergory": "Test Catergory",
+    "description": "Komplett programmieren und auf Funktion testen",
+    "created": "27.07.2022",
+    "duedate": "10.09.2022",
+    "urgency": "intermediate",
+    "status": "todo"
+  }
+];
+
+let categories = [
+  {
+    "management":{
+      "id": 1,
+      "name": "Management",
+      "color": "#7190FC"
+    }
+  },
+  {
+    "software":{
+      "id": 2,
+      "name": "Software Development",
+      "color": "#ffb071"
+    }
+  },
+  {
+    "design":{
+      "id": 3,
+      "name": "UX/UI Design",
+      "color": "#e271ff"
+    }
+  },
+  {
+    "humanResources":{
+      "id": 4,
+      "name": "Human Resources",
+      "color": "#55ae66"
+    }
+  }
+];
+
+let accounts = [
+  {
+    "id": 1,
+    "firstName": "Stefan",
+    "lastName": "Richter",
+    "email": "stefan.richter@gmail.de",
+    "password": "12345",
+    "img": "src/img/profile-1.jfif"
+  },
+  {
+    "id": 2,
+    "firstName": "Erika",
+    "lastName": "Schneider",
+    "email": "erika.schneider@gmail.com",
+    "password": "12345",
+    "img": "src/img/profile-1.jfif"
+  },
+  {
+    "id": 3,
+    "firstName": "Jens",
+    "lastName": "Schmidt",
+    "email": "jens.schmidt@gmail.com",
+    "password": "12345",
+    "img": "src/img/profile-1.jfif"
+  },
+  {
+    "id": 4,
+    "firstName": "Laura",
+    "lastName": "Scholz",
+    "email": "laura.scholz@gmail.com",
+    "password": "12345",
+    "img": "src/img/profile-1.jfif"
+  },
+  {
+    "id": 5,
+    "firstName": "Max",
+    "lastName": "Hofmann",
+    "email": "max.hofmann@gmail.com",
+    "password": "12345",
+    "img": "src/img/profile-1.jfif"
+  }
+];
+
 let currentTask = [];
 let isMenuOpen = false;
 let currentDraggedElement;
@@ -130,38 +237,7 @@ window.addEventListener('resize', checkMediaQuery);
 
 
 //Start Board Test-Functions
-let tasks = [
-  {
-    "id": 0,
-    "title": "Neuen Mitarbeiter einarbeiten",
-    "catergory": "Test Catergory",
-    "description": "Bitte alle Basics vermitteln",
-    "created": "27.07.2022",
-    "duedate": "05.09.2022",
-    "urgency": "high",
-    "status": "todo"
-  },
-  { 
-    "id": 1,
-    "title": "Büromaterial bestellen",
-    "catergory": "Test Catergory",
-    "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
-    "created": "27.07.2022",
-    "duedate": "01.09.2022",
-    "urgency": "low",
-    "status": "todo"
-  },
-  {
-    "id": 2,
-    "title": "Software fertigstellen",
-    "catergory": "Test Catergory",
-    "description": "Komplett programmieren und auf Funktion testen",
-    "created": "27.07.2022",
-    "duedate": "10.09.2022",
-    "urgency": "intermediate",
-    "status": "todo"
-  }
-];
+
 
 
 function addToTask() {
