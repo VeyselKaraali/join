@@ -11,7 +11,6 @@ async function init(){
   await downloadFromServer();
   createNavigation();
   setActiveMenu();
-
   showTasks();
 }
 
