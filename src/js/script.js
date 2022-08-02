@@ -117,6 +117,7 @@ let accounts = [
 
 let currentTask = [];
 let isMenuOpen = false;
+let isUserDataShown = false;
 let currentDraggedElement;
 
 /**
@@ -222,6 +223,19 @@ function toggleMenu() {
         menuBtn.classList.remove('open');
         navBody.style.height = '0';
       }
+  }
+}
+
+function toggleUserTooltip(id){
+  id =  id.substring(5);
+  let userText = document.getElementById(`tooltip-user-${id}`);
+  if(isUserDataShown){
+    isUserDataShown = !isUserDataShown;
+    userText.style.visibility = "hidden";
+  }
+  else{
+    isUserDataShown = !isUserDataShown;
+    userText.style.visibility = "visible";
   }
 }
 

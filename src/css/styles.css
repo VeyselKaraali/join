@@ -148,7 +148,6 @@ h6 {
   height: 50px;
   object-fit: cover;
   object-position: top center;
-  border: 2px solid #fff;
   margin-top: auto;
   margin-bottom: 30px;
   border-radius: 100%;
@@ -283,24 +282,23 @@ h6 {
 .content {
   grid-area: nav;
   grid-column-start: 2;
-  padding: 80px 60px 0 60px;
+  padding: 80px 20px 20px 20px;
   max-width: 1400px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
 /* === END LAYOUT === */
 
 /* === START TOOLTIP === */
-.tooltip {
+.tooltip-click, .tooltip {
   position: relative;
   display: inline-block;
 }
 
-.tooltip .tooltiptext {
+.tooltip-click .tooltiptext, .tooltip .tooltiptext {
   font-size: 10px;
   visibility: hidden;
-  width: 70px;
+  width: 80px;
   background-color: #1e3190;
   color: #fff;
   text-align: center;
@@ -308,12 +306,12 @@ h6 {
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  bottom: 120%;
+  bottom: 150%;
   left: 50%;
-  margin-left: -35px;
+  margin-left: -40px;
 }
 
-.tooltip .tooltiptext::after {
+.tooltip-click .tooltiptext::after, .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -327,11 +325,22 @@ h6 {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.tooltip-click .tooltiptext {
+  visibility: hidden;
+}
+
 /* === END TOOLTIP === */
 
 /* === START BACKLOG === */
+
+
 .headline-wrapper {
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .headline {
@@ -345,6 +354,107 @@ h6 {
   color: #1e3190;
 }
 
+.task-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, max-content)); 
+  justify-content: center;
+  grid-gap: 20px;
+  width: 100%;
+}
+
+.category-color {
+  width: 280px;
+  height: auto;
+  background-color: #ffb071;
+}
+
+.task-wrapper {
+  width: 100%;
+  height: calc(100% - 10px);
+  margin-top: 10px;
+  background-color: #fff;
+  border: 2px solid rgba(200, 200, 200, 0.5);
+  border-top: none;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-wrapper,
+.assigned-wrapper {
+  gap: 5px 0;
+}
+
+.task-wrapper,
+.category-color {
+  border-radius: 10px;
+}
+
+.assigned-wrapper,
+.title-wrapper,
+.category-wrapper,
+.date-wrapper,
+.urgency-wrapper,
+.description-wrapper {
+  display: flex;
+}
+
+.assigned-wrapper > div:first-child,
+.title-wrapper > div:first-child,
+.category-wrapper > div:first-child,
+.date-wrapper > div:first-child,
+.urgency-wrapper > div:first-child,
+.description-wrapper > div:first-child {
+  min-width: 100px;
+  font-size: 14px;
+  font-family: 'PT Sans bold';
+  color: #1e3190;
+}
+
+.assigned-wrapper {
+  flex-direction: column;
+}
+
+.assigned-wrapper .tooltiptext {
+  width: 140px;
+  margin-left: -70px
+}
+
+.assigned-wrapper .tooltiptext a {
+  color: #fff
+}
+
+.task-wrapper .image-wrapper {
+  display: flex;
+  gap: 0 10px;
+}
+
+.task-wrapper .assigned-wrapper img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: top;
+  cursor: pointer;
+}
+
+.task-wrapper .description {
+  overflow-y: auto;
+  max-height: 100px;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: end;
+  gap: 0 10px;
+  padding-top: 10px;
+}
+
+.task-wrapper .button-wrapper img {
+  cursor: pointer;
+}
+
+/*
 .backlog-headlines {
   display: flex;
   margin-bottom: 10px;
@@ -451,6 +561,7 @@ h6 {
 .col-3 {
   width: 50%;  
 }
+*/
 /* === END BACKLOG === */
 
 /* === START BACKLOG MOBILE === */
