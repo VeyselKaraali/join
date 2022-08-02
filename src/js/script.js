@@ -120,6 +120,8 @@ let isMenuOpen = false;
 let isUserDataShown = false;
 let currentDraggedElement;
 
+let tasksFromBackend;
+
 /**
  * This function is used to 
  * 
@@ -127,6 +129,9 @@ let currentDraggedElement;
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
+  tasksFromBackend = JSON.parse(backend.getItem('tasks')) || [];
+  console.log(tasksFromBackend);
+
   createIds();
   createNavigation();
   setActiveMenu();
