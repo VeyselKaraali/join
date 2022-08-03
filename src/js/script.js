@@ -310,6 +310,15 @@ function addToTask() {
   description.value = '';
 
 }
+function myInit() {
+  
+    setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
+
+    let users = [];
+
+    users.push('Andi Bandi');
+    backend.setItem('users', JSON.stringify(users));
+}
 
 
 function showTasks() {
