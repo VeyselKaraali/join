@@ -41,37 +41,6 @@ let tasks = [
   }
 ];
 
-let categories = [
-  {
-    "management":{
-      "id": 1,
-      "name": "Management",
-      "color": "#7190FC"
-    }
-  },
-  {
-    "software":{
-      "id": 2,
-      "name": "Software Development",
-      "color": "#ffb071"
-    }
-  },
-  {
-    "design":{
-      "id": 3,
-      "name": "UX/UI Design",
-      "color": "#e271ff"
-    }
-  },
-  {
-    "humanResources":{
-      "id": 4,
-      "name": "Human Resources",
-      "color": "#55ae66"
-    }
-  }
-];
-
 let accounts = [
   {
     "id": 1,
@@ -129,15 +98,22 @@ let tasks2 =[];
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
-  //tasksFromBackend = JSON.parse(backend.getItem('name')) || [];
-  //console.log(tasksFromBackend);
-  //console.log(JSON.stringify(tasksFromBackend));
-  //tasks = JSON.parse(backend.getItem('tasks')) || [];
-  //addTask();
-  createIds();
   createNavigation();
-  setActiveMenu();
+  setMenuActive();
+}
+
+async function initBoard(){
+  init();
+  createIds();
   showTasks();
+}
+
+async function initBacklog(){
+  init();
+}
+
+async function initTask(){
+  init();
 }
 
 function createNavigation() {
@@ -179,8 +155,9 @@ function createDesktopNavigation(){
   `;
   document.getElementById('desktop-nav').innerHTML = desktopNav;
 }
+/* END DESKTOP NAVIGATION */
 
-/* MOBILE NAVIGATION */
+/* START MOBILE NAVIGATION */
 function createMobileNavigation(){
   let mobileNav = `
     <div class="nav-header">
@@ -210,8 +187,9 @@ function createMobileNavigation(){
  
   // This function is for testing the board
 }
+/* END MOBILE NAVIGATION */
 
-function setActiveMenu(){
+function setMenuActive(){
   let links = document.getElementsByClassName("myLink");
   let URL = window.location.pathname;
   URL = URL.substring(URL.lastIndexOf('/'));
