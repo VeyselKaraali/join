@@ -799,7 +799,17 @@ textarea:focus, input:focus{
   #content, .board-wrapper {
     padding: 80px 20px 20px 20px;
   }
-  .board-wrapper {
-    
+  
+  #desktop-nav {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #content {
+    padding: 80px 20px 20px 20px;
+  }
+  .layout {
+    display: unset;
   }
 }

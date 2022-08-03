@@ -163,7 +163,7 @@ function showMobileNavigation(){
     <div class="nav-header">
       <img src="src/img/profile1.jpg" class="profile-img" alt="">
       <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
-      <div id="menu-btn" class="menu-btn" onclick="toggleNavigation()">
+      <div id="menu-btn" class="menu-btn" onclick="toggleMobileNavigation()">
         <div class="menu-line"></div>
       </div>
     </div>
@@ -200,7 +200,7 @@ function setMenuActive(){
   }
 }
 
-function toggleNavigation() {
+function toggleMobileNavigation() {
   const menuBtn = document.getElementById('menu-btn');
   navBody = document.getElementById("nav-body");
   if(menuBtn){
@@ -229,22 +229,23 @@ function toggleUserTooltip(id){
   }
 }
 
+
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
-  let content = document.getElementById('content');
+  //let content = document.getElementById('content');
 
   if (window.innerWidth <= 768 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
-    content.style.gridArea = "content";
-    content.style.gridColumnStart = "1";
+    //content.style.gridArea = "content";
+    //content.style.gridColumnStart = "1";
   }
   if(window.innerWidth > 768 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
     desktopNav.classList.remove('d-none');
-    content.style.gridArea = "nav";
-    content.style.gridColumnStart = "2";
+    //content.style.gridArea = "nav";
+    //content.style.gridColumnStart = "2";
   }
 }
 window.addEventListener('load', checkMediaQuery);
