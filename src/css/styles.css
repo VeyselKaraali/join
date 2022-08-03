@@ -340,7 +340,7 @@ h6 {
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   width: 100%;
 }
 
@@ -356,15 +356,17 @@ h6 {
 }
 
 .task-container {
+  --n: 4;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, max-content)); 
-  justify-content: center;
-  grid-gap: 20px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(max(280px,(100% - (var(--n) - 1)*10px)/var(--n)), 1fr));
+  /*justify-content: center;*/
+  gap: 20px;
+  /*width: 100%;*/
+  /*margin: 5px;*/
 }
 
 .category-color {
-  width: 280px;
+  /*width: 280px;*/
   height: auto;
   background-color: #ffb071;
 }
@@ -398,6 +400,14 @@ h6 {
 .urgency-wrapper,
 .description-wrapper {
   display: flex;
+}
+
+.title-wrapper,
+.category-wrapper,
+.date-wrapper,
+.urgency-wrapper,
+.description-wrapper {
+  align-items: baseline;
 }
 
 .assigned-wrapper > div:first-child,
@@ -436,7 +446,6 @@ h6 {
   border-radius: 100%;
   object-fit: cover;
   object-position: top;
-  cursor: pointer;
 }
 
 .task-wrapper .description {
@@ -449,6 +458,7 @@ h6 {
   justify-content: end;
   gap: 0 10px;
   padding-top: 10px;
+  margin-top: auto;
 }
 
 .task-wrapper .button-wrapper img {

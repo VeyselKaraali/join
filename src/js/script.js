@@ -216,6 +216,7 @@ function toggleMobileNavigation() {
   }
 }
 
+/*
 function toggleUserTooltip(id){
   id =  id.substring(5);
   let userText = document.getElementById(`tooltip-user-${id}`);
@@ -228,7 +229,7 @@ function toggleUserTooltip(id){
     userText.style.visibility = "visible";
   }
 }
-
+*/
 
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
