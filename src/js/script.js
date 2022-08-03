@@ -98,7 +98,7 @@ let tasks2 =[];
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
-  createNavigation();
+  showNavigation();
   setMenuActive();
 }
 
@@ -116,14 +116,14 @@ async function initTask(){
   init();
 }
 
-function createNavigation() {
-  createDesktopNavigation();
-  createMobileNavigation();
+function showNavigation() {
+  showDesktopNavigation();
+  showMobileNavigation();
 }
 
 
 /* START DESKTOP NAVIGATION */
-function createDesktopNavigation(){
+function showDesktopNavigation(){
   let desktopNav = `
   <a href="index.html" class="logo-wrapper myLink" data-pathname="/index.html">
     <img class="logo" src="src/icons/join_logo.png" alt="">
@@ -158,12 +158,12 @@ function createDesktopNavigation(){
 /* END DESKTOP NAVIGATION */
 
 /* START MOBILE NAVIGATION */
-function createMobileNavigation(){
+function showMobileNavigation(){
   let mobileNav = `
     <div class="nav-header">
       <img src="src/img/profile-1.jfif" class="profile-img" alt="">
       <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
-      <div id="menu-btn" class="menu-btn" onclick="toggleMenu()">
+      <div id="menu-btn" class="menu-btn" onclick="toggleNavigation()">
         <div class="menu-line"></div>
       </div>
     </div>
@@ -200,7 +200,7 @@ function setMenuActive(){
   }
 }
 
-function toggleMenu() {
+function toggleNavigation() {
   const menuBtn = document.getElementById('menu-btn');
   navBody = document.getElementById("nav-body");
   if(menuBtn){
