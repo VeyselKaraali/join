@@ -110,6 +110,7 @@ async function initBoard(){
 
 async function initBacklog(){
   init();
+  createBacklogTask();
 }
 
 async function initTask(){
@@ -265,6 +266,66 @@ function createIds() {
   await backend.setItem('tasks2', JSON.stringify(tasks2));
 }*/
 
+function createBacklogTask() {
+
+  let backlogTask = ` <div class="task-container">
+  <div class="category-color">
+    <div class="task-wrapper">
+      <div class="assigned-wrapper">
+        <div>ASSIGNED TO</div>
+        <div class="image-wrapper">
+          <div class="tooltip-click">
+            <img onclick="toggleUserTooltip(id)" id="user-1" src="src/img/profile1.jpg" alt="">
+            <span id="tooltip-user-1" class="tooltiptext">Darrin S. Jones<br><a href="mailto:darrin.jones@gmail.de">darrin.jones@gmail.de</a></span>
+          </div>
+          <div class="tooltip-click">
+            <img onclick="toggleUserTooltip(id)" id="user-2" src="src/img/profile2.jpg" alt="">
+            <span id="tooltip-user-2" class="tooltiptext">Darrin S. Jones<br><a href="mailto:darrin.jones@gmail.de">darrin.jones@gmail.de</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="title-wrapper">
+        <div>TITLE</div>
+        <div id="backlog-title">Title</div>
+      </div>
+      <div class="category-wrapper">
+        <div>CATEGORY</div>
+        <div id="backlog-category" >Marketing</div>
+      </div>
+      <div class="date-wrapper">
+        <div>DUE DATE</div>
+        <div id="backlog-date" >31/08/2022</div>
+      </div>
+      <div class="urgency-wrapper">
+        <div>URGENCY</div>
+        <div id="backlog-urgency" >Medium</div>
+      </div>
+      <div class="description-wrapper">
+        <div>DESCRIPTION</div>
+        <div id="backlog-description"  class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus itaque est nihil repudiandae aspernatur laborum sed eos animi inventore alias! Id porro perferendis rem quis ab nihil, necessitatibus quibusdam. Nam?</div>
+      </div>
+      <div class="button-wrapper">
+        <div class="tooltip">
+          <img src="src/icons/move.svg" alt="">
+          <span class="tooltiptext">Move To Board</span>
+        </div>
+        <div class="tooltip">
+          <img src="src/icons/edit.svg" alt="">
+          <span class="tooltiptext">Edit</span>
+        </div>
+        <div class="tooltip">
+          <img src="src/icons/delete.svg" alt="">
+          <span class="tooltiptext">Delete</span>
+        </div>
+      </div>
+    </div>
+  </div>`
+
+document.getElementById('task-container').innerHTML = backlogTask
+
+
+}
+
 
 function addToTask() {
 
@@ -293,6 +354,8 @@ function addToTask() {
   catergory.value = '';
   urgency.value = '';
   description.value = '';
+
+  createBacklogTask(allTasks)
 
 }
 function myInit() {
