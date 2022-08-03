@@ -146,7 +146,7 @@ function createNavigation() {
 }
 
 
-/* DESKTOP NAVIGATION */
+/* START DESKTOP NAVIGATION */
 function createDesktopNavigation(){
   let desktopNav = `
   <a href="index.html" class="logo-wrapper myLink" data-pathname="/index.html">
@@ -160,6 +160,7 @@ function createDesktopNavigation(){
     <a href="help.html" class="menu-item myLink" data-pathname="/help.html">Help</a>
   </div>
   
+  <!-- 
   <div class="horizontal-line"></div>
   
   <div class="menu-wrapper">
@@ -172,6 +173,7 @@ function createDesktopNavigation(){
   <div class="menu-wrapper">
     <a class="menu-item" href="login.html">Logout</a>
   </div>
+  -->
   
   <img class="profile-img" src="src/img/profile-1.jfif" alt="">
   `;
@@ -194,9 +196,11 @@ function createMobileNavigation(){
         <a href="backlog.html">Backlog</a>
         <a href="task.html">Add Task</a>
         <a href="help.html">Help</a>
+        <!--
         <a href="imprint.html">Imprint</a>
         <a href="privacy.html">Privacy</a>
         <a href="login.html">Logout</a>
+        -->
       </div>
       <!-- </div> -->
 
@@ -225,7 +229,8 @@ function toggleMenu() {
       isMenuOpen = !isMenuOpen;
       if(isMenuOpen){
         menuBtn.classList.add('open');
-        navBody.style.height = '280px';
+        //navBody.style.height = '280px';
+        navBody.style.height = '160px';
       } else {
         menuBtn.classList.remove('open');
         navBody.style.height = '0';

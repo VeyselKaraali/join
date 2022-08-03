@@ -241,7 +241,8 @@ h6 {
 }
 
 #mobile-nav .nav-body-wrapper {
-  height: 280px;
+  /*height: 280px;*/
+  height: 160px;
 }
 
 #mobile-nav .nav-body {
