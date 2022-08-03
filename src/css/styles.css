@@ -283,8 +283,8 @@ h6 {
 .content {
   grid-area: nav;
   grid-column-start: 2;
-  padding: 80px 20px 20px 20px;
-  max-width: 1400px;
+  padding: 20px;
+  max-width: calc(100vw - (100vw - 100%));
   display: flex;
   flex-direction: column;
 }
@@ -346,7 +346,7 @@ h6 {
 
 .headline {
   font-family: 'PT Sans bold';
-  font-size: 24px;
+  font-size: 32px;
 }
 
 .sub-headline {
@@ -793,4 +793,13 @@ textarea:focus, input:focus{
   font-size: 1rem;
   border-radius: 0.25rem;
   transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+@media screen and (max-width: 768px) {
+  #content, .board-wrapper {
+    padding: 80px 20px 20px 20px;
+  }
+  .board-wrapper {
+    
+  }
 }

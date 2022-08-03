@@ -151,7 +151,7 @@ function showDesktopNavigation(){
   </div>
   -->
   
-  <img class="profile-img" src="src/img/profile-1.jfif" alt="">
+  <img class="profile-img" src="src/img/profile1.jpg" alt="">
   `;
   document.getElementById('desktop-nav').innerHTML = desktopNav;
 }
@@ -161,7 +161,7 @@ function showDesktopNavigation(){
 function showMobileNavigation(){
   let mobileNav = `
     <div class="nav-header">
-      <img src="src/img/profile-1.jfif" class="profile-img" alt="">
+      <img src="src/img/profile1.jpg" class="profile-img" alt="">
       <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
       <div id="menu-btn" class="menu-btn" onclick="toggleNavigation()">
         <div class="menu-line"></div>
@@ -234,13 +234,13 @@ function checkMediaQuery() {
   let desktopNav = document.getElementById('desktop-nav');
   let content = document.getElementById('content');
 
-  if (window.innerWidth <= 900 && mobileNav && desktopNav) {
+  if (window.innerWidth <= 768 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
     content.style.gridArea = "content";
     content.style.gridColumnStart = "1";
   }
-  if(window.innerWidth > 900 && mobileNav && desktopNav) {
+  if(window.innerWidth > 768 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
     desktopNav.classList.remove('d-none');
     content.style.gridArea = "nav";
