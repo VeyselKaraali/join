@@ -120,7 +120,7 @@ let isMenuOpen = false;
 let isUserDataShown = false;
 let currentDraggedElement;
 
-let tasksFromBackend;
+let tasks2 =[];
 
 /**
  * This function is used to 
@@ -129,9 +129,11 @@ let tasksFromBackend;
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
-  //tasksFromBackend = JSON.parse(backend.getItem('tasks')) || [];
+  //tasksFromBackend = JSON.parse(backend.getItem('name')) || [];
   //console.log(tasksFromBackend);
-
+  //console.log(JSON.stringify(tasksFromBackend));
+  //tasks = JSON.parse(backend.getItem('tasks')) || [];
+  //addTask();
   createIds();
   createNavigation();
   setActiveMenu();
@@ -272,6 +274,11 @@ function createIds() {
     tasks[i]['id'] = i + 1;
   }
 }
+
+/*async function addTask() {
+  tasks2.push('Task1');
+  await backend.setItem('tasks2', JSON.stringify(tasks2));
+}*/
 
 
 function addToTask() {
