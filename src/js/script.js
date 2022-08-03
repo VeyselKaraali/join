@@ -129,8 +129,8 @@ let tasksFromBackend;
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
-  tasksFromBackend = JSON.parse(backend.getItem('tasks')) || [];
-  console.log(tasksFromBackend);
+  //tasksFromBackend = JSON.parse(backend.getItem('tasks')) || [];
+  //console.log(tasksFromBackend);
 
   createIds();
   createNavigation();
