@@ -356,19 +356,19 @@ h6 {
 }
 
 .task-container {
-  --n: 4;
+  --n: 4; /* The maximum number of columns */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(max(280px,(100% - (var(--n) - 1)*10px)/var(--n)), 1fr));
-  /*justify-content: center;*/
+  grid-template-columns: repeat(auto-fill,
+           minmax(max(280px,(100% - (var(--n) - 1)*10px)/var(--n)), 1fr));
   gap: 20px;
-  /*width: 100%;*/
-  /*margin: 5px;*/
+  margin: 5px;
 }
 
 .category-color {
   /*width: 280px;*/
   height: auto;
   background-color: #ffb071;
+  /*padding: 5px;*/
 }
 
 .task-wrapper {

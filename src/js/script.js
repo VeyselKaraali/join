@@ -321,7 +321,7 @@ function createBacklogTask() {
     </div>
   </div>`
 
-document.getElementById('task-container').innerHTML = backlogTask
+//document.getElementById('task-container').innerHTML = backlogTask;
 
 
 }
