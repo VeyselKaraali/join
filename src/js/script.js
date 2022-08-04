@@ -349,6 +349,9 @@ function addToTask() {
   currentTask.push(allTasks)
   console.log(currentTask)
 
+  // Save tasks on the server
+  backend.setItem('tasks', JSON.stringify(allTasks));
+
   title.value = '';
   date.value = '';
   catergory.value = '';
