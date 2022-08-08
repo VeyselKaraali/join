@@ -11,100 +11,73 @@
   <title>Task</title>
 </head>
 
-<body onload="initTask()">
-  <!-- === START NAVIGATION === -->
-  <nav id="desktop-nav" class="d-none"></nav>
-  <nav id="mobile-nav" class="d-none"></nav>
-  <!-- === END NAVIGATION === -->
-‚
-  <div class="add-task-wrapper">
+  <body onload="initTask()">
+    <!-- === START NAVIGATION === -->
+    <nav id="desktop-nav" class="d-none"></nav>
+    <nav id="mobile-nav" class="d-none"></nav>
+    <!-- === END NAVIGATION === -->
 
-
-    <h1 class="headline">Add Task</h1>
-
-    <span class="sub-headline">Learning Management System Project</span>
-
-
-    <main class="inputContainer">
-      <br>
-      <div>
-
-
-        <form onsubmit="addToTask()" class="input-row">
-
-          <div>
-
-            <div>
-              <label for="TITLE" class="form-label">TITLE</label>
-              <input required id="title" class="form-control" type="text" placeholder="Managment meeting preparation"
-                aria-label="default input example">
-            </div>
-
-
-            <div>
-              <label for="CATERGORY" class="form-label">CATERGORY</label>
-              <select  id="catergory" class="form-select" aria-label="Default select example">
-                <option selected>Management</option>
-                <option value="Software Development">Software Development</option>
-                <option value="UX/UI Desing">UX/UI Desing</option>
-                <option value="Human Resources">Human Resources</option>
-              </select>
-            </div>
-
-          </div>
-
-          <div>
-
-            <div>
-              <label for="DUE DATE" class="form-label">DUE DATE</label>
-              <input required id="date" class="form-control" type="date" placeholder="DD.MM.YYYY" aria-label="default input example">
-            </div>
-
-            <div>
-              <label for="URGENCY" class="form-label">URGENCY</label>
-              <select id="urgency"  class="form-select" aria-label="Default select example">
-                <option selected>High</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Low">Low</option>
-              </select>
-            </div>
-
-          </div>
-
-      </div>
-
-
-
-      <div class="flex input-row">
-
-        <div>
-          <label for="DESCRIPTION" class="form-label">DESCRIPTION</label>
-          <textarea required id="description"  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <div class="layout">
+      <div id="content" class="content">
+        
+        <div class="headline-wrapper">
+          <div class="headline">Add Task</div>
+          <div class="sub-headline">Learning Management System Project</div>
         </div>
 
-        <div>
+        <form onsubmit = "addToTask()" class="task">
+          <div class="item title-wrapper">
+            <div>TITLE</div>
+            <input required type="text">
+          </div>
+    
+          <div class="item date-wrapper">
+            <div>DUE DATE</div>
+            <input id="datePicker" required type="date">
+          </div>
+              
+          <div class="item category-wrapper">
+            <label for="category">CATEGORY</label>
+            <select name="category" id="category">
+              <option value="management">Management</option>
+              <option value="software-development">Software Development</option>
+              <option value="design">Design</option>
+              <option value="human-resources">Human Resources</option>
+            </select>
+          </div>
 
-          <h2>ASSIGNED TO</h2> <br> <br>
-          <button type="button" class="btn btn-primary">Cancel</button>
+          <div class="item urgency-wrapper">
+            <label for="urgency">URGENCY</label>
+            <select name="urgency" id="urgency">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+              
+          <div class="item description-wrapper">
+            <label for="description">DESCRIPTION</label>
+            <textarea required id="description" rows="3"></textarea>
+          </div>
+  
+          <div class="item assigned-wrapper">
+            <div>ASSIGNED TO</div>
+            <div class="image-wrapper">
+              <img id="user-1" src="src/img/profile1.jpg" alt="">
+              <img id="user-2" src="src/img/profile2.jpg" alt="">
+              <img id="user-3" src="src/img/profile3.jpg" alt="">
+              <img id="user-4" src="src/img/profile4.jpg" alt="">
+              <img id="user-5" src="src/img/profile5.jpg" alt="">
+            </div>
+          </div>
 
-          <button onclick="addToTask()" type="button" class="btn btn-primary">Create Task</button>
-        </div>
-
+            <div class="item button-wrapper">
+              <button>CANCEL</button>
+              <button>CREATE TASK</button>
+            </div>
+        </form>
       </div>
+    </div>
 
-      </form>
-
-
-
-  </div>
-
-
-  </main>
-
-
-
-
-
-</body>
-
+  </body>
 </html>

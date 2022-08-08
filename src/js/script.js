@@ -115,11 +115,16 @@ async function initBacklog(){
 
 async function initTask(){
   init();
+  setCurrentDate();
 }
 
 function showNavigation() {
   showDesktopNavigation();
   showMobileNavigation();
+}
+
+function setCurrentDate() {
+  document.getElementById('datePicker').valueAsDate = new Date();
 }
 
 
