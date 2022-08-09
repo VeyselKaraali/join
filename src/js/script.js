@@ -335,15 +335,15 @@ function createBacklogTask() {
 function addToTask() {
 
   let title = document.getElementById('title')  
-  let date = document.getElementById('date')
-  let catergory = document.getElementById('catergory')
+  let date = document.getElementById('datePicker')
+  let category = document.getElementById('category')
   let urgency  = document.getElementById('urgency')
   let description = document.getElementById('description')
 
   let allTasks= {
     "id": 0,
     "title": title.value,
-    "catergory": catergory.value,
+    "category": category.value,
     "description": description.value,
     "created": "27.07.2022",
     "duedate": date.value,
@@ -359,7 +359,7 @@ function addToTask() {
 
   title.value = '';
   date.value = '';
-  catergory.value = '';
+  category.value = '';
   urgency.value = '';
   description.value = '';
 
