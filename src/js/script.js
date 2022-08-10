@@ -88,9 +88,7 @@ let currentTask = [];
 let isMenuOpen = false;
 let isUserDataShown = false;
 let currentDraggedElement;
-
-let tasks2 =[];
-
+let allTasks = [];
 /**
  * This function is used to 
  * 
@@ -222,37 +220,17 @@ function toggleMobileNavigation() {
   }
 }
 
-/*
-function toggleUserTooltip(id){
-  id =  id.substring(5);
-  let userText = document.getElementById(`tooltip-user-${id}`);
-  if(isUserDataShown){
-    isUserDataShown = !isUserDataShown;
-    userText.style.visibility = "hidden";
-  }
-  else{
-    isUserDataShown = !isUserDataShown;
-    userText.style.visibility = "visible";
-  }
-}
-*/
-
 function checkMediaQuery() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
-  //let content = document.getElementById('content');
 
   if (window.innerWidth <= 768 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
-    //content.style.gridArea = "content";
-    //content.style.gridColumnStart = "1";
   }
   if(window.innerWidth > 768 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
     desktopNav.classList.remove('d-none');
-    //content.style.gridArea = "nav";
-    //content.style.gridColumnStart = "2";
   }
 }
 window.addEventListener('load', checkMediaQuery);
@@ -265,11 +243,6 @@ function createIds() {
     tasks[i]['id'] = i + 1;
   }
 }
-
-/*async function addTask() {
-  tasks2.push('Task1');
-  await backend.setItem('tasks2', JSON.stringify(tasks2));
-}*/
 
 function createBacklogTask() {
 
@@ -327,20 +300,36 @@ function createBacklogTask() {
   </div>`
 
 //document.getElementById('task-container').innerHTML = backlogTask;
-
-
 }
 
 
-function addToTask() {
-
+function addTask() {
   let title = document.getElementById('title')  
   let date = document.getElementById('datePicker')
   let category = document.getElementById('category')
   let urgency  = document.getElementById('urgency')
   let description = document.getElementById('description')
+  
+  let allTasksAsString = backend.getItem('allTasks') || [];
+  if(allTasksAsString.length != 0){
+    allTasks = JSON.parse(allTasksAsString);
+  }
 
-  let allTasks= {
+
+  let currentTask = {
+        "id": `${new Date().getTime()}`,
+        "title": title.value,
+        "category": category.value,
+        "description": description.value,
+        "duedate": date.value,
+        "urgency": urgency.value,
+        "status": "todo"
+  };
+
+  allTasks.push(currentTask);
+  backend.setItem('allTasks', JSON.stringify(allTasks));
+
+  /*let allTasks= {
     "id": 0,
     "title": title.value,
     "category": category.value,
@@ -349,13 +338,14 @@ function addToTask() {
     "duedate": date.value,
     "urgency": urgency.value,
     "status": "todo"
-  };
+  };*/
 
-  currentTask.push(allTasks)
-  console.log(currentTask)
+  //currentTask.push(allTasks)
+  //console.log(currentTask)
+  console.log(allTasks);
 
   // Save tasks on the server
-  backend.setItem('tasks', JSON.stringify(allTasks));
+  //backend.setItem('tasks', JSON.stringify(allTasks));
 
   title.value = '';
   date.value = '';
@@ -363,19 +353,9 @@ function addToTask() {
   urgency.value = '';
   description.value = '';
 
-  createBacklogTask(allTasks)
+  //createBacklogTask(allTasks)
 
 }
-function myInit() {
-  
-    setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
-
-    let users = [];
-
-    users.push('Andi Bandi');
-    backend.setItem('users', JSON.stringify(users));
-}
-
 
 function showTasks() {
   renderTasks('todo');
