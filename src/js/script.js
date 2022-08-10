@@ -303,14 +303,14 @@ function createBacklogTask() {
 }
 
 
-function addTask() {
+async function addTask() {
   let title = document.getElementById('title')  
   let date = document.getElementById('datePicker')
   let category = document.getElementById('category')
   let urgency  = document.getElementById('urgency')
   let description = document.getElementById('description')
   
-  let allTasksAsString = backend.getItem('allTasks') || [];
+  let allTasksAsString = await backend.getItem('allTasks') || [];
   if(allTasksAsString.length != 0){
     allTasks = JSON.parse(allTasksAsString);
   }
@@ -327,7 +327,7 @@ function addTask() {
   };
 
   allTasks.push(currentTask);
-  backend.setItem('allTasks', JSON.stringify(allTasks));
+  await backend.setItem('allTasks', JSON.stringify(allTasks));
 
   /*let allTasks= {
     "id": 0,
