@@ -89,6 +89,7 @@ let isMenuOpen = false;
 let isUserDataShown = false;
 let currentDraggedElement;
 let allTasks = [];
+let editors = [];
 /**
  * This function is used to 
  * 
@@ -113,7 +114,8 @@ async function initBacklog(){
 
 async function initTask(){
   init();
-  setCurrentDate();
+  //setCurrentDate();
+  resetForm();
 }
 
 function showNavigation() {
@@ -121,10 +123,11 @@ function showNavigation() {
   showMobileNavigation();
 }
 
+/*
 function setCurrentDate() {
   document.getElementById('datePicker').valueAsDate = new Date();
 }
-
+*/
 
 /* START DESKTOP NAVIGATION */
 function showDesktopNavigation(){
@@ -319,42 +322,51 @@ async function addTask() {
   let currentTask = {
         "id": `${new Date().getTime()}`,
         "title": title.value,
-        "category": category.value,
-        "description": description.value,
         "duedate": date.value,
+        "category": category.value,
         "urgency": urgency.value,
+        "description": description.value,
+        editors:[
+          {
+            id: "user-1",
+          },
+          {
+            id: "user-2",
+          },
+          {
+            id: "user-3",
+          }
+        ],
         "status": "todo"
   };
 
   allTasks.push(currentTask);
   await backend.setItem('allTasks', JSON.stringify(allTasks));
 
-  /*let allTasks= {
-    "id": 0,
-    "title": title.value,
-    "category": category.value,
-    "description": description.value,
-    "created": "27.07.2022",
-    "duedate": date.value,
-    "urgency": urgency.value,
-    "status": "todo"
-  };*/
-
-  //currentTask.push(allTasks)
-  //console.log(currentTask)
   console.log(allTasks);
+  resetForm();
+}
 
-  // Save tasks on the server
-  //backend.setItem('tasks', JSON.stringify(allTasks));
+function resetForm() {
+  document.getElementById('title').value = '';  
+  document.getElementById('datePicker').value = ''; 
+  document.getElementById("category").selectedIndex = -1;
+  document.getElementById("urgency").selectedIndex = -1;
+  document.getElementById('description').value = ''; 
+}
 
-  title.value = '';
-  date.value = '';
-  category.value = '';
-  urgency.value = '';
-  description.value = '';
+function selectTaskEditors(id){
+  let editor = document.getElementById(id);
 
-  //createBacklogTask(allTasks)
-
+  let index = editors.indexOf(id);
+  if (index !== -1) {
+    editors.splice(index, 1);
+  }
+  editor.classList.toggle('editor-selected');
+  if(editor.classList.contains('editor-selected')){
+    editors.push(id);
+  }
+  //console.log(editors);
 }
 
 function showTasks() {

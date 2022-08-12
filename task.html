@@ -38,7 +38,7 @@
               
           <div class="item category-wrapper">
             <label for="category">CATEGORY</label>
-            <select name="category" id="category">
+            <select name="category" id="category" required>
               <option value="management">Management</option>
               <option value="software-development">Software Development</option>
               <option value="design">Design</option>
@@ -48,7 +48,7 @@
 
           <div class="item urgency-wrapper">
             <label for="urgency">URGENCY</label>
-            <select name="urgency" id="urgency">
+            <select name="urgency" id="urgency" required>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -63,11 +63,11 @@
           <div class="item assigned-wrapper">
             <div>ASSIGNED TO</div>
             <div class="image-wrapper">
-              <img id="user-1" src="src/img/profile1.jpg" alt="">
-              <img id="user-2" src="src/img/profile2.jpg" alt="">
-              <img id="user-3" src="src/img/profile3.jpg" alt="">
-              <img id="user-4" src="src/img/profile4.jpg" alt="">
-              <img id="user-5" src="src/img/profile5.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-1" src="src/img/profile1.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-2" src="src/img/profile2.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-3" src="src/img/profile3.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-4" src="src/img/profile4.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-5" src="src/img/profile5.jpg" alt="">
             </div>
           </div>
 
