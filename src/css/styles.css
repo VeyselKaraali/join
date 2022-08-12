@@ -96,6 +96,8 @@ h6 {
   background-color: #1e3190;
   color: #fff;
   position: fixed;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 #desktop-nav a:hover {
@@ -442,7 +444,6 @@ h6 {
 
 .task-wrapper .image-wrapper {
   display: flex;
-  gap: 0 10px;
 }
 
 .task-wrapper .assigned-wrapper img {
@@ -674,8 +675,8 @@ form.task .assigned-wrapper {
 }
 
 form .image-wrapper img {
-  width: 45px;
-  height: 45px;
+  width: 60px;
+  height: 60px;
   border-radius: 100%;
   object-fit: cover;
   object-position: top;
@@ -725,7 +726,9 @@ form.task select:focus {
 
 form.task .image-wrapper {
   display: flex;
-  gap: 0 10px;
+  gap: 10px 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 form.task .button-wrapper {
@@ -740,6 +743,7 @@ form.task .button-wrapper button {
   width: 120px;
   height: 40px;
   font-family: 'PT Sans bold' !important;
+  font-size: 14px !important;
   border-radius: 10px;
   color: #1e3190;
   border: 2px solid #1e3190;

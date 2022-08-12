@@ -312,6 +312,7 @@ async function addTask() {
   let category = document.getElementById('category')
   let urgency  = document.getElementById('urgency')
   let description = document.getElementById('description')
+  let categoryColor = setCategoryColor(category.value);
   
   let allTasksAsString = await backend.getItem('allTasks') || [];
   if(allTasksAsString.length != 0){
@@ -324,19 +325,10 @@ async function addTask() {
         "title": title.value,
         "duedate": date.value,
         "category": category.value,
+        "categoryColor": categoryColor,
         "urgency": urgency.value,
         "description": description.value,
-        editors:[
-          {
-            id: "user-1",
-          },
-          {
-            id: "user-2",
-          },
-          {
-            id: "user-3",
-          }
-        ],
+        "editors": editors,
         "status": "todo"
   };
 
@@ -355,6 +347,24 @@ function resetForm() {
   document.getElementById('description').value = ''; 
 }
 
+function setCategoryColor(category) {
+  if(category == 'management'){
+    return '#7190FC';
+  }
+  if(category == 'software-development'){
+    return '#ffb071';
+  }
+  if(category == 'design'){
+    return '#e271ff';
+  }
+  if(category == 'human-resources'){
+    return '#55ae66';
+  }
+  else {
+    return '#000';
+  }
+}
+
 function selectTaskEditors(id){
   let editor = document.getElementById(id);
 
@@ -366,7 +376,7 @@ function selectTaskEditors(id){
   if(editor.classList.contains('editor-selected')){
     editors.push(id);
   }
-  //console.log(editors);
+  console.log(editors);
 }
 
 function showTasks() {
