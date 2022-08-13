@@ -18,14 +18,17 @@
     <!-- === END NAVIGATION === -->
 
     <div class="layout">
-      <div id="content" class="content">
+      <div id="content-task" class="content">
+
         
+
         <div class="headline-wrapper">
           <div class="headline">Add Task</div>
           <div class="sub-headline">Learning Management System Project</div>
         </div>
 
-        <form onsubmit = "addTask(); return false;" class="task">
+        <form id="form-task" onsubmit = "addTask(); return false;" class="task">
+          <div id="msg-success" class="msg-success d-none">Task was created successfully</div>
           <div class="item title-wrapper">
             <div>TITLE</div>
             <input id="title" required type="text">
@@ -62,7 +65,7 @@
   
           <div class="item assigned-wrapper">
             <div>ASSIGNED TO</div>
-            <div class="image-wrapper">
+            <div id="task-image-wrapper" class="image-wrapper">
               <img onclick="selectTaskEditors(this.id)" id="user-1" src="src/img/profile1.jpg" alt="">
               <img onclick="selectTaskEditors(this.id)" id="user-2" src="src/img/profile2.jpg" alt="">
               <img onclick="selectTaskEditors(this.id)" id="user-3" src="src/img/profile3.jpg" alt="">

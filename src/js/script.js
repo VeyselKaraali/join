@@ -41,55 +41,13 @@ let tasks = [
   }
 ];
 
-let accounts = [
-  {
-    "id": 1,
-    "firstName": "Stefan",
-    "lastName": "Richter",
-    "email": "stefan.richter@gmail.de",
-    "password": "12345",
-    "img": "src/img/profile-1.jfif"
-  },
-  {
-    "id": 2,
-    "firstName": "Erika",
-    "lastName": "Schneider",
-    "email": "erika.schneider@gmail.com",
-    "password": "12345",
-    "img": "src/img/profile-1.jfif"
-  },
-  {
-    "id": 3,
-    "firstName": "Jens",
-    "lastName": "Schmidt",
-    "email": "jens.schmidt@gmail.com",
-    "password": "12345",
-    "img": "src/img/profile-1.jfif"
-  },
-  {
-    "id": 4,
-    "firstName": "Laura",
-    "lastName": "Scholz",
-    "email": "laura.scholz@gmail.com",
-    "password": "12345",
-    "img": "src/img/profile-1.jfif"
-  },
-  {
-    "id": 5,
-    "firstName": "Max",
-    "lastName": "Hofmann",
-    "email": "max.hofmann@gmail.com",
-    "password": "12345",
-    "img": "src/img/profile-1.jfif"
-  }
-];
-
 let currentTask = [];
 let isMenuOpen = false;
 let isUserDataShown = false;
 let currentDraggedElement;
 let allTasks = [];
 let editors = [];
+
 /**
  * This function is used to 
  * 
@@ -97,7 +55,7 @@ let editors = [];
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
-  showNavigation();
+  renderNavigation();
   setMenuActive();
 }
 
@@ -110,27 +68,21 @@ async function initBoard(){
 async function initBacklog(){
   init();
   createBacklogTask();
+  await loadTasksToBacklog() 
 }
 
 async function initTask(){
   init();
-  //setCurrentDate();
   resetForm();
 }
 
-function showNavigation() {
-  showDesktopNavigation();
-  showMobileNavigation();
+function renderNavigation() {
+  renderDesktopNavigation();
+  renderMobileNavigation();
 }
-
-/*
-function setCurrentDate() {
-  document.getElementById('datePicker').valueAsDate = new Date();
-}
-*/
 
 /* START DESKTOP NAVIGATION */
-function showDesktopNavigation(){
+function renderDesktopNavigation(){
   let desktopNav = `
   <a href="index.html" class="logo-wrapper myLink" data-pathname="/index.html">
     <img class="logo" src="src/icons/join_logo.png" alt="">
@@ -165,7 +117,7 @@ function showDesktopNavigation(){
 /* END DESKTOP NAVIGATION */
 
 /* START MOBILE NAVIGATION */
-function showMobileNavigation(){
+function renderMobileNavigation(){
   let mobileNav = `
     <div class="nav-header">
       <img src="src/img/profile1.jpg" class="profile-img" alt="">
@@ -223,7 +175,7 @@ function toggleMobileNavigation() {
   }
 }
 
-function checkMediaQuery() {
+function checkNavigation() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
 
@@ -236,8 +188,8 @@ function checkMediaQuery() {
     desktopNav.classList.remove('d-none');
   }
 }
-window.addEventListener('load', checkMediaQuery);
-window.addEventListener('resize', checkMediaQuery);
+window.addEventListener('load', checkNavigation);
+window.addEventListener('resize', checkNavigation);
 
 
 //Start Board Test-Functions
@@ -305,6 +257,18 @@ function createBacklogTask() {
 //document.getElementById('task-container').innerHTML = backlogTask;
 }
 
+async function loadTasksToBacklog() {
+  let allTasksAsString = await backend.getItem('allTasks') || [];
+  if(allTasksAsString.length != 0){
+    allTasks = JSON.parse(allTasksAsString);
+  }
+  for (let i = 0; i < allTasks.length; i++) {
+    console.log(allTasks[i].title);
+    
+  }
+  console.log(allTasks);
+}
+
 
 async function addTask() {
   let title = document.getElementById('title')  
@@ -319,7 +283,6 @@ async function addTask() {
     allTasks = JSON.parse(allTasksAsString);
   }
 
-
   let currentTask = {
         "id": `${new Date().getTime()}`,
         "title": title.value,
@@ -329,14 +292,27 @@ async function addTask() {
         "urgency": urgency.value,
         "description": description.value,
         "editors": editors,
+        "backlog": true,
         "status": "todo"
   };
 
   allTasks.push(currentTask);
   await backend.setItem('allTasks', JSON.stringify(allTasks));
 
-  console.log(allTasks);
+  //console.log(allTasks);
   resetForm();
+  showSuccessMessage();
+}
+
+function showSuccessMessage() {
+  let msgSuccess = document.getElementById('msg-success');
+  
+  if(msgSuccess.classList.contains('d-none')){
+    setTimeout(msgSuccess.classList.remove('d-none'), 2500);
+    //msgSuccess.classList.remove('d-none');
+  }
+
+  setTimeout(msgSuccess.classList.add('d-none'), 2500);
 }
 
 function resetForm() {
@@ -345,6 +321,19 @@ function resetForm() {
   document.getElementById("category").selectedIndex = -1;
   document.getElementById("urgency").selectedIndex = -1;
   document.getElementById('description').value = ''; 
+  resetEditors();
+}
+
+function resetEditors() {
+  editors = [];
+  let element = document.getElementById('task-image-wrapper');
+        let children = element.children;
+        for(let i=0; i<children.length; i++){
+            let child = children[i];
+            if(child.classList.contains('editor-selected')){
+              child.classList.remove('editor-selected');
+            }
+        }
 }
 
 function setCategoryColor(category) {
