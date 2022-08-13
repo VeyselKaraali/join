@@ -110,7 +110,7 @@ function renderDesktopNavigation(){
   </div>
   -->
   
-  <img class="profile-img" src="src/img/profile1.jpg" alt="">
+  <img class="profile-img" src="src/img/user-1.jpg" alt="">
   `;
   document.getElementById('desktop-nav').innerHTML = desktopNav;
 }
@@ -120,7 +120,7 @@ function renderDesktopNavigation(){
 function renderMobileNavigation(){
   let mobileNav = `
     <div class="nav-header">
-      <img src="src/img/profile1.jpg" class="profile-img" alt="">
+      <img src="src/img/user-1.jpg" class="profile-img" alt="">
       <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
       <div id="menu-btn" class="menu-btn" onclick="toggleMobileNavigation()">
         <div class="menu-line"></div>
@@ -258,6 +258,7 @@ function createBacklogTask() {
 }
 
 async function loadTasksToBacklog() {
+  await downloadFromServer();
   let allTasksAsString = await backend.getItem('allTasks') || [];
   if(allTasksAsString.length != 0){
     allTasks = JSON.parse(allTasksAsString);
