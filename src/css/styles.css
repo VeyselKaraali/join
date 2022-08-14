@@ -445,6 +445,7 @@ h6 {
 
 .task-wrapper .image-wrapper {
   display: flex;
+  gap: 10px;
 }
 
 .task-wrapper .assigned-wrapper img {
@@ -634,13 +635,14 @@ textarea:focus, input:focus{
 /* === START TASK === */
 
 @keyframes msgSuccess {
+  0%  {z-index: 2;}
   50%  {opacity: 1;}
-  100% {opacity: 0;}
+  100% {opacity: 0; display: none;}
 }
 
 .msg-success {
   position: absolute;
-  z-index: 2;
+  z-index: -1;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);

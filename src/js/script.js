@@ -67,7 +67,6 @@ async function initBoard(){
 
 async function initBacklog(){
   init();
-  createBacklogTask();
   await loadTasksToBacklog() 
 }
 
@@ -199,75 +198,100 @@ function createIds() {
   }
 }
 
-function createBacklogTask() {
+function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors) {
 
-  let backlogTask = ` <div class="task-container">
-  <div class="category-color">
-    <div class="task-wrapper">
-      <div class="assigned-wrapper">
-        <div>ASSIGNED TO</div>
-        <div class="image-wrapper">
-          <div class="tooltip-click">
-            <img onclick="toggleUserTooltip(id)" id="user-1" src="src/img/profile1.jpg" alt="">
-            <span id="tooltip-user-1" class="tooltiptext">Darrin S. Jones<br><a href="mailto:darrin.jones@gmail.de">darrin.jones@gmail.de</a></span>
-          </div>
-          <div class="tooltip-click">
-            <img onclick="toggleUserTooltip(id)" id="user-2" src="src/img/profile2.jpg" alt="">
-            <span id="tooltip-user-2" class="tooltiptext">Darrin S. Jones<br><a href="mailto:darrin.jones@gmail.de">darrin.jones@gmail.de</a></span>
-          </div>
-        </div>
-      </div>
-      <div class="title-wrapper">
-        <div>TITLE</div>
-        <div id="backlog-title">Title</div>
-      </div>
-      <div class="category-wrapper">
-        <div>CATEGORY</div>
-        <div id="backlog-category" >Marketing</div>
-      </div>
-      <div class="date-wrapper">
-        <div>DUE DATE</div>
-        <div id="backlog-date" >31/08/2022</div>
-      </div>
-      <div class="urgency-wrapper">
-        <div>URGENCY</div>
-        <div id="backlog-urgency" >Medium</div>
-      </div>
-      <div class="description-wrapper">
-        <div>DESCRIPTION</div>
-        <div id="backlog-description"  class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus itaque est nihil repudiandae aspernatur laborum sed eos animi inventore alias! Id porro perferendis rem quis ab nihil, necessitatibus quibusdam. Nam?</div>
-      </div>
-      <div class="button-wrapper">
-        <div class="tooltip">
-          <img src="src/icons/move.svg" alt="">
-          <span class="tooltiptext">Move To Board</span>
-        </div>
-        <div class="tooltip">
-          <img src="src/icons/edit.svg" alt="">
-          <span class="tooltiptext">Edit</span>
-        </div>
-        <div class="tooltip">
-          <img src="src/icons/delete.svg" alt="">
-          <span class="tooltiptext">Delete</span>
-        </div>
+  let backlogTask = 
+  `
+  <div class="category-color" style="background-color: ${categoryColor}">
+  <div class="task-wrapper">
+    <div class="assigned-wrapper">
+      <div>ASSIGNED TO</div>
+      <div class="image-wrapper">
+        <img id="user-1" src="src/img/user-1.jpg" alt="">
+        <img id="user-2" src="src/img/user-2.jpg" alt="">
+        <script> renderBacklogEditors(${id}, ${editors});</script>
       </div>
     </div>
-  </div>`
+    <div class="title-wrapper">
+      <div>TITLE</div>
+      <div id="backlog-title-${id}">${title}</div>
+    </div>
+    <div class="category-wrapper">
+      <div>CATEGORY</div>
+      <div id="backlog-category-${id}">${category}</div>
+    </div>
+    <div class="date-wrapper">
+      <div>DUE DATE</div>
+      <div id="backlog-date-${id}">${dueDate}</div>
+    </div>
+    <div class="urgency-wrapper">
+      <div>URGENCY</div>
+      <div id="backlog-urgency-${id}">${urgency}</div>
+    </div>
+    <div class="description-wrapper">
+      <div>DESCRIPTION</div>
+      <div id="backlog-description-${id}" class="description">${description}</div>
+    </div>
+    <div class="button-wrapper">
+      <div id="move-board-${id}" class="tooltip">
+        <img src="src/icons/move.svg" alt="">
+        <span class="tooltiptext">Move To Board</span>
+      </div>
+      <div id="edit-${id}" class="tooltip">
+        <img src="src/icons/edit.svg" alt="">
+        <span class="tooltiptext">Edit</span>
+      </div>
+      <div id="delete-${id}" class="tooltip">
+        <img src="src/icons/delete.svg" alt="">
+        <span class="tooltiptext">Delete</span>
+      </div>
+    </div>
+  </div>
+  </div>
+  `;
 
-//document.getElementById('task-container').innerHTML = backlogTask;
+
+document.getElementById('task-container').innerHTML += backlogTask;
+}
+
+function renderBacklogEditors(id, editors) {
+  let images='';
+  for (let i = 0; i < editors.length; i++) {
+    images += `<img id="${editors[i]}-${id}" src="src/img/${editors[i]}.jpg" alt="">`
+  }
+  return images;
 }
 
 async function loadTasksToBacklog() {
+  let id ='';
+  let title ='';
+  let dueDate ='';
+  let category ='';
+  let categoryColor ='';
+  let urgency ='';
+  let description ='';
+  let editors = [];
+
   await downloadFromServer();
   let allTasksAsString = await backend.getItem('allTasks') || [];
   if(allTasksAsString.length != 0){
     allTasks = JSON.parse(allTasksAsString);
   }
+
   for (let i = 0; i < allTasks.length; i++) {
-    console.log(allTasks[i].title);
-    
+    if(allTasks[i].backlog) {
+      id = allTasks[i].id;
+      title = allTasks[i].title;
+      dueDate = allTasks[i].duedate;
+      category = allTasks[i].category;
+      categoryColor = allTasks[i].categoryColor;
+      urgency = allTasks[i].urgency;
+      description = allTasks[i].description;
+      editors = allTasks[i].editors;
+      renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
+    }
   }
-  console.log(allTasks);
+  //console.log(allTasks);
 }
 
 
@@ -287,7 +311,7 @@ async function addTask() {
   let currentTask = {
         "id": `${new Date().getTime()}`,
         "title": title.value,
-        "duedate": date.value,
+        "dueDate": date.value,
         "category": category.value,
         "categoryColor": categoryColor,
         "urgency": urgency.value,
@@ -309,11 +333,12 @@ function showSuccessMessage() {
   let msgSuccess = document.getElementById('msg-success');
   
   if(msgSuccess.classList.contains('d-none')){
-    setTimeout(msgSuccess.classList.remove('d-none'), 2500);
-    //msgSuccess.classList.remove('d-none');
+    msgSuccess.classList.remove('d-none');
   }
-
-  setTimeout(msgSuccess.classList.add('d-none'), 2500);
+  msgSuccess.style.zIndex = '';
+  msgSuccess.style.animation = 'none';
+  msgSuccess.offsetHeight;
+  msgSuccess.style.animation = null;
 }
 
 function resetForm() {
