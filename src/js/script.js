@@ -178,11 +178,11 @@ function checkNavigation() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
 
-  if (window.innerWidth <= 768 && mobileNav && desktopNav) {
+  if (window.innerWidth <= 800 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
   }
-  if(window.innerWidth > 768 && mobileNav && desktopNav) {
+  if(window.innerWidth > 800 && mobileNav && desktopNav) {
     mobileNav.classList.add('d-none');
     desktopNav.classList.remove('d-none');
   }
@@ -206,10 +206,7 @@ function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency
   <div class="task-wrapper">
     <div class="assigned-wrapper">
       <div>ASSIGNED TO</div>
-      <div class="image-wrapper">
-        <img id="user-1" src="src/img/user-1.jpg" alt="">
-        <img id="user-2" src="src/img/user-2.jpg" alt="">
-        <script> renderBacklogEditors(${id}, ${editors});</script>
+      <div id="backlog-image-wrapper-${id}" class="image-wrapper">
       </div>
     </div>
     <div class="title-wrapper">
@@ -252,14 +249,14 @@ function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency
 
 
 document.getElementById('task-container').innerHTML += backlogTask;
+renderBacklogEditors(id, editors);
 }
 
 function renderBacklogEditors(id, editors) {
-  let images='';
+  let imageWrapper = document.getElementById(`backlog-image-wrapper-${id}`);
   for (let i = 0; i < editors.length; i++) {
-    images += `<img id="${editors[i]}-${id}" src="src/img/${editors[i]}.jpg" alt="">`
+    imageWrapper.innerHTML += `<img id="${editors[i]}-${id}" src="src/img/${editors[i]}.jpg" alt="">`
   }
-  return images;
 }
 
 async function loadTasksToBacklog() {
@@ -282,7 +279,7 @@ async function loadTasksToBacklog() {
     if(allTasks[i].backlog) {
       id = allTasks[i].id;
       title = allTasks[i].title;
-      dueDate = allTasks[i].duedate;
+      dueDate = allTasks[i].dueDate;
       category = allTasks[i].category;
       categoryColor = allTasks[i].categoryColor;
       urgency = allTasks[i].urgency;
@@ -363,16 +360,16 @@ function resetEditors() {
 }
 
 function setCategoryColor(category) {
-  if(category == 'management'){
+  if(category == 'Management'){
     return '#7190FC';
   }
-  if(category == 'software-development'){
+  if(category == 'Software-Development'){
     return '#ffb071';
   }
-  if(category == 'design'){
+  if(category == 'Design'){
     return '#e271ff';
   }
-  if(category == 'human-resources'){
+  if(category == 'Human-Resources'){
     return '#55ae66';
   }
   else {

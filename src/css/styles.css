@@ -366,17 +366,22 @@ h6 {
 }
 
 .task-container {
-  --n: 4; /* The maximum number of columns */
+  /*--n: 4; 
   display: grid;
   grid-template-columns: repeat(auto-fill,
            minmax(max(280px,(100% - (var(--n) - 1)*10px)/var(--n)), 1fr));
   gap: 20px;
-  margin: 5px;
+  margin: 5px; */
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);  
+  max-width: calc(1110px);
+  /*width: calc(100% - 2px);*/
 }
 
 .category-color {
-  height: auto;
-  background-color: #ffb071;
+  height: 350px;
+
 }
 
 .task-wrapper {
@@ -786,7 +791,19 @@ form.task .button-wrapper button:hover {
 }
 /* === END TASK === */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1150px) {
+  .task-container {
+    grid-template-columns: repeat(2, 1fr);  
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .task-container {
+    grid-template-columns: repeat(1, 1fr);  
+  }
+}
+
+@media screen and (max-width: 800px) {
   #content-task, #content-backlog, #content-help, .board-wrapper {
     padding: 80px 20px 20px 20px;
   }
