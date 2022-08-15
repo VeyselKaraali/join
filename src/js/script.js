@@ -18,7 +18,7 @@ async function init(){
 
 async function initBoard(){
   init();
-  await load();
+  await loadDataFromServer();
   showTasks();
 }
 
@@ -418,22 +418,6 @@ function hoverHighlight(status, toSet) {
   }
 }
 
-
-async function load() {
-
-  await loadDataFromServer();
-
-  for (let i = 0; i < allTasks.length; i++) {
-    id = allTasks[i].id;
-    title = allTasks[i].title;
-    dueDate = allTasks[i].dueDate;
-    category = allTasks[i].category;
-    categoryColor = allTasks[i].categoryColor;
-    urgency = allTasks[i].urgency;
-    description = allTasks[i].description;
-    editors = allTasks[i].editors;
-  }
-}
 
 function save() {
   backend.setItem('allTasks', JSON.stringify(allTasks));
