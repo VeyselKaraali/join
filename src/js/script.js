@@ -63,11 +63,13 @@ async function initBoard(){
   init();
   createIds();
   showTasks();
+  //loadTasks()
 }
 
 async function initBacklog(){
   init();
-  await loadTasksToBacklog() 
+  await loadTasks(); 
+  //await loadDataFromServer();
 }
 
 async function initTask(){
@@ -141,9 +143,6 @@ function renderMobileNavigation(){
 
   `;
   document.getElementById('mobile-nav').innerHTML = mobileNav;
-
- 
-  // This function is for testing the board
 }
 /* END MOBILE NAVIGATION */
 
@@ -190,16 +189,44 @@ function checkNavigation() {
 window.addEventListener('load', checkNavigation);
 window.addEventListener('resize', checkNavigation);
 
-
-//Start Board Test-Functions
 function createIds() {
   for (let i = 0; i < tasks.length; i++) {
     tasks[i]['id'] = i + 1;
   }
 }
 
-function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors) {
+async function loadTasks() {
+  let id ='';
+  let title ='';
+  let dueDate ='';
+  let category ='';
+  let categoryColor ='';
+  let urgency ='';
+  let description ='';
+  let editors = [];
 
+  await loadDataFromServer();
+
+  for (let i = 0; i < allTasks.length; i++) {
+    id = allTasks[i].id;
+    title = allTasks[i].title;
+    dueDate = allTasks[i].dueDate;
+    category = allTasks[i].category;
+    categoryColor = allTasks[i].categoryColor;
+    urgency = allTasks[i].urgency;
+    description = allTasks[i].description;
+    editors = allTasks[i].editors;
+    
+    if(allTasks[i].backlog == 'true') {
+      renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
+    }
+    else {
+      // renderBoardTasks
+    }
+  }
+}
+
+function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors) {
   let backlogTask = 
   `
   <div class="category-color" style="background-color: ${categoryColor}">
@@ -230,16 +257,16 @@ function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency
       <div id="backlog-description-${id}" class="description">${description}</div>
     </div>
     <div class="button-wrapper">
-      <div id="move-board-${id}" class="tooltip">
-        <img src="src/icons/move.svg" alt="">
+      <div class="tooltip">
+        <img onclick="moveTaskToBoard(this.id)" id="move-board-${id}" src="src/icons/move.svg" alt="">
         <span class="tooltiptext">Move To Board</span>
       </div>
-      <div id="edit-${id}" class="tooltip">
-        <img src="src/icons/edit.svg" alt="">
+      <div class="tooltip">
+        <img id="edit-${id}" src="src/icons/edit.svg" alt="">
         <span class="tooltiptext">Edit</span>
       </div>
-      <div id="delete-${id}" class="tooltip">
-        <img src="src/icons/delete.svg" alt="">
+      <div class="tooltip">
+        <img onclick="deleteTask(this.id)" id="delete-${id}" src="src/icons/delete.svg" alt="">
         <span class="tooltiptext">Delete</span>
       </div>
     </div>
@@ -247,9 +274,8 @@ function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency
   </div>
   `;
 
-
-document.getElementById('task-container').innerHTML += backlogTask;
-renderBacklogEditors(id, editors);
+  document.getElementById('task-container').innerHTML += backlogTask;
+  renderBacklogEditors(id, editors);
 }
 
 function renderBacklogEditors(id, editors) {
@@ -259,38 +285,19 @@ function renderBacklogEditors(id, editors) {
   }
 }
 
-async function loadTasksToBacklog() {
-  let id ='';
-  let title ='';
-  let dueDate ='';
-  let category ='';
-  let categoryColor ='';
-  let urgency ='';
-  let description ='';
-  let editors = [];
-
+async function loadDataFromServer() {
   await downloadFromServer();
-  let allTasksAsString = await backend.getItem('allTasks') || [];
+  let allTasksAsString = await backend.getItem(`allTasks`) || [];
+  
   if(allTasksAsString.length != 0){
     allTasks = JSON.parse(allTasksAsString);
   }
-
-  for (let i = 0; i < allTasks.length; i++) {
-    if(allTasks[i].backlog) {
-      id = allTasks[i].id;
-      title = allTasks[i].title;
-      dueDate = allTasks[i].dueDate;
-      category = allTasks[i].category;
-      categoryColor = allTasks[i].categoryColor;
-      urgency = allTasks[i].urgency;
-      description = allTasks[i].description;
-      editors = allTasks[i].editors;
-      renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
-    }
-  }
-  //console.log(allTasks);
 }
 
+async function pushDataToServer(currentTask){
+  allTasks.push(currentTask);
+  await backend.setItem('allTasks', JSON.stringify(allTasks));
+}
 
 async function addTask() {
   let title = document.getElementById('title')  
@@ -299,11 +306,8 @@ async function addTask() {
   let urgency  = document.getElementById('urgency')
   let description = document.getElementById('description')
   let categoryColor = setCategoryColor(category.value);
-  
-  let allTasksAsString = await backend.getItem('allTasks') || [];
-  if(allTasksAsString.length != 0){
-    allTasks = JSON.parse(allTasksAsString);
-  }
+
+  await loadDataFromServer();
 
   let currentTask = {
         "id": `${new Date().getTime()}`,
@@ -314,16 +318,38 @@ async function addTask() {
         "urgency": urgency.value,
         "description": description.value,
         "editors": editors,
-        "backlog": true,
+        "backlog": 'true',
         "status": "todo"
   };
 
-  allTasks.push(currentTask);
-  await backend.setItem('allTasks', JSON.stringify(allTasks));
-
-  //console.log(allTasks);
+  await pushDataToServer(currentTask);
   resetForm();
   showSuccessMessage();
+}
+
+async function moveTaskToBoard(taskId) {
+  for (let i = 0; i < allTasks.length; i++) {
+    let index = allTasks[i].id.indexOf(taskId.substring(11));
+    if (index !== -1) {
+      allTasks[i].backlog = 'false';
+      break;
+    }
+  }
+  await backend.setItem('allTasks', JSON.stringify(allTasks));
+  console.log(allTasks);
+  location.reload();
+}
+
+async function deleteTask(taskId) {
+  for (let i = 0; i < allTasks.length; i++) {
+    let index = allTasks[i].id.indexOf(taskId.substring(7));
+    if (index !== -1) {
+      allTasks.splice(i, 1);
+      break;
+    }
+  }
+  await backend.setItem('allTasks', JSON.stringify(allTasks));
+  location.reload();
 }
 
 function showSuccessMessage() {
@@ -379,8 +405,8 @@ function setCategoryColor(category) {
 
 function selectTaskEditors(id){
   let editor = document.getElementById(id);
-
   let index = editors.indexOf(id);
+
   if (index !== -1) {
     editors.splice(index, 1);
   }
@@ -388,7 +414,6 @@ function selectTaskEditors(id){
   if(editor.classList.contains('editor-selected')){
     editors.push(id);
   }
-  console.log(editors);
 }
 
 function showTasks() {
@@ -417,7 +442,6 @@ function setCurrentDraggedElement(id) {
   currentDraggedElement = id;
 }
 
-
 function moveTo(status) {
   let currentDroppedElement = status;
   tasks[currentDraggedElement -1].status = currentDroppedElement;
@@ -425,7 +449,6 @@ function moveTo(status) {
   hoverHighlight(status, false);
   showTasks();
 }
-
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -437,9 +460,7 @@ function hoverHighlight(status, toSet) {
   } else {
     document.getElementById(`${status}`).classList.remove('highlight');
   }
-  
 }
-//End Board Test-Functions
 
 
 
