@@ -383,9 +383,9 @@ function renderTasks(selectedStatus) {
     if (getTasks[i].backlog === 'false') {
       content.innerHTML += /*html*/ `
         <div class="board-task" id="${getTasks[i]['id']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
-          <span>${getTasks[i].id}</span>
-          <span>${getTasks[i].title}</span>
-          <span>${getTasks[i].dueDate}</span>
+          <span>Title: ${getTasks[i].title}</span>
+          <span>Due Date: ${getTasks[i].dueDate}</span>
+          <span>Urgency: ${getTasks[i].urgency}</span>
         </div>`
     }    
   };  
