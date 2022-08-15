@@ -1,46 +1,3 @@
-// let tasks = [
-//   {
-//     "id": 0,
-//     "title": "Neuen Mitarbeiter einarbeiten",
-//     "catergory": "Test Catergory",
-//     "description": "Bitte alle Basics vermitteln",
-//     "created": "27.07.2022",
-//     "duedate": "05.09.2022",
-//     "urgency": "high",
-//     "status": "done"
-//   },
-//   { 
-//     "id": 0,
-//     "title": "Büromaterial bestellen",
-//     "catergory": "Test Catergory",
-//     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
-//     "created": "27.07.2022",
-//     "duedate": "01.09.2022",
-//     "urgency": "low",
-//     "status": "todo"
-//   },
-//   {
-//     "id": 0,
-//     "title": "Software fertigstellen",
-//     "catergory": "Test Catergory",
-//     "description": "Komplett programmieren und auf Funktion testen",
-//     "created": "27.07.2022",
-//     "duedate": "10.09.2022",
-//     "urgency": "intermediate",
-//     "status": "todo"
-//   },
-//   {
-//     "id": 0,
-//     "title": "Kaffee kochen",
-//     "catergory": "Test Catergory",
-//     "description": "Bitte schnell, wir haben durst :-)",
-//     "created": "01.08.2022",
-//     "duedate": "01.08.2022",
-//     "urgency": "high",
-//     "status": "inprogress"
-//   }
-// ];
-
 let currentTask = [];
 let isMenuOpen = false;
 let isUserDataShown = false;
@@ -62,8 +19,8 @@ async function init(){
 async function initBoard(){
   init();
   // createIds();
-  
-  loadTasks()
+  await load();
+  // loadTasks()
   showTasks();
 }
 
@@ -431,7 +388,7 @@ function renderTasks(selectedStatus) {
     return currentTask.status == `${selectedStatus}`;
   });
   for (let i = 0; i < getTasks.length; i++) {
-    if (allTasks[i].backlog === 'false') {
+    if (getTasks[i].backlog === 'false') {
       content.innerHTML += /*html*/ `
         <div class="board-task" id="${getTasks[i]['id']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
           <span>${getTasks[i].id}</span>
@@ -447,10 +404,13 @@ function setCurrentDraggedElement(id) {
 }
 
 function moveTo(status) {
-  let currentDroppedElement = status;
-  tasks[currentDraggedElement -1].status = currentDroppedElement;
-  
+ allTasks.forEach(element => {
+    if (element.id == currentDraggedElement) {
+      element.status = status;
+    }
+  });
   hoverHighlight(status, false);
+  save();
   showTasks();
 }
 
@@ -467,8 +427,22 @@ function hoverHighlight(status, toSet) {
 }
 
 
+async function load() {
 
+  await loadDataFromServer();
 
+  for (let i = 0; i < allTasks.length; i++) {
+    id = allTasks[i].id;
+    title = allTasks[i].title;
+    dueDate = allTasks[i].dueDate;
+    category = allTasks[i].category;
+    categoryColor = allTasks[i].categoryColor;
+    urgency = allTasks[i].urgency;
+    description = allTasks[i].description;
+    editors = allTasks[i].editors;
+  }
+}
 
-
-
+function save() {
+  backend.setItem('allTasks', JSON.stringify(allTasks));
+}

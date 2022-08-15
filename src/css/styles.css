@@ -597,7 +597,6 @@ textarea:focus, input:focus{
   gap: 30px;
   width: calc(100vw - var(--desktopNavWidth));
   max-width: 100%;
-  z-index: -1;
   height: 100%;
 }
 
