@@ -396,14 +396,18 @@ function setCurrentDraggedElement(id) {
 }
 
 function moveTo(status) {
- allTasks.forEach(element => {
+  selectDraggedElement(status);
+  hoverHighlight(status, false);
+  save();
+  showTasks();
+}
+
+function selectDraggedElement(status) {
+  allTasks.forEach(element => {
     if (element.id == currentDraggedElement) {
       element.status = status;
     }
   });
-  hoverHighlight(status, false);
-  save();
-  showTasks();
 }
 
 function allowDrop(ev) {
@@ -417,7 +421,6 @@ function hoverHighlight(status, toSet) {
     document.getElementById(`${status}`).classList.remove('highlight');
   }
 }
-
 
 function save() {
   backend.setItem('allTasks', JSON.stringify(allTasks));
