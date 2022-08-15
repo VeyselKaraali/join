@@ -37,6 +37,8 @@ box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
 
 :root {
   font-size: 16px;
+  --desktopNavWidth: 120px;
+  --mobileNavHeight: 60px;
 }
 
 *,
@@ -91,13 +93,11 @@ h6 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 120px;
+  width: var(--desktopNavWidth);
   height: 100vh;
   background-color: #1e3190;
   color: #fff;
   position: fixed;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 #desktop-nav a:hover {
@@ -197,7 +197,7 @@ h6 {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 60px;
+  height: var(--mobileNavHeight);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
 }
 
@@ -280,10 +280,11 @@ h6 {
 
 /* === START LAYOUT === */
 .layout {
-  display: grid;
+  /*display: grid;
   grid-template-columns: 120px 1fr;
   grid-template-rows: auto;
-  grid-template-areas: "nav content";
+  grid-template-areas: "nav content";*/
+  display: flex;
 }
 
 .desktop-nav {
@@ -293,13 +294,18 @@ h6 {
 }
 
 .content {
-  grid-area: nav;
+  /*grid-area: nav;
   grid-column-start: 2;
   padding: 20px;
   max-width: calc(100vw - (100vw - 100%));
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center;*/
+  position: absolute;
+  left: var(--desktopNavWidth);
+  width: calc(100vw - var(--desktopNavWidth));
+  max-width: 100%;
+  padding: 20px;
 }
 /* === END LAYOUT === */
 
@@ -348,7 +354,7 @@ h6 {
 
 /* === START BACKLOG === */
 .headline-wrapper {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -671,6 +677,12 @@ textarea:focus, input:focus{
   animation-duration: 3s;
 }
 
+#content-task {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 form.task {
   position: relative;
   padding: 20px;
@@ -801,16 +813,19 @@ form.task .button-wrapper button:hover {
 
 @media screen and (max-width: 800px) {
   #content-task, #content-backlog, #content-help, .board-wrapper {
-    padding: 80px 20px 20px 20px;
+    padding: 20px;
   }
-  
+  .content {
+    top: var(--mobileNavHeight);
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+  }
+
   #desktop-nav {
     display: none;
   }
 
-  #content-task, #content-backlog {
-    padding: 80px 20px 20px 20px;
-  }
   .layout {
     display: unset;
   }
