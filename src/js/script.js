@@ -1,45 +1,45 @@
-let tasks = [
-  {
-    "id": 0,
-    "title": "Neuen Mitarbeiter einarbeiten",
-    "catergory": "Test Catergory",
-    "description": "Bitte alle Basics vermitteln",
-    "created": "27.07.2022",
-    "duedate": "05.09.2022",
-    "urgency": "high",
-    "status": "done"
-  },
-  { 
-    "id": 0,
-    "title": "Büromaterial bestellen",
-    "catergory": "Test Catergory",
-    "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
-    "created": "27.07.2022",
-    "duedate": "01.09.2022",
-    "urgency": "low",
-    "status": "todo"
-  },
-  {
-    "id": 0,
-    "title": "Software fertigstellen",
-    "catergory": "Test Catergory",
-    "description": "Komplett programmieren und auf Funktion testen",
-    "created": "27.07.2022",
-    "duedate": "10.09.2022",
-    "urgency": "intermediate",
-    "status": "todo"
-  },
-  {
-    "id": 0,
-    "title": "Kaffee kochen",
-    "catergory": "Test Catergory",
-    "description": "Bitte schnell, wir haben durst :-)",
-    "created": "01.08.2022",
-    "duedate": "01.08.2022",
-    "urgency": "high",
-    "status": "inprogress"
-  }
-];
+// let tasks = [
+//   {
+//     "id": 0,
+//     "title": "Neuen Mitarbeiter einarbeiten",
+//     "catergory": "Test Catergory",
+//     "description": "Bitte alle Basics vermitteln",
+//     "created": "27.07.2022",
+//     "duedate": "05.09.2022",
+//     "urgency": "high",
+//     "status": "done"
+//   },
+//   { 
+//     "id": 0,
+//     "title": "Büromaterial bestellen",
+//     "catergory": "Test Catergory",
+//     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
+//     "created": "27.07.2022",
+//     "duedate": "01.09.2022",
+//     "urgency": "low",
+//     "status": "todo"
+//   },
+//   {
+//     "id": 0,
+//     "title": "Software fertigstellen",
+//     "catergory": "Test Catergory",
+//     "description": "Komplett programmieren und auf Funktion testen",
+//     "created": "27.07.2022",
+//     "duedate": "10.09.2022",
+//     "urgency": "intermediate",
+//     "status": "todo"
+//   },
+//   {
+//     "id": 0,
+//     "title": "Kaffee kochen",
+//     "catergory": "Test Catergory",
+//     "description": "Bitte schnell, wir haben durst :-)",
+//     "created": "01.08.2022",
+//     "duedate": "01.08.2022",
+//     "urgency": "high",
+//     "status": "inprogress"
+//   }
+// ];
 
 let currentTask = [];
 let isMenuOpen = false;
@@ -61,9 +61,10 @@ async function init(){
 
 async function initBoard(){
   init();
-  createIds();
+  // createIds();
+  
+  loadTasks()
   showTasks();
-  //loadTasks()
 }
 
 async function initBacklog(){
@@ -221,7 +222,7 @@ async function loadTasks() {
       renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
     }
     else {
-      // renderBoardTasks
+      // showTasks();
     }
   }
 }
@@ -426,15 +427,18 @@ function showTasks() {
 function renderTasks(selectedStatus) {
   let content = document.getElementById(`${selectedStatus}`);
   content.innerHTML = '';
-  let getTasks = tasks.filter(function (currentTask) {
+  let getTasks = allTasks.filter(function (currentTask) {
     return currentTask.status == `${selectedStatus}`;
   });
   for (let i = 0; i < getTasks.length; i++) {
-    content.innerHTML += /*html*/ `
-      <div class="board-task" id="task-${i}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
-        <span>${getTasks[i].title}</span>
-        <span>${getTasks[i].duedate}</span>
-      </div>`
+    if (allTasks[i].backlog === 'false') {
+      content.innerHTML += /*html*/ `
+        <div class="board-task" id="${getTasks[i]['id']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
+          <span>${getTasks[i].id}</span>
+          <span>${getTasks[i].title}</span>
+          <span>${getTasks[i].dueDate}</span>
+        </div>`
+    }    
   };  
 }
 
