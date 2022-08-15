@@ -592,21 +592,21 @@ textarea:focus, input:focus{
 
 /* === START BOARD === */
 .board-wrapper {
-  margin: 30px 20px 0px 20px;
-  position: absolute;
   display: flex;
   justify-content: space-between;
-  left: 120px;
-  gap: 32px;
-  width: calc(100% - 160px);
+  gap: 30px;
+  width: calc(100vw - var(--desktopNavWidth));
+  max-width: 100%;
   z-index: -1;
+  height: 100%;
 }
 
-.todo,
-.inprogress,
-.testing,
-.done {
-  width: 25%;
+.board-wrapper > div {
+  width: calc(25% - 15px);
+}
+
+.board-wrapper h2 {
+  font-size: 16px;
 }
 
 .todo-header,
@@ -621,7 +621,8 @@ textarea:focus, input:focus{
 .inprogress-content,
 .testing-content,
 .done-content {
-  min-height: 70vh;
+  height: 100%;
+  /*min-height: 70vh;*/
   border-radius: 10px;
   background-color: #f4f3fb;
   padding: 8px;
@@ -681,6 +682,8 @@ textarea:focus, input:focus{
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: calc(100vh - 20px);
+  max-height: 100%;
 }
 
 form.task {
@@ -812,7 +815,7 @@ form.task .button-wrapper button:hover {
 /* === END TASK === */
 
 @media screen and (max-width: 800px) {
-  #content-task, #content-backlog, #content-help, .board-wrapper {
+  #content-task, #content-backlog, #content-help {
     padding: 20px;
   }
   .content {
@@ -843,5 +846,24 @@ form.task .button-wrapper button:hover {
   form.task .assigned-wrapper {
     width: 100%;
     gap: 10px 0;
+  }
+
+  #content-task {
+    height: calc(50vh);
+  }
+
+  .board-wrapper {
+    width: 100vw;
+    flex-wrap: wrap;
+  }
+
+  .board-wrapper > div {
+    width: calc(50% - 15px);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .board-wrapper > div {
+    width: calc(100%);
   }
 }
