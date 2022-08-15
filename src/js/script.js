@@ -18,9 +18,7 @@ async function init(){
 
 async function initBoard(){
   init();
-  // createIds();
   await load();
-  // loadTasks()
   showTasks();
 }
 
@@ -146,12 +144,6 @@ function checkNavigation() {
 }
 window.addEventListener('load', checkNavigation);
 window.addEventListener('resize', checkNavigation);
-
-function createIds() {
-  for (let i = 0; i < tasks.length; i++) {
-    tasks[i]['id'] = i + 1;
-  }
-}
 
 async function loadTasks() {
   let id ='';
