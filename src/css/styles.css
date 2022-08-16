@@ -683,6 +683,9 @@ input:focus {
 .board-toolbar {
   display: flex;
   justify-content: flex-end;
+}
+
+.board-toolbar img {
   cursor: pointer;
 }
 
