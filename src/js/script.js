@@ -1,46 +1,3 @@
-// let tasks = [
-//   {
-//     "id": 0,
-//     "title": "Neuen Mitarbeiter einarbeiten",
-//     "catergory": "Test Catergory",
-//     "description": "Bitte alle Basics vermitteln",
-//     "created": "27.07.2022",
-//     "duedate": "05.09.2022",
-//     "urgency": "high",
-//     "status": "done"
-//   },
-//   { 
-//     "id": 0,
-//     "title": "Büromaterial bestellen",
-//     "catergory": "Test Catergory",
-//     "description": "Kopierpapier, Druckerpatrone, Kugelschreiber usw.",
-//     "created": "27.07.2022",
-//     "duedate": "01.09.2022",
-//     "urgency": "low",
-//     "status": "todo"
-//   },
-//   {
-//     "id": 0,
-//     "title": "Software fertigstellen",
-//     "catergory": "Test Catergory",
-//     "description": "Komplett programmieren und auf Funktion testen",
-//     "created": "27.07.2022",
-//     "duedate": "10.09.2022",
-//     "urgency": "intermediate",
-//     "status": "todo"
-//   },
-//   {
-//     "id": 0,
-//     "title": "Kaffee kochen",
-//     "catergory": "Test Catergory",
-//     "description": "Bitte schnell, wir haben durst :-)",
-//     "created": "01.08.2022",
-//     "duedate": "01.08.2022",
-//     "urgency": "high",
-//     "status": "inprogress"
-//   }
-// ];
-
 let currentTask = [];
 let isMenuOpen = false;
 let isUserDataShown = false;
@@ -61,9 +18,7 @@ async function init(){
 
 async function initBoard(){
   init();
-  // createIds();
-  
-  loadTasks()
+  await loadDataFromServer();
   showTasks();
 }
 
@@ -189,12 +144,6 @@ function checkNavigation() {
 }
 window.addEventListener('load', checkNavigation);
 window.addEventListener('resize', checkNavigation);
-
-function createIds() {
-  for (let i = 0; i < tasks.length; i++) {
-    tasks[i]['id'] = i + 1;
-  }
-}
 
 async function loadTasks() {
   let id ='';
@@ -511,13 +460,16 @@ function renderTasks(selectedStatus) {
     return currentTask.status == `${selectedStatus}`;
   });
   for (let i = 0; i < getTasks.length; i++) {
-    if (allTasks[i].backlog === 'false') {
+    if (getTasks[i].backlog === 'false') {
       content.innerHTML += /*html*/ `
-        <div class="board-task" id="${getTasks[i]['id']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
-          <span>${getTasks[i].id}</span>
-          <span>${getTasks[i].title}</span>
-          <span>${getTasks[i].dueDate}</span>
-        </div>`
+        <div id="${getTasks[i]['id']}" class="board-task" style="background-color: ${getTasks[i]['categoryColor']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
+          <div class="board-task-inner">
+            <div><span class="task-bold">Title:</span> ${getTasks[i].title}</div>
+            <div><span class="task-bold">Due Date:</span> ${getTasks[i].dueDate}</div>
+            <div><span class="task-bold">Urgency:</span> ${getTasks[i].urgency}</div>
+            <div class="board-toolbar"><img src="src/icons/delete.svg" onclick="deleteTask(this.id)"></div>
+          </div>
+        <div>`;
     }    
   };  
 }
@@ -527,11 +479,18 @@ function setCurrentDraggedElement(id) {
 }
 
 function moveTo(status) {
-  let currentDroppedElement = status;
-  tasks[currentDraggedElement -1].status = currentDroppedElement;
-  
+  selectDraggedElement(status);
   hoverHighlight(status, false);
+  save();
   showTasks();
+}
+
+function selectDraggedElement(status) {
+  allTasks.forEach(element => {
+    if (element.id == currentDraggedElement) {
+      element.status = status;
+    }
+  });
 }
 
 function allowDrop(ev) {
@@ -546,9 +505,6 @@ function hoverHighlight(status, toSet) {
   }
 }
 
-
-
-
-
-
-
+function save() {
+  backend.setItem('allTasks', JSON.stringify(allTasks));
+}
