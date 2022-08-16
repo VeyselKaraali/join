@@ -353,6 +353,23 @@ h6 {
 /* === END TOOLTIP === */
 
 /* === START BACKLOG === */
+#content-backlog {
+  min-height: 100vh;
+}
+
+.edit-task-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 2;
+  background-color:  rgba(30, 49, 144,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .headline-wrapper {
   margin-bottom: 20px;
   display: flex;
@@ -823,6 +840,10 @@ form.task .button-wrapper button:hover {
     left: 0;
     width: 100vw;
     max-width: 100%;
+  }
+
+  #content-backlog {
+    min-height: calc(100vh - var(--mobileNavHeight));
   }
 
   #desktop-nav {
