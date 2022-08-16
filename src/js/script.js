@@ -382,11 +382,14 @@ function renderTasks(selectedStatus) {
   for (let i = 0; i < getTasks.length; i++) {
     if (getTasks[i].backlog === 'false') {
       content.innerHTML += /*html*/ `
-        <div class="board-task" id="${getTasks[i]['id']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
-          <span>Title: ${getTasks[i].title}</span>
-          <span>Due Date: ${getTasks[i].dueDate}</span>
-          <span>Urgency: ${getTasks[i].urgency}</span>
-        </div>`
+        <div id="${getTasks[i]['id']}" class="board-task" style="background-color: ${getTasks[i]['categoryColor']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
+          <div class="board-task-inner">
+            <div><span class="task-bold">Title:</span> ${getTasks[i].title}</div>
+            <div><span class="task-bold">Due Date:</span> ${getTasks[i].dueDate}</div>
+            <div><span class="task-bold">Urgency:</span> ${getTasks[i].urgency}</div>
+            <div class="board-toolbar"><img src="src/icons/delete.svg" onclick="deleteTask(this.id)"></div>
+          </div>
+        <div>`;
     }    
   };  
 }
