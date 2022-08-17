@@ -678,8 +678,16 @@ input:focus {
   outline: unset;
 }
 
+.board-task:last-child {
+  margin-bottom: 0;
+}
+
 .board-task-inner {
-  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 10px;
   padding: 8px;
   background-color: white;
   height: 100%;
@@ -688,26 +696,33 @@ input:focus {
   border-bottom-right-radius: 10px;
 }
 
-.board-task-inner div {
+.board-task-title, .board-task-description {
   margin-bottom: 8px;
 }
 
-.board-task-inner div:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
+.board-task-title {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.board-task-description {
+  width: 100%;
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .board-toolbar {
   display: flex;
-  justify-content: flex-end;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
 }
 
 .board-toolbar img {
   cursor: pointer;
-}
-
-.task-bold {
-  font-weight: bold;
+  object-fit: contain;
 }
 
 .highlight {

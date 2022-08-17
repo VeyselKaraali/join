@@ -461,13 +461,16 @@ function renderTasks(selectedStatus) {
   });
   for (let i = 0; i < getTasks.length; i++) {
     if (getTasks[i].backlog === 'false') {
+      let urgencyColor = setUrgencyColor(getTasks[i]);
       content.innerHTML += /*html*/ `
         <div id="${getTasks[i]['id']}" class="board-task" style="background-color: ${getTasks[i]['categoryColor']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
           <div class="board-task-inner">
-            <div><span class="task-bold">Title:</span> ${getTasks[i].title}</div>
-            <div><span class="task-bold">Due Date:</span> ${getTasks[i].dueDate}</div>
-            <div class="task-bold">${getTasks[i].description}</div>
-            <div class="board-toolbar"><div class="urgency">${getTasks[i].urgency}</div><div></div><img src="src/icons/delete.svg" onclick="deleteTask(this.id)"></div>
+            <div class="board-task-title">${getTasks[i].title}</div>
+            <div class="board-task-description">${getTasks[i].description}</div>
+            <div class="board-toolbar">
+              <div class="board-urgency" style="color: ${urgencyColor}">${getTasks[i].urgency}</div>
+              <div class="board-due-date">${getTasks[i].dueDate}</div>
+              <img src="src/icons/delete.svg" onclick="deleteTask(this.id)">
           </div>
         <div>`;
     }    
@@ -502,6 +505,17 @@ function hoverHighlight(status, toSet) {
     document.getElementById(`${status}`).classList.add('highlight');
   } else {
     document.getElementById(`${status}`).classList.remove('highlight');
+  }
+}
+
+function setUrgencyColor(currentTask) {
+  let urgency = currentTask['urgency'];
+  if (urgency == "High") {
+    return 'red';
+  } else if (urgency == "Medium") {
+    return 'blue';
+  } else {
+    return 'DarkSeaGreen';
   }
 }
 
