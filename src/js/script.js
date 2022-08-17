@@ -171,7 +171,7 @@ async function loadTasks() {
       renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
     }
     else {
-      // showTasks();
+      //showTasks();
     }
   }
 }
@@ -212,7 +212,7 @@ function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency
         <span class="tooltiptext">Move To Board</span>
       </div>
       <div class="tooltip">
-        <img id="edit-${id}" src="src/icons/edit.svg" alt="">
+        <img onclick="editTask(this.id)" id="edit-${id}" src="src/icons/edit.svg" alt="">
         <span class="tooltiptext">Edit</span>
       </div>
       <div class="tooltip">
@@ -288,6 +288,86 @@ async function moveTaskToBoard(taskId) {
   await backend.setItem('allTasks', JSON.stringify(allTasks));
   console.log(allTasks);
   location.reload();
+}
+
+function editTask(editId) {
+  //document.getElementById('content-backlog').style.filter = "grayscale(100%)"
+  document.getElementById('edit-task-wrapper').classList.remove('d-none');
+  document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
+  loadForm('form-edit-task');
+  for (let i = 0; i < allTasks.length; i++) {
+    let index = allTasks[i].id.indexOf(editId.substring(5));
+    if (index !== -1) {
+      
+      break;
+    }
+  }
+}
+
+function loadForm(formId) {
+  document.getElementById(`${formId}`).innerHTML=`
+  <div id="msg-success" class="msg-success d-none">Task was created successfully</div>
+          <div class="item title-wrapper">
+            <div>TITLE</div>
+            <input id="title" required type="text">
+          </div>
+    
+          <div class="item date-wrapper">
+            <div>DUE DATE</div>
+            <input id="datePicker" required type="date">
+          </div>
+              
+          <div class="item category-wrapper">
+            <label for="category">CATEGORY</label>
+            <select name="category" id="category" required>
+              <option value="Management">Management</option>
+              <option value="Software-Development">Software Development</option>
+              <option value="Design">Design</option>
+              <option value="Human-Resources">Human Resources</option>
+            </select>
+          </div>
+
+          <div class="item urgency-wrapper">
+            <label for="urgency">URGENCY</label>
+            <select name="urgency" id="urgency" required>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+              
+          <div class="item description-wrapper">
+            <label for="description">DESCRIPTION</label>
+            <textarea required id="description" rows="3"></textarea>
+          </div>
+  
+          <div class="item assigned-wrapper">
+            <div>ASSIGNED TO</div>
+            <div id="task-image-wrapper" class="image-wrapper">
+              <img onclick="selectTaskEditors(this.id)" id="user-1" src="src/img/user-1.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-2" src="src/img/user-2.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-3" src="src/img/user-3.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-4" src="src/img/user-4.jpg" alt="">
+              <img onclick="selectTaskEditors(this.id)" id="user-5" src="src/img/user-5.jpg" alt="">
+            </div>
+          </div>
+
+          <div class="item button-wrapper">
+            <button type="button" onclick="resetForm()">CANCEL</button>
+            <button type="submit">CREATE TASK</button>
+          </div>
+  `;
+}
+
+function loadDataInForm(i) {
+  let title = allTasks[i].title;
+  let dueDate = allTasks[i].dueDate;
+  let category = allTasks[i].category;
+  let urgency = allTasks[i].urgency;
+  let description = allTasks[i].description;
+  let editors = allTasks[i].editors;
+  
+
 }
 
 async function deleteTask(taskId) {
