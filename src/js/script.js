@@ -386,8 +386,8 @@ function renderTasks(selectedStatus) {
           <div class="board-task-inner">
             <div><span class="task-bold">Title:</span> ${getTasks[i].title}</div>
             <div><span class="task-bold">Due Date:</span> ${getTasks[i].dueDate}</div>
-            <div><span class="task-bold">Urgency:</span> ${getTasks[i].urgency}</div>
-            <div class="board-toolbar"><img src="src/icons/delete.svg" onclick="deleteTask(this.id)"></div>
+            <div class="task-bold">${getTasks[i].description}</div>
+            <div class="board-toolbar"><div class="urgency">${getTasks[i].urgency}</div><div></div><img src="src/icons/delete.svg" onclick="deleteTask(this.id)"></div>
           </div>
         <div>`;
     }    
