@@ -470,7 +470,7 @@ function renderTasks(selectedStatus) {
             <div class="board-toolbar">
               <div class="board-urgency" style="color: ${urgencyColor}">${getTasks[i].urgency}</div>
               <div class="board-due-date">${getTasks[i].dueDate}</div>
-              <img src="src/icons/delete.svg" onclick="deleteTask(this.id)">
+              <img src="src/icons/delete.svg" onclick="deleteBoardTask(${getTasks[i]['id']})">
           </div>
         <div>`;
     }    
@@ -481,10 +481,10 @@ function setCurrentDraggedElement(id) {
   currentDraggedElement = id;
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   selectDraggedElement(status);
   hoverHighlight(status, false);
-  save();
+  await save();
   showTasks();
 }
 
@@ -519,6 +519,16 @@ function setUrgencyColor(currentTask) {
   }
 }
 
-function save() {
-  backend.setItem('allTasks', JSON.stringify(allTasks));
+async function save() {
+  await backend.setItem('allTasks', JSON.stringify(allTasks));
+}
+
+async function deleteBoardTask(id) {
+  for (let i = 0; i < allTasks.length; i++) {
+    if (allTasks[i].id == id) {
+      allTasks.splice(i, 1);
+    }
+  }
+  await save();
+  showTasks();
 }
