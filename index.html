@@ -7,57 +7,88 @@
   <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
   <link rel="stylesheet" href="src/css/styles.css" />
   <script src="src/js/mini_backend.js"></script>
-  <script src="src/js/script.js" defer></script>
-  <title>Board</title>
+  <script src="src/js/script.js"></script>
+  <title>Login</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
 </head>
 
-<body onload="initBoard()">
-  <!-- === START BOARD === -->
-  <div class="layout">
-    <!-- === START NAVIGATION === -->
-    <nav id="desktop-nav" class="d-none"></nav>
-    <nav id="mobile-nav" class="d-none"></nav>
-    <!-- === END NAVIGATION === -->
-    
-    <div id="content-task" class="content">
-      <div class="board-wrapper">
-        <div class="todo">
-          <div class="todo-header">
-            <h2>To Do</h2>
-          </div>
-          <div id="todo" class="todo-content" ondragleave="hoverHighlight('todo', false)"
-            ondragover="allowDrop(event); hoverHighlight('todo', true)" ondrop="moveTo('todo')">
-          </div>
-        </div>
-        <div class="inprogress">
-          <div class="inprogress-header">
-            <h2>In Progress</h2>
-          </div>
-          <div id="inprogress" class="inprogress-content" ondragleave="hoverHighlight('inprogress', false)"
-            ondragover="allowDrop(event); hoverHighlight('inprogress', true)" ondrop="moveTo('inprogress')">
-          </div>
-        </div>
-    
-        <div class="testing">
-          <div class="testing-header">
-            <h2>Testing</h2>
-          </div>
-          <div id="testing" class="testing-content" ondragleave="hoverHighlight('testing', false)"
-            ondragover="allowDrop(event); hoverHighlight('testing', true)" ondrop="moveTo('testing')">
-          </div>
-        </div>
-        <div class="done">
-          <div class="done-header">
-            <h2>Done</h2>
-          </div>
-          <div id="done" class="done-content" ondragleave="hoverHighlight('done', false)"
-            ondragover="allowDrop(event); hoverHighlight('done', true)" ondrop="moveTo('done')">
-          </div>
-        </div>
+<body id="login" onload=" loadAllUsers()">
+
+  <div id="signInPage" class="form-wrapper">
+    <div class="headline-wrapper">
+      <img src="src/icons/join_logo.png" alt="">
+      <div class="login">Login</div>
+    </div>
+    <div class="horizontal-line"></div>
+    <form action="">
+      <div class="input-wrapper">
+        <label for="Username">E-Mail:</label>
+        <input id="username" type="text" placeholder="Email">
+        <label for="Username">Password:</label>
+        <input id="password" type="password" placeholder="Password">
+      </div>
+ 
+      <div style="margin-top: 10px;display: flex;justify-content: center;flex-direction: column;">
+        <button onclick="loginUser()" type="button" class="btn btn-success">Login</button>
+        <button onclick="openSignUpPage()" type="button" class="btn btn-danger">Create Account</button>
+
+      </div> 
+      <br>
+      <div>
+        <a class="text-decoration" href="join.html">Login as guest</a>
+      </div>
+
+      <br>
+      
+    </div>
+
+  <div id="signUpPage" class="form-wrapper d-none ">
+    <div class="headline-wrapper">
+      <img src="src/icons/join_logo.png" alt="">
+      <div class="login">Create Account
       </div>
     </div>
+    <div class="horizontal-line"></div>
+    <form action="">
+      <div class="input-wrapper">
+        <label for="Username">Email</label>
+        <input id="create-username" type="text" placeholder="Email">
+        <div class="form-group">
+          <label for="Username">Password</label>
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+           <input id="create-password" type="password" class="form-control" id="confirm-password" placeholder="confirm-password">
+        </div>
+        <div class="d-flex flex-row align-items-center justify-content-between">
+      </div>
+    </form>
+
+
+      <div class="mb-3">
+        <label for="formFile" class="form-label">
+          Choose your profile picture</label>
+        <input  class="form-control" type="file" accept=".jpg"  id="formFile">
+      </div>
+ 
+
+   
+      <div>
+        <a class="text-decoration" onclick="openSignInPage()">
+          Do you already have an account? Sign in</a>
+      </div>
+  
+      <button onclick="createUser()" class="btn btn-danger">Create Account</button>
+</div>
+
+
+   
+    
   </div>
-  <!-- === END BOARD === -->
+
 </body>
 
 </html>
