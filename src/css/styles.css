@@ -529,7 +529,7 @@ h6 {
 /* === START LOGIN === */
 #login {
   background-color: #1e3190;
-  background-image: url(/join/src/img/login-background.jpg);
+  background-image: url(/src/img/login-background.jpg);
   display: flex;
   justify-content: center;
   align-items: center;
