@@ -5,6 +5,25 @@ let currentDraggedElement;
 let allTasks = [];
 let editors = [];
 let currentEditTask;
+let loginuser = [];
+let users = [
+
+  {
+      username:  "christian@developerakademie.com",
+      password:  "christian"
+  },
+
+  {
+    username:  "faysal@developerakademie.com",
+    password:  "faysal"
+  },
+
+  {
+    username:  "andreas@developerakademie.com",
+    password:  "andreas"
+  }
+
+]
 
 /**
  * This function is used to 
@@ -47,7 +66,7 @@ function renderDesktopNavigation(){
   </a>
   
   <div class="menu-wrapper">
-    <a href="index.html" class="menu-item myLink" data-pathname="/index.html">Board</a>
+    <a href="join.html" class="menu-item myLink" data-pathname="/index.html">Board</a>
     <a href="backlog.html" class="menu-item myLink" data-pathname="/backlog.html">Backlog</a>
     <a href="task.html" class="menu-item myLink" data-pathname="/task.html">Add Task</a>
     <a href="help.html" class="menu-item myLink" data-pathname="/help.html">Help</a>
@@ -272,6 +291,8 @@ async function addTask() {
   await pushDataToServer(currentTask);
   resetForm();
   showSuccessMessage();
+  window.location="backlog.html"
+
 }
 
 async function moveTaskToBoard(taskId) {
@@ -518,7 +539,7 @@ function renderTasks(selectedStatus) {
             <div class="board-toolbar">
               <div class="board-urgency" style="color: ${urgencyColor}">${getTasks[i].urgency}</div>
               <div class="board-due-date">${getTasks[i].dueDate}</div>
-              <img src="src/icons/delete.svg" onclick="deleteTask(this.id)">
+              <img src="src/icons/delete.svg" onclick="deleteBoardTask(${getTasks[i]['id']})">
           </div>
         <div>`;
     }    
@@ -529,10 +550,10 @@ function setCurrentDraggedElement(id) {
   currentDraggedElement = id;
 }
 
-function moveTo(status) {
+async function moveTo(status) {
   selectDraggedElement(status);
   hoverHighlight(status, false);
-  save();
+  await save();
   showTasks();
 }
 
@@ -569,4 +590,72 @@ function setUrgencyColor(currentTask) {
 
 async function save() {
   await backend.setItem('allTasks', JSON.stringify(allTasks));
+}
+
+async function deleteBoardTask(id) {
+  for (let i = 0; i < allTasks.length; i++) {
+    if (allTasks[i].id == id) {
+      allTasks.splice(i, 1);
+    }
+  }
+  await save();
+  showTasks();
+}
+
+function loginUser() {
+  let loginUsername = document.getElementById('username').value
+  let loginPassword = document.getElementById('password').value
+  for (let i = 0; i < users.length; i++) {
+    if (loginUsername == users[i].username && loginPassword == users[i].password) 
+    {
+      window.location="join.html"
+      break;
+    } else {
+      alert('Failed')
+      break;
+    } 
+    
+  }
+  
+}
+
+function openSignUpPage() {
+
+  let signUpPage = document.getElementById('signUpPage')
+  let signInPage = document.getElementById('signInPage')
+  signUpPage.classList.remove('d-none');
+  signInPage.classList.add('d-none');
+}
+
+function openSignInPage() {
+
+  let signUpPage = document.getElementById('signUpPage')
+  let signInPage = document.getElementById('signInPage')
+  signUpPage.classList.add('d-none');
+  signInPage.classList.remove('d-none');
+}
+
+
+function createUser() {
+  let createUsername = document.getElementById('create-username').value;
+  let createPassword = document.getElementById('create-password').value;
+
+  let createdUsers = {
+    'username': createUsername, 
+    'password': createPassword,
+  }; 
+
+  users.push(createdUsers);
+  let allUsersAsString = JSON.stringify(users);
+  localStorage.setItem('users',allUsersAsString)
+  console.log(users);
+  window.location="index.html"
+}
+
+function loadAllUsers() {
+  let allUsersAsSting = localStorage.getItem('users');
+  users= JSON.parse(allUsersAsSting);
+  console.log('loaded all Users'.users);
+
+
 }
