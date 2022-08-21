@@ -4,6 +4,7 @@ let isUserDataShown = false;
 let currentDraggedElement;
 let allTasks = [];
 let editors = [];
+let currentEditTask;
 
 /**
  * This function is used to 
@@ -120,7 +121,6 @@ function toggleMobileNavigation() {
       isMenuOpen = !isMenuOpen;
       if(isMenuOpen){
         menuBtn.classList.add('open');
-        //navBody.style.height = '280px';
         navBody.style.height = '160px';
       } else {
         menuBtn.classList.remove('open');
@@ -169,9 +169,6 @@ async function loadTasks() {
     
     if(allTasks[i].backlog == 'true') {
       renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
-    }
-    else {
-      //showTasks();
     }
   }
 }
@@ -291,22 +288,52 @@ async function moveTaskToBoard(taskId) {
 }
 
 function editTask(editId) {
-  //document.getElementById('content-backlog').style.filter = "grayscale(100%)"
+  currentEditTask = editId;
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
   document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
   loadForm('form-edit-task');
   for (let i = 0; i < allTasks.length; i++) {
     let index = allTasks[i].id.indexOf(editId.substring(5));
     if (index !== -1) {
+      let id = allTasks[i].id;
+      document.getElementById('title').value = document.getElementById(`backlog-title-${id}`).innerHTML;
+      document.getElementById('datePicker').value = document.getElementById(`backlog-date-${id}`).innerHTML;
+      document.getElementById('category').value = document.getElementById(`backlog-category-${id}`).innerHTML;
+      document.getElementById('urgency').value = document.getElementById(`backlog-urgency-${id}`).innerHTML;
+      document.getElementById('description').value = document.getElementById(`backlog-description-${id}`).innerHTML;
       
+      let editors = allTasks[i].editors;
+      for(let i=0; i<editors.length; i++) {
+        document.getElementById(`${editors[i]}`).classList.add('editor-selected');
+      }
       break;
     }
   }
 }
 
+async function updateTask() {
+  currentEditTask = currentEditTask.substring(5);
+
+  for (let i = 0; i < allTasks.length; i++) {
+    let index = allTasks[i].id.indexOf(currentEditTask.substring(5));
+    if (index !== -1) {
+      allTasks[i].title = document.getElementById('title').value;
+      allTasks[i].dueDate = document.getElementById('datePicker').value
+      allTasks[i].category = document.getElementById('category').value 
+      allTasks[i].categoryColor = setCategoryColor(category.value);
+      allTasks[i].urgency = document.getElementById('urgency').value
+      allTasks[i].description = document.getElementById('description').value
+      allTasks[i].editors = editors;
+    }
+  }
+  await save();
+  location.reload();
+}
+
 function loadForm(formId) {
   document.getElementById(`${formId}`).innerHTML=`
   <div id="msg-success" class="msg-success d-none">Task was created successfully</div>
+          
           <div class="item title-wrapper">
             <div>TITLE</div>
             <input id="title" required type="text">
@@ -352,11 +379,30 @@ function loadForm(formId) {
             </div>
           </div>
 
-          <div class="item button-wrapper">
-            <button type="button" onclick="resetForm()">CANCEL</button>
-            <button type="submit">CREATE TASK</button>
+          <div id="button-wrapper" class="item button-wrapper">
           </div>
   `;
+
+  renderFormButtons();
+}
+
+function renderFormButtons(){
+  let buttons;
+  let path = window.location.pathname.split("/").pop();
+  if(path == 'task.html') {
+    buttons = `
+    <button type="button" onclick="resetForm()">CANCEL</button>
+    <button type="submit">CREATE TASK</button>
+    `
+  }
+  if(path == 'backlog.html') {
+    buttons = `
+    <button type="button" onclick="resetForm()">CANCEL</button>
+    <button type="submit">UPDATE TASK</button>
+    `
+  }
+
+  document.getElementById('button-wrapper').innerHTML = buttons;
 }
 
 function loadDataInForm(i) {
@@ -369,6 +415,8 @@ function loadDataInForm(i) {
   
 
 }
+
+
 
 async function deleteTask(taskId) {
   for (let i = 0; i < allTasks.length; i++) {
@@ -519,6 +567,6 @@ function setUrgencyColor(currentTask) {
   }
 }
 
-function save() {
-  backend.setItem('allTasks', JSON.stringify(allTasks));
+async function save() {
+  await backend.setItem('allTasks', JSON.stringify(allTasks));
 }

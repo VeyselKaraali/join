@@ -180,7 +180,7 @@ h6 {
   background-color: #1e3190;
   width: 100vw;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
 }
 
 #mobile-nav .profile-img {
