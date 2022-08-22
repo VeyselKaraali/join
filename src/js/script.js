@@ -291,8 +291,13 @@ async function addTask() {
   await pushDataToServer(currentTask);
   resetForm();
   showSuccessMessage();
-  window.location="backlog.html"
+  /*window.location="backlog.html"*/
+}
 
+function cancelEdits(){
+  resetForm();
+  document.getElementById('edit-task-wrapper').classList.add('d-none');
+  document.getElementById('task-container').style.filter = "blur(0px)";
 }
 
 async function moveTaskToBoard(taskId) {
@@ -309,6 +314,8 @@ async function moveTaskToBoard(taskId) {
 }
 
 function editTask(editId) {
+  document.getElementById('task-container').style.filter = "blur(3px)";
+  
   currentEditTask = editId;
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
   document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
@@ -323,7 +330,7 @@ function editTask(editId) {
       document.getElementById('urgency').value = document.getElementById(`backlog-urgency-${id}`).innerHTML;
       document.getElementById('description').value = document.getElementById(`backlog-description-${id}`).innerHTML;
       
-      let editors = allTasks[i].editors;
+      editors = allTasks[i].editors;
       for(let i=0; i<editors.length; i++) {
         document.getElementById(`${editors[i]}`).classList.add('editor-selected');
       }
@@ -339,16 +346,17 @@ async function updateTask() {
     let index = allTasks[i].id.indexOf(currentEditTask.substring(5));
     if (index !== -1) {
       allTasks[i].title = document.getElementById('title').value;
-      allTasks[i].dueDate = document.getElementById('datePicker').value
-      allTasks[i].category = document.getElementById('category').value 
+      allTasks[i].dueDate = document.getElementById('datePicker').value;
+      allTasks[i].category = document.getElementById('category').value;
       allTasks[i].categoryColor = setCategoryColor(category.value);
-      allTasks[i].urgency = document.getElementById('urgency').value
-      allTasks[i].description = document.getElementById('description').value
+      allTasks[i].urgency = document.getElementById('urgency').value;
+      allTasks[i].description = document.getElementById('description').value;
       allTasks[i].editors = editors;
     }
   }
   await save();
   location.reload();
+  document.getElementById('task-container').style.filter = "blur(0px)";
 }
 
 function loadForm(formId) {
@@ -418,26 +426,13 @@ function renderFormButtons(){
   }
   if(path == 'backlog.html') {
     buttons = `
-    <button type="button" onclick="resetForm()">CANCEL</button>
+    <button type="button" onclick="cancelEdits()">CANCEL</button>
     <button type="submit">UPDATE TASK</button>
     `
   }
 
   document.getElementById('button-wrapper').innerHTML = buttons;
 }
-
-function loadDataInForm(i) {
-  let title = allTasks[i].title;
-  let dueDate = allTasks[i].dueDate;
-  let category = allTasks[i].category;
-  let urgency = allTasks[i].urgency;
-  let description = allTasks[i].description;
-  let editors = allTasks[i].editors;
-  
-
-}
-
-
 
 async function deleteTask(taskId) {
   for (let i = 0; i < allTasks.length; i++) {
