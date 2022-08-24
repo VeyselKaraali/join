@@ -4,7 +4,9 @@ let isUserDataShown = false;
 let currentDraggedElement;
 let allTasks = [];
 let editors = [];
+let oldEditors = [];
 let currentEditTask;
+let currentId;
 let loginuser = [];
 let users = [
 
@@ -294,12 +296,6 @@ async function addTask() {
   /*window.location="backlog.html"*/
 }
 
-function cancelEdits(){
-  resetForm();
-  document.getElementById('edit-task-wrapper').classList.add('d-none');
-  document.getElementById('task-container').style.filter = "blur(0px)";
-}
-
 async function moveTaskToBoard(taskId) {
   for (let i = 0; i < allTasks.length; i++) {
     let index = allTasks[i].id.indexOf(taskId.substring(11));
@@ -313,8 +309,15 @@ async function moveTaskToBoard(taskId) {
   location.reload();
 }
 
+function cancelEdits(){
+  resetForm();
+  document.getElementById('edit-task-wrapper').classList.add('d-none');
+  //document.getElementById('task-container').style.filter = "blur(0px)";
+}
+
 function editTask(editId) {
-  document.getElementById('task-container').style.filter = "blur(3px)";
+  oldEditors = editors;
+  //document.getElementById('task-container').style.filter = "blur(3px)";
   
   currentEditTask = editId;
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
@@ -329,6 +332,7 @@ function editTask(editId) {
       document.getElementById('category').value = document.getElementById(`backlog-category-${id}`).innerHTML;
       document.getElementById('urgency').value = document.getElementById(`backlog-urgency-${id}`).innerHTML;
       document.getElementById('description').value = document.getElementById(`backlog-description-${id}`).innerHTML;
+      
       
       editors = allTasks[i].editors;
       for(let i=0; i<editors.length; i++) {
@@ -356,7 +360,7 @@ async function updateTask() {
   }
   await save();
   location.reload();
-  document.getElementById('task-container').style.filter = "blur(0px)";
+  //document.getElementById('task-container').style.filter = "blur(0px)";
 }
 
 function loadForm(formId) {

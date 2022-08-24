@@ -282,27 +282,10 @@ h6 {
 
 /* === START LAYOUT === */
 .layout {
-  /*display: grid;
-  grid-template-columns: 120px 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: "nav content";*/
   display: flex;
-}
-
-.desktop-nav {
-  grid-area: nav;
-  grid-column-start: 1;
-  grid-column-end: 2;
 }
 
 .content {
-  /*grid-area: nav;
-  grid-column-start: 2;
-  padding: 20px;
-  max-width: calc(100vw - (100vw - 100%));
-  display: flex;
-  flex-direction: column;
-  align-items: center;*/
   position: absolute;
   left: var(--desktopNavWidth);
   width: calc(100vw - var(--desktopNavWidth));
@@ -361,6 +344,7 @@ h6 {
 /* === START BACKLOG === */
 #content-backlog {
   min-height: 100vh;
+  width: calc(100vw - var(--desktopNavWidth));
 }
 
 .edit-task-wrapper {
@@ -395,27 +379,16 @@ h6 {
 }
 
 .task-container {
-  display: grid;
-  grid-auto-columns: calc((100% - 2*20px)/3);
-  /* size of one column */
-  grid-gap: 20px;
+  display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1090px;
 }
 
 .category-color {
   height: 350px;
-}
-
-.category-color:nth-child(3n + 1) {
-  grid-column: 1
-}
-
-.category-color:nth-child(3n + 2) {
-  grid-column: 2
-}
-
-.category-color:nth-child(3n + 3) {
-  grid-column: 3
+  width: calc(100% / 3 - 20px);
 }
 
 .task-wrapper {
@@ -904,41 +877,9 @@ form.task .button-wrapper button:hover {
 
 /* === END TASK === */
 
-
-/*
-.task-container {
-  display: grid;
-  grid-auto-columns: calc((100% - 2*20px)/3);
-  grid-gap: 20px;
-  justify-content: center;
-}
-
-.category-color {
-  height: 350px;
-}
-
-.category-color:nth-child(3n + 1) {
-  grid-column: 1
-}
-
-.category-color:nth-child(3n + 2) {
-  grid-column: 2
-}
-
-.category-color:nth-child(3n + 3) {
-  grid-column: 3
-}
-*/
-
 @media screen and (max-width: 1000px) {
-  .task-container {
-    grid-auto-columns: calc((100% - 2*20px)/2);
-    grid-gap: 20px;
-    justify-content: center;
-  }
-
-  .category-color:nth-child(3n + 3) {
-    grid-column: unset;
+  .category-color {
+    width: calc(100% / 2 - 20px);
   }
 }
 
@@ -1010,19 +951,13 @@ form.task .button-wrapper button:hover {
 }
 
 @media screen and (max-width: 700px) {
-  .task-container {
-    grid-auto-columns: calc((100% - 2*20px)/1);
-    grid-gap: 20px;
-    justify-content: center;
-  }
-
-  .category-color:nth-child(3n + 2) {
-    grid-column: unset;
+  .category-color {
+    width: calc(100% - 20px);
   }
 }
 
 @media screen and (max-width: 500px) {
-  .board-wrapper>div {
+  .board-wrapper > div {
     width: calc(100%);
   }
 }
