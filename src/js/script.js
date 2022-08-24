@@ -526,7 +526,14 @@ function renderTasks(selectedStatus) {
   for (let i = 0; i < getTasks.length; i++) {
     if (getTasks[i].backlog === 'false') {
       let urgencyColor = setUrgencyColor(getTasks[i]);
-      content.innerHTML += /*html*/ `
+      content.innerHTML += generateTasksHtml(getTasks, i, urgencyColor);
+    }    
+  };  
+}
+
+
+function generateTasksHtml(getTasks, i, urgencyColor) {
+  return /*html*/ `
         <div id="${getTasks[i]['id']}" class="board-task" style="background-color: ${getTasks[i]['categoryColor']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
           <div class="board-task-inner">
             <div class="board-task-title">${getTasks[i].title}</div>
@@ -537,9 +544,8 @@ function renderTasks(selectedStatus) {
               <img src="src/icons/delete.svg" onclick="deleteBoardTask(${getTasks[i]['id']})">
           </div>
         <div>`;
-    }    
-  };  
 }
+
 
 function setCurrentDraggedElement(id) {
   currentDraggedElement = id;
