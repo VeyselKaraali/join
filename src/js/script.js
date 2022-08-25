@@ -312,7 +312,7 @@ async function moveTaskToBoard(taskId) {
 function cancelEdits(){
   resetForm();
   document.getElementById('edit-task-wrapper').classList.add('d-none');
-  //document.getElementById('task-container').style.filter = "blur(0px)";
+  document.getElementById('task-container').style.filter = "blur(0px)";
 }
 
 function editTask(editId) {
@@ -321,7 +321,7 @@ function editTask(editId) {
   
   currentEditTask = editId;
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
-  document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
+  /*document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';*/
   loadForm('form-edit-task');
   for (let i = 0; i < allTasks.length; i++) {
     let index = allTasks[i].id.indexOf(editId.substring(5));
@@ -360,7 +360,7 @@ async function updateTask() {
   }
   await save();
   location.reload();
-  //document.getElementById('task-container').style.filter = "blur(0px)";
+  document.getElementById('task-container').style.filter = "blur(0px)";
 }
 
 function loadForm(formId) {
