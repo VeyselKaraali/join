@@ -768,7 +768,7 @@ form.task {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 1200px;
   gap: 10px 20px;
   border-radius: 10px;
   border: 1px solid #ccc;
