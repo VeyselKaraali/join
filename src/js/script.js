@@ -63,12 +63,12 @@ function renderNavigation() {
 /* START DESKTOP NAVIGATION */
 function renderDesktopNavigation(){
   let desktopNav = `
-  <a href="index.html" class="logo-wrapper myLink" data-pathname="/index.html">
+  <a href="join.html" class="logo-wrapper myLink" data-pathname="/join.html">
     <img class="logo" src="src/icons/join_logo.png" alt="">
   </a>
   
   <div class="menu-wrapper">
-    <a href="join.html" class="menu-item myLink" data-pathname="/index.html">Board</a>
+    <a href="join.html" class="menu-item myLink" data-pathname="/join.html">Board</a>
     <a href="backlog.html" class="menu-item myLink" data-pathname="/backlog.html">Backlog</a>
     <a href="task.html" class="menu-item myLink" data-pathname="/task.html">Add Task</a>
     <a href="help.html" class="menu-item myLink" data-pathname="/help.html">Help</a>
@@ -100,14 +100,14 @@ function renderMobileNavigation(){
   let mobileNav = `
     <div class="nav-header">
       <img src="src/img/user-1.jpg" class="profile-img" alt="">
-      <a href="index.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
+      <a href="join.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
       <div id="menu-btn" class="menu-btn" onclick="toggleMobileNavigation()">
         <div class="menu-line"></div>
       </div>
     </div>
     <!-- <div id="nav-body-wrapper" class="nav-body-wrapper"> -->
       <div id="nav-body" class="nav-body">
-        <a href="index.html">Board</a>
+        <a href="join.html">Board</a>
         <a href="backlog.html">Backlog</a>
         <a href="task.html">Add Task</a>
         <a href="help.html">Help</a>
@@ -316,6 +316,7 @@ function cancelEdits(){
 }
 
 function editTask(editId) {
+  window.scrollTo({top: 0});
   oldEditors = editors;
   //document.getElementById('task-container').style.filter = "blur(3px)";
   
@@ -654,7 +655,7 @@ function createUser() {
   let allUsersAsString = JSON.stringify(users);
   localStorage.setItem('users',allUsersAsString)
   console.log(users);
-  window.location="index.html"
+  window.location="join.html"
 }
 
 function loadAllUsers() {

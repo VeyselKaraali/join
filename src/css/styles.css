@@ -496,10 +496,13 @@ h6 {
 
 #form-edit-task {
   /*margin: 0 20px;*/
-  max-width: unset;
-  position: fixed;
+  /*max-width: unset;*/
+  position: sticky;
+  top: 0;
+  left: 50%;
+  /*transform: translate(-50%, -50%);*/
   background-color: #fff;
-  width: inherit;
+  max-width: unset;
 }
 
 /* === END BACKLOG === */
@@ -765,7 +768,7 @@ form.task {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 1200px;
   gap: 10px 20px;
   border-radius: 10px;
   border: 1px solid #ccc;
@@ -922,9 +925,11 @@ form.task .button-wrapper button:hover {
   }
 
   #edit-task-wrapper {
-    top: calc(var(--mobileNavHeight) + 15px);
+    /*top: calc(var(--mobileNavHeight) + 15px);
     transform: translate(-50%, 0);
-    margin-bottom: 20px;
+    margin-bottom: 20px;*/
+    /*transform: translate(-50%, 0);*/
+    width: 100%;
   }
 
   #desktop-nav {
