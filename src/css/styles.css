@@ -278,6 +278,11 @@ h6 {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+#mobile-nav .nav-body a:hover {
+  color:#1e3190;
+  background-color: #fff;
+}
+
 /* === END MOBILE NAV === */
 
 /* === START LAYOUT === */
