@@ -170,3 +170,21 @@ function generateTasksHtml(getTasks, i, urgencyColor) {
             </div>
           <div>`;
   }
+
+  function renderFormButtons(){
+    let buttons;
+    let path = window.location.pathname.split("/").pop();
+    if(path == 'task.html') {
+      buttons = `
+      <button type="button" onclick="resetForm()">CANCEL</button>
+      <button type="submit">CREATE TASK</button>
+      `
+    }
+    if(path == 'backlog.html') {
+      buttons = `
+      <button type="button" onclick="cancelEdits()">CANCEL</button>
+      <button type="submit">UPDATE TASK</button>
+      `
+    }
+    document.getElementById('button-wrapper').innerHTML = buttons;
+  }
