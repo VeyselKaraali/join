@@ -62,64 +62,14 @@ function renderNavigation() {
 
 /* START DESKTOP NAVIGATION */
 function renderDesktopNavigation(){
-  let desktopNav = `
-  <a href="join.html" class="logo-wrapper myLink" data-pathname="/join.html">
-    <img class="logo" src="src/icons/join_logo.png" alt="">
-  </a>
-  
-  <div class="menu-wrapper">
-    <a href="join.html" class="menu-item myLink" data-pathname="/join.html">Board</a>
-    <a href="backlog.html" class="menu-item myLink" data-pathname="/backlog.html">Backlog</a>
-    <a href="task.html" class="menu-item myLink" data-pathname="/task.html">Add Task</a>
-    <a href="help.html" class="menu-item myLink" data-pathname="/help.html">Help</a>
-  </div>
-  
-  <!-- 
-  <div class="horizontal-line"></div>
-  
-  <div class="menu-wrapper">
-    <a href="imprint.html" class="menu-item myLink" data-pathname="/imprint.html">Imprint</a>
-    <a href="privacy.html" class="menu-item myLink" data-pathname="/privacy.html">Privacy</a>
-  </div>
-  
-  <div class="horizontal-line"></div>
-  
-  <div class="menu-wrapper">
-    <a class="menu-item" href="login.html">Logout</a>
-  </div>
-  -->
-  
-  <img class="profile-img" src="src/img/user-1.jpg" alt="">
-  `;
+  let desktopNav = renderDesktopNavigationHtml();
   document.getElementById('desktop-nav').innerHTML = desktopNav;
 }
 /* END DESKTOP NAVIGATION */
 
 /* START MOBILE NAVIGATION */
 function renderMobileNavigation(){
-  let mobileNav = `
-    <div class="nav-header">
-      <img src="src/img/user-1.jpg" class="profile-img" alt="">
-      <a href="join.html"><img src="src/icons/logo.png" class="logo" alt=""></a>
-      <div id="menu-btn" class="menu-btn" onclick="toggleMobileNavigation()">
-        <div class="menu-line"></div>
-      </div>
-    </div>
-    <!-- <div id="nav-body-wrapper" class="nav-body-wrapper"> -->
-      <div id="nav-body" class="nav-body">
-        <a href="join.html">Board</a>
-        <a href="backlog.html">Backlog</a>
-        <a href="task.html">Add Task</a>
-        <a href="help.html">Help</a>
-        <!--
-        <a href="imprint.html">Imprint</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="login.html">Logout</a>
-        -->
-      </div>
-      <!-- </div> -->
-
-  `;
+  let mobileNav = renderMobileNavigationHtml();
   document.getElementById('mobile-nav').innerHTML = mobileNav;
 }
 /* END MOBILE NAVIGATION */
@@ -195,53 +145,8 @@ async function loadTasks() {
 }
 
 function renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors) {
-  let backlogTask = 
-  `
-  <div class="category-color" style="background-color: ${categoryColor}">
-  <div class="task-wrapper">
-    <div class="assigned-wrapper">
-      <div>ASSIGNED TO</div>
-      <div id="backlog-image-wrapper-${id}" class="image-wrapper">
-      </div>
-    </div>
-    <div class="title-wrapper">
-      <div>TITLE</div>
-      <div id="backlog-title-${id}">${title}</div>
-    </div>
-    <div class="category-wrapper">
-      <div>CATEGORY</div>
-      <div id="backlog-category-${id}">${category}</div>
-    </div>
-    <div class="date-wrapper">
-      <div>DUE DATE</div>
-      <div id="backlog-date-${id}">${dueDate}</div>
-    </div>
-    <div class="urgency-wrapper">
-      <div>URGENCY</div>
-      <div id="backlog-urgency-${id}">${urgency}</div>
-    </div>
-    <div class="description-wrapper">
-      <div>DESCRIPTION</div>
-      <div id="backlog-description-${id}" class="description">${description}</div>
-    </div>
-    <div class="button-wrapper">
-      <div class="tooltip">
-        <img onclick="moveTaskToBoard(this.id)" id="move-board-${id}" src="src/icons/move.svg" alt="">
-        <span class="tooltiptext">Move To Board</span>
-      </div>
-      <div class="tooltip">
-        <img onclick="editTask(this.id)" id="edit-${id}" src="src/icons/edit.svg" alt="">
-        <span class="tooltiptext">Edit</span>
-      </div>
-      <div class="tooltip">
-        <img onclick="deleteTask(this.id)" id="delete-${id}" src="src/icons/delete.svg" alt="">
-        <span class="tooltiptext">Delete</span>
-      </div>
-    </div>
-  </div>
-  </div>
-  `;
-
+  let backlogTask = renderBacklogTasksHtml(id, title, dueDate, category, categoryColor, urgency, description, editors);
+  
   document.getElementById('task-container').innerHTML += backlogTask;
   renderBacklogEditors(id, editors);
 }
@@ -305,7 +210,7 @@ async function moveTaskToBoard(taskId) {
     }
   }
   await backend.setItem('allTasks', JSON.stringify(allTasks));
-  console.log(allTasks);
+  // console.log(allTasks);
   location.reload();
 }
 
@@ -365,57 +270,7 @@ async function updateTask() {
 }
 
 function loadForm(formId) {
-  document.getElementById(`${formId}`).innerHTML=`
-  <div id="msg-success" class="msg-success d-none">Task was created successfully</div>
-          
-          <div class="item title-wrapper">
-            <div>TITLE</div>
-            <input id="title" required type="text">
-          </div>
-    
-          <div class="item date-wrapper">
-            <div>DUE DATE</div>
-            <input id="datePicker" required type="date">
-          </div>
-              
-          <div class="item category-wrapper">
-            <label for="category">CATEGORY</label>
-            <select name="category" id="category" required>
-              <option value="Management">Management</option>
-              <option value="Software-Development">Software Development</option>
-              <option value="Design">Design</option>
-              <option value="Human-Resources">Human Resources</option>
-            </select>
-          </div>
-
-          <div class="item urgency-wrapper">
-            <label for="urgency">URGENCY</label>
-            <select name="urgency" id="urgency" required>
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
-            </select>
-          </div>
-              
-          <div class="item description-wrapper">
-            <label for="description">DESCRIPTION</label>
-            <textarea required id="description" rows="3"></textarea>
-          </div>
-  
-          <div class="item assigned-wrapper">
-            <div>ASSIGNED TO</div>
-            <div id="task-image-wrapper" class="image-wrapper">
-              <img onclick="selectTaskEditors(this.id)" id="user-1" src="src/img/user-1.jpg" alt="">
-              <img onclick="selectTaskEditors(this.id)" id="user-2" src="src/img/user-2.jpg" alt="">
-              <img onclick="selectTaskEditors(this.id)" id="user-3" src="src/img/user-3.jpg" alt="">
-              <img onclick="selectTaskEditors(this.id)" id="user-4" src="src/img/user-4.jpg" alt="">
-              <img onclick="selectTaskEditors(this.id)" id="user-5" src="src/img/user-5.jpg" alt="">
-            </div>
-          </div>
-
-          <div id="button-wrapper" class="item button-wrapper">
-          </div>
-  `;
+  document.getElementById(`${formId}`).innerHTML = renderLoadFormHtml();
 
   renderFormButtons();
 }
@@ -654,14 +509,12 @@ function createUser() {
   users.push(createdUsers);
   let allUsersAsString = JSON.stringify(users);
   localStorage.setItem('users',allUsersAsString)
-  console.log(users);
+  // console.log(users);
   window.location="join.html"
 }
 
 function loadAllUsers() {
   let allUsersAsSting = localStorage.getItem('users');
   users= JSON.parse(allUsersAsSting);
-  console.log('loaded all Users'.users);
-
-
+  // console.log('loaded all Users'.users);
 }
