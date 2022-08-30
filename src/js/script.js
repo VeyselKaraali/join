@@ -9,7 +9,6 @@ let currentEditTask;
 let currentId;
 let loginuser = [];
 let users = [
-
   {
       username:  "christian@developerakademie.com",
       password:  "christian"
@@ -24,7 +23,6 @@ let users = [
     username:  "andreas@developerakademie.com",
     password:  "andreas"
   }
-
 ]
 
 /**
@@ -103,7 +101,6 @@ function toggleMobileNavigation() {
 function checkNavigation() {
   let mobileNav = document.getElementById('mobile-nav');
   let desktopNav = document.getElementById('desktop-nav');
-
   if (window.innerWidth <= 800 && mobileNav && desktopNav) {
     mobileNav.classList.remove('d-none');
     desktopNav.classList.add('d-none');
@@ -113,6 +110,7 @@ function checkNavigation() {
     desktopNav.classList.remove('d-none');
   }
 }
+
 window.addEventListener('load', checkNavigation);
 window.addEventListener('resize', checkNavigation);
 
@@ -179,26 +177,27 @@ async function addTask() {
   let urgency  = document.getElementById('urgency')
   let description = document.getElementById('description')
   let categoryColor = setCategoryColor(category.value);
-
+  let currentTask = createTasksJson(title, date, category, urgency, description, categoryColor);
   await loadDataFromServer();
-
-  let currentTask = {
-        "id": `${new Date().getTime()}`,
-        "title": title.value,
-        "dueDate": date.value,
-        "category": category.value,
-        "categoryColor": categoryColor,
-        "urgency": urgency.value,
-        "description": description.value,
-        "editors": editors,
-        "backlog": 'true',
-        "status": "todo"
-  };
-
   await pushDataToServer(currentTask);
   resetForm();
   showSuccessMessage();
   /*window.location="backlog.html"*/
+}
+
+function createTasksJson(title, date, category, urgency, description, categoryColor) {
+  return {
+    "id": `${new Date().getTime()}`,
+    "title": title.value,
+    "dueDate": date.value,
+    "category": category.value,
+    "categoryColor": categoryColor,
+    "urgency": urgency.value,
+    "description": description.value,
+    "editors": editors,
+    "backlog": 'true',
+    "status": "todo"
+  };
 }
 
 async function moveTaskToBoard(taskId) {
@@ -224,7 +223,6 @@ function editTask(editId) {
   window.scrollTo({top: 0});
   oldEditors = editors;
   //document.getElementById('task-container').style.filter = "blur(3px)";
-  
   currentEditTask = editId;
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
   document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
@@ -238,8 +236,6 @@ function editTask(editId) {
       document.getElementById('category').value = document.getElementById(`backlog-category-${id}`).innerHTML;
       document.getElementById('urgency').value = document.getElementById(`backlog-urgency-${id}`).innerHTML;
       document.getElementById('description').value = document.getElementById(`backlog-description-${id}`).innerHTML;
-      
-      
       editors = allTasks[i].editors;
       for(let i=0; i<editors.length; i++) {
         document.getElementById(`${editors[i]}`).classList.add('editor-selected');
@@ -251,22 +247,25 @@ function editTask(editId) {
 
 async function updateTask() {
   currentEditTask = currentEditTask.substring(5);
-
   for (let i = 0; i < allTasks.length; i++) {
     let index = allTasks[i].id.indexOf(currentEditTask.substring(5));
     if (index !== -1) {
-      allTasks[i].title = document.getElementById('title').value;
-      allTasks[i].dueDate = document.getElementById('datePicker').value;
-      allTasks[i].category = document.getElementById('category').value;
-      allTasks[i].categoryColor = setCategoryColor(category.value);
-      allTasks[i].urgency = document.getElementById('urgency').value;
-      allTasks[i].description = document.getElementById('description').value;
-      allTasks[i].editors = editors;
+      setTaskUpdateValues(i);
     }
   }
   await save();
   location.reload();
   //document.getElementById('task-container').style.filter = "blur(0px)";
+}
+
+function setTaskUpdateValues(i) {
+  allTasks[i].title = document.getElementById('title').value;
+  allTasks[i].dueDate = document.getElementById('datePicker').value;
+  allTasks[i].category = document.getElementById('category').value;
+  allTasks[i].categoryColor = setCategoryColor(category.value);
+  allTasks[i].urgency = document.getElementById('urgency').value;
+  allTasks[i].description = document.getElementById('description').value;
+  allTasks[i].editors = editors;
 }
 
 function loadForm(formId) {
@@ -290,7 +289,6 @@ function renderFormButtons(){
     <button type="submit">UPDATE TASK</button>
     `
   }
-
   document.getElementById('button-wrapper').innerHTML = buttons;
 }
 
@@ -392,21 +390,6 @@ function renderTasks(selectedStatus) {
 }
 
 
-function generateTasksHtml(getTasks, i, urgencyColor) {
-  return /*html*/ `
-        <div id="${getTasks[i]['id']}" class="board-task" style="background-color: ${getTasks[i]['categoryColor']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
-          <div class="board-task-inner">
-            <div class="board-task-title">${getTasks[i].title}</div>
-            <div class="board-task-description">${getTasks[i].description}</div>
-            <div class="board-toolbar">
-              <div class="board-urgency" style="color: ${urgencyColor}">${getTasks[i].urgency}</div>
-              <div class="board-due-date">${getTasks[i].dueDate}</div>
-              <img src="src/icons/delete.svg" onclick="deleteBoardTask(${getTasks[i]['id']})">
-          </div>
-        <div>`;
-}
-
-
 function setCurrentDraggedElement(id) {
   currentDraggedElement = id;
 }
@@ -475,9 +458,7 @@ function loginUser() {
       alert('Failed')
       break;
     } 
-    
-  }
-  
+  } 
 }
 
 function openSignUpPage() {
@@ -495,7 +476,6 @@ function openSignInPage() {
   signUpPage.classList.add('d-none');
   signInPage.classList.remove('d-none');
 }
-
 
 function createUser() {
   let createUsername = document.getElementById('create-username').value;

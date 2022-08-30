@@ -30,7 +30,6 @@ function renderDesktopNavigationHtml() {
     `;
 }
 
-
 function renderMobileNavigationHtml() {
     return `
         <div class="nav-header">
@@ -55,7 +54,6 @@ function renderMobileNavigationHtml() {
         <!-- </div> -->
      `;
 }
-
 
 function renderBacklogTasksHtml(id, title, dueDate, category, categoryColor, urgency, description, editors) {
 return `
@@ -104,7 +102,6 @@ return `
     </div>
 `;
 }
-
 
 function renderLoadFormHtml() {
     return `
@@ -159,3 +156,17 @@ function renderLoadFormHtml() {
                 </div>
     `;
 }
+
+function generateTasksHtml(getTasks, i, urgencyColor) {
+    return /*html*/ `
+          <div id="${getTasks[i]['id']}" class="board-task" style="background-color: ${getTasks[i]['categoryColor']}" draggable="true" ondragstart="setCurrentDraggedElement(${getTasks[i]['id']})">
+            <div class="board-task-inner">
+              <div class="board-task-title">${getTasks[i].title}</div>
+              <div class="board-task-description">${getTasks[i].description}</div>
+              <div class="board-toolbar">
+                <div class="board-urgency" style="color: ${urgencyColor}">${getTasks[i].urgency}</div>
+                <div class="board-due-date">${getTasks[i].dueDate}</div>
+                <img src="src/icons/delete.svg" onclick="deleteBoardTask(${getTasks[i]['id']})">
+            </div>
+          <div>`;
+  }
