@@ -637,6 +637,7 @@ input:focus {
 .done-header {
   text-align: center;
   text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .todo-content,

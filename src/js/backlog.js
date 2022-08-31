@@ -31,23 +31,30 @@ function editTask(editId) {
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
   document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
   loadForm('form-edit-task');
-  
+  showToEditedTask(editId);
+}
+
+function showToEditedTask(editId) {
   for (let i = 0; i < allTasks.length; i++) {
     let index = allTasks[i].id.indexOf(editId.substring(5));
     if (index !== -1) {
-      let id = allTasks[i].id;
-      document.getElementById('title').value = document.getElementById(`backlog-title-${id}`).innerHTML;
-      document.getElementById('datePicker').value = document.getElementById(`backlog-date-${id}`).innerHTML;
-      document.getElementById('category').value = document.getElementById(`backlog-category-${id}`).innerHTML;
-      document.getElementById('urgency').value = document.getElementById(`backlog-urgency-${id}`).innerHTML;
-      document.getElementById('description').value = document.getElementById(`backlog-description-${id}`).innerHTML;
-      editors = allTasks[i].editors;
+      getEditTaskValues(i);
       for(let i=0; i<editors.length; i++) {
         document.getElementById(`${editors[i]}`).classList.add('editor-selected');
       }
       break;
     }
   }
+}
+
+function getEditTaskValues(i) {
+  let id = allTasks[i].id;
+  document.getElementById('title').value = document.getElementById(`backlog-title-${id}`).innerHTML;
+  document.getElementById('datePicker').value = document.getElementById(`backlog-date-${id}`).innerHTML;
+  document.getElementById('category').value = document.getElementById(`backlog-category-${id}`).innerHTML;
+  document.getElementById('urgency').value = document.getElementById(`backlog-urgency-${id}`).innerHTML;
+  document.getElementById('description').value = document.getElementById(`backlog-description-${id}`).innerHTML;
+  editors = allTasks[i].editors;
 }
 
 function cancelEdits(){

@@ -115,26 +115,16 @@ window.addEventListener('load', checkNavigation);
 window.addEventListener('resize', checkNavigation);
 
 async function loadTasks() {
-  let id ='';
-  let title ='';
-  let dueDate ='';
-  let category ='';
-  let categoryColor ='';
-  let urgency ='';
-  let description ='';
-  let editors = [];
-
   await loadDataFromServer();
-
   for (let i = 0; i < allTasks.length; i++) {
-    id = allTasks[i].id;
-    title = allTasks[i].title;
-    dueDate = allTasks[i].dueDate;
-    category = allTasks[i].category;
-    categoryColor = allTasks[i].categoryColor;
-    urgency = allTasks[i].urgency;
-    description = allTasks[i].description;
-    editors = allTasks[i].editors;
+    let id = allTasks[i].id;
+    let title = allTasks[i].title;
+    let dueDate = allTasks[i].dueDate;
+    let category = allTasks[i].category;
+    let categoryColor = allTasks[i].categoryColor;
+    let urgency = allTasks[i].urgency;
+    let description = allTasks[i].description;
+    let editors = allTasks[i].editors;
     
     if(allTasks[i].backlog == 'true') {
       renderBacklogTasks(id, title, dueDate, category, categoryColor, urgency, description, editors);
