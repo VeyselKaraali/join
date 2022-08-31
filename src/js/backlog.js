@@ -31,14 +31,11 @@ function editTask(editId) {
   document.getElementById('edit-task-wrapper').classList.remove('d-none');
   document.getElementById('edit-task-wrapper').style.backgroundColor = '#fff';
   loadForm('form-edit-task');
-  showToEditedTask(editId);
-}
-
-function showToEditedTask(editId) {
+  
   for (let i = 0; i < allTasks.length; i++) {
     let index = allTasks[i].id.indexOf(editId.substring(5));
     if (index !== -1) {
-      getEditTaskValues(i);
+      getEditTaskValue(i);
       for(let i=0; i<editors.length; i++) {
         document.getElementById(`${editors[i]}`).classList.add('editor-selected');
       }
@@ -47,7 +44,7 @@ function showToEditedTask(editId) {
   }
 }
 
-function getEditTaskValues(i) {
+function getEditTaskValue(i) {
   let id = allTasks[i].id;
   document.getElementById('title').value = document.getElementById(`backlog-title-${id}`).innerHTML;
   document.getElementById('datePicker').value = document.getElementById(`backlog-date-${id}`).innerHTML;
