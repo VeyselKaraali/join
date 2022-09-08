@@ -7,71 +7,6 @@ let editors = [];
 let oldEditors = [];
 let currentEditTask;
 let currentId;
-let users = [ { 'email': 'christian', 'password': '123'
-
-
-}
-
-]
-
-
-function login() {
-    let email = document.getElementById('email');
-    let password = document.getElementById('password'); 
-    let user = users.find(u => u.email == email.value && u.password == password.value);
-    console.log(user);
-    if(user)  {
-      window.location="join.html"
-    
-    } 
-    else {
-      alert('Failed')
-    } 
-  } 
-
-
-function loadAllUsers() {
-  let allUsersAsSting = localStorage.getItem('users');
-  users= JSON.parse(allUsersAsSting);
-  // console.log('loaded all Users'.users);
-}
-
-
-function addUser() {
-  let email = document.getElementById('add-mail').value;
-  let password = document.getElementById('add-password').value;
-
-  let createdUsers = {
-    'email': email, 
-    'password': password,
-  }; 
-
-  users.push(createdUsers);
-  let allUsersAsString = JSON.stringify(users);
-  localStorage.setItem('users',allUsersAsString)
-  // console.log(users);
-  window.location="index.html"
-  alert('registered')
-
-}
-
-
-function openSignUpPage() {
-
-  let signUpPage = document.getElementById('signUpPage')
-  let signInPage = document.getElementById('signInPage')
-  signUpPage.classList.remove('d-none');
-  signInPage.classList.add('d-none');
-}
-
-function openSignInPage() {
-
-  let signUpPage = document.getElementById('signUpPage')
-  let signInPage = document.getElementById('signInPage')
-  signUpPage.classList.add('d-none');
-  signInPage.classList.remove('d-none');
-}
-
 
 
 
@@ -82,6 +17,7 @@ function openSignInPage() {
 async function init(){
   setURL('https://gruppe-288.developerakademie.net/join/smallest_backend_ever');
   await downloadFromServer();
+  await loadAllUsers();
   renderNavigation();
   setMenuActive();
 }

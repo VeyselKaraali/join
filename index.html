@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="src/icons/join_logo.png">
   <link rel="stylesheet" href="src/css/styles.css" />
-  <script src="src/js/script.js" defer></script>
   <script src="src/js/mini_backend.js"></script>
+  <script src="src/js/script.js" defer></script>
   <script src="src/js/templates.js" defer></script>
   <title>Login</title>
   <!-- CSS only -->
@@ -16,7 +16,7 @@
 
 </head>
 
-<body id="login" onload="loadAllUsers()">
+<body id="login" onload="init()">
 
   <div id="signInPage" class="form-wrapper">
     <div class="headline-wrapper">
@@ -32,6 +32,11 @@
         <label for="Username">Password:</label>
         <input required id="password" type="password" placeholder="Password">
       </div>
+
+      <div id="msgBox" >
+
+
+      </div>
  
       <div style="margin-top: 10px;display: flex;justify-content: center;flex-direction: column;">
         <button onclick="login()" type="button" class="btn btn-success">Login</button>
@@ -40,7 +45,7 @@
       </div> 
       <br>
       <div>
-        <a class="text-decoration" href="index.html">Login as guest</a>
+        <a class="text-decoration" href="join.html">Login as guest</a>
       </div>
 
       <br>
@@ -67,9 +72,6 @@
         </div>
         <div class="d-flex flex-row align-items-center justify-content-between">
       </div>
- 
-
-
    
       <div>
         <a class="text-decoration" onclick="openSignInPage()">
