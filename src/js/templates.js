@@ -9,6 +9,8 @@ function renderDesktopNavigationHtml() {
         <a href="backlog.html" class="menu-item myLink" data-pathname="/backlog.html">Backlog</a>
         <a href="task.html" class="menu-item myLink" data-pathname="/task.html">Add Task</a>
         <a href="help.html" class="menu-item myLink" data-pathname="/help.html">Help</a>
+        <a href="index.html" class="menu-item myLink" data-pathname="/index.html">Logout</a>
+
         </div>
         
         <!-- 
