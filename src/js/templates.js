@@ -47,6 +47,8 @@ function renderMobileNavigationHtml() {
             <a href="backlog.html">Backlog</a>
             <a href="task.html">Add Task</a>
             <a href="help.html">Help</a>
+            <a href="login.html">Logout</a>
+
             <!--
             <a href="imprint.html">Imprint</a>
             <a href="privacy.html">Privacy</a>

@@ -61,6 +61,7 @@ body {
   font-family: 'PT Sans', 'sans-serif';
   font-weight: normal;
   margin: 0;
+  overflow-x:hidden;
 }
 
 p,
@@ -538,8 +539,8 @@ h6 {
 
 /* === START LOGIN === */
 #login {
-  background-color: #1e3190;
-  background-image: url(/src/img/login-background.jpg);
+  background-color: #000000;
+  background-image: url(/join/src/img/login-background.jpg);
   display: flex;
   justify-content: center;
   align-items: center;

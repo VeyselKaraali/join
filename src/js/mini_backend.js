@@ -8,10 +8,17 @@ let users = [ { 'email': 'christian', 'password': '123'
 
 ]
 
+function loadAllUsers() {
+    let allUsersAsSting = localStorage.getItem('users');
+    users= JSON.parse(allUsersAsSting);
+    // console.log('loaded all Users'.users);
+  }
+  
+
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password'); 
-    let user = users.find(u => u.email == email.value && u.password == password.value);
+    let user = users?.find(u => u.email == email.value && u.password == password.value);
     console.log(user);
     if(user)  {
       window.location="join.html"
@@ -23,13 +30,6 @@ function login() {
   } 
 
 
-function loadAllUsers() {
-  let allUsersAsSting = localStorage.getItem('users');
-  users= JSON.parse(allUsersAsSting);
-  // console.log('loaded all Users'.users);
-}
-
-
 function addUser() {
   let email = document.getElementById('add-mail').value;
   let password = document.getElementById('add-password').value;
@@ -39,7 +39,7 @@ function addUser() {
     'password': password,
   }; 
 
-  users.push(createdUsers);
+  users?.push(createdUsers);
   let allUsersAsString = JSON.stringify(users);
   localStorage.setItem('users',allUsersAsString)
   // console.log(users);
